@@ -1,0 +1,23 @@
+{
+  "name": "CraneCall – Crane Contact Manager",
+  "short_name": "CraneCall",
+  "description": "Instant crane operator, supervisor and owner contacts for construction sites",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0F1923",
+  "theme_color": "#1A2744",
+  "orientation": "portrait",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Search Cranes",
+      "short_name": "Search",
+      "url": "/index.html",
+      "description": "Search for a crane or contact"
+    }
+  ]
+}
