@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#FF6B00">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="CraneCall – Construction Crane Contact Management">
+<title>CraneCall</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+/* ═══════════════════════════════════════════════════════
+   CRANECALL v3 — PREMIUM CONSTRUCTION MANAGEMENT APP
+   Design: Engineering-grade, daylight-optimized, touch-first
+   Palette: Warm white · Deep navy · Safety orange · Clean greys
+   Signature: Subtle depth, bold hierarchy, no decorative clutter
+═══════════════════════════════════════════════════════ */
+:root {
+  --bg:         #F4F6F9;
+  --white:      #FFFFFF;
+  --navy:       #0B1F3A;
+  --navy2:      #1A3558;
+  --navy3:      #253F66;
+  --orange:     #FF6B00;
+  --orange2:    #E55F00;
+  --orange-lt:  #FFF3EB;
+  --orange-glow:rgba(255,107,0,0.18);
+  --grey1:      #E4E9F0;
+  --grey2:      #C9D3E0;
+  --grey3:      #8A99B0;
+  --text:       #0B1F3A;
+  --text2:      #334E6B;
+  --muted:      #8A99B0;
+  --green:      #0D9B4A;
+  --green-lt:   #E8F8EF;
+  --amber:      #C97A00;
+  --amber-lt:   #FFF8E6;
+  --red:        #D62B2B;
+  --red-lt:     #FEF1F1;
+  --slate:      #5A7090;
+  --slate-lt:   #EEF2F7;
+  --r-sm:       8px;
+  --r:          12px;
+  --r-lg:       16px;
+  --r-xl:       22px;
+  --sh1:        0 1px 4px rgba(11,31,58,0.07),0 2px 8px rgba(11,31,58,0.05);
+  --sh2:        0 4px 16px rgba(11,31,58,0.10),0 2px 6px rgba(11,31,58,0.06);
+  --sh3:        0 12px 40px rgba(11,31,58,0.14),0 4px 12px rgba(11,31,58,0.08);
+  --font:       -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --dur:        0.14s;
+  --ease:       cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+html,body{height:100%;overflow:hidden;}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-tap-highlight-color:transparent;
+  display:flex;
+  flex-direction:column;
+  max-width:620px;
+  margin:0 auto;
+}
+button{font-family:var(--font);cursor:pointer;border:none;background:none;}
+input,select,textarea{font-family:var(--font);}
+a{color:inherit;text-decoration:none;}
+
+/* ── App container ── */
+#app{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:80px;
+}
+
+/* ══════════════════════════════════════
+   HEADER — Navy bar, bold identity
+══════════════════════════════════════ */
+.hdr{
+  background:var(--navy);
+  padding:0 16px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:200;
+  box-shadow:0 2px 12px rgba(11,31,58,0.25);
+}
+.hdr-logo{
+  flex:1;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:-0.5px;
+  color:#fff;
+}
+.hdr-logo span{color:var(--orange);}
+.hdr-back{
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.1);
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  color:#fff;
+  font-size:22px;
+  font-weight:300;
+  line-height:1;
+  flex-shrink:0;
+  transition:background var(--dur) var(--ease);
+}
+.hdr-back:active{background:rgba(255,255,255,0.2);}
+.hdr-title{
+  flex:1;
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.hdr-act{
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.1);
+  border-radius:var(--r-sm);
+  color:rgba(255,255,255,0.8);
+  transition:background var(--dur);
+  flex-shrink:0;
+}
+.hdr-act:active{background:rgba(255,255,255,0.2);}
+
+/* ══════════════════════════════════════
+   SEARCH BAR — Large, obvious, sticky
+══════════════════════════════════════ */
+.search-wrap{
+  background:var(--navy);
+  padding:0 16px 14px;
+  position:sticky;
+  top:58px;
+  z-index:190;
+}
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(255,255,255,0.12);
+  border:1.5px solid rgba(255,255,255,0.18);
+  border-radius:var(--r-lg);
+  padding:0 14px;
+  height:50px;
+  transition:border-color var(--dur),background var(--dur);
+}
+.search-box:focus-within{
+  background:rgba(255,255,255,0.18);
+  border-color:var(--orange);
+}
+.search-box svg{color:rgba(255,255,255,0.55);flex-shrink:0;}
+.search-box input{
+  flex:1;
+  background:none;
+  border:none;
+  outline:none;
+  font-size:16px;
+  font-weight:500;
+  color:#fff;
+}
+.search-box input::placeholder{color:rgba(255,255,255,0.45);font-weight:400;}
+.search-clear{
+  width:24px;height:24px;
+  background:rgba(255,255,255,0.15);
+  border-radius:50%;
+  color:#fff;
+  font-size:13px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.search-clear.vis{display:flex;}
+
+/* ══════════════════════════════════════
+   SYNC BAR
+══════════════════════════════════════ */
+.sync-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  font-size:12px;
+  color:var(--muted);
+  background:var(--bg);
+  border-bottom:1px solid var(--grey1);
+}
+.sync-pill{
+  display:flex;align-items:center;gap:6px;
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-radius:20px;
+  padding:4px 10px;
+  font-size:12px;
+  font-weight:600;
+  box-shadow:var(--sh1);
+}
+.sdot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--green);
+  flex-shrink:0;
+}
+.sdot.off{background:var(--amber);}
+.sdot.err{background:var(--red);}
+.sync-btn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--orange-lt);
+  border:1px solid rgba(255,107,0,0.2);
+  border-radius:20px;
+  padding:4px 12px;
+  font-size:12px;
+  font-weight:700;
+  color:var(--orange);
+  transition:background var(--dur);
+}
+.sync-btn:active{background:rgba(255,107,0,0.15);}
+@keyframes spin{to{transform:rotate(360deg);}}
+.spinning{animation:spin 0.9s linear infinite;display:inline-block;}
+
+/* ══════════════════════════════════════
+   DASHBOARD — Navy gradient hero cards
+══════════════════════════════════════ */
+.dash{
+  background:var(--white);
+  padding:16px;
+  border-bottom:1px solid var(--grey1);
+}
+.dash-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+.dash-total-num{
+  font-size:40px;
+  font-weight:900;
+  letter-spacing:-2px;
+  color:var(--navy);
+  line-height:1;
+}
+.dash-total-lbl{
+  font-size:13px;
+  font-weight:600;
+  color:var(--muted);
+  margin-top:2px;
+}
+.dash-date{
+  text-align:right;
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.dash-date strong{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:var(--text2);
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.stat-card{
+  border-radius:var(--r);
+  padding:12px 10px 14px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur);
+  box-shadow:var(--sh1);
+}
+.stat-card:active{transform:scale(0.96);}
+.stat-card.working{background:linear-gradient(135deg,#0D9B4A 0%,#0A7A3A 100%);}
+.stat-card.standby{background:linear-gradient(135deg,#3B6EA8 0%,#2E5585 100%);}
+.stat-card.breakdown{background:linear-gradient(135deg,#D62B2B 0%,#B02020 100%);}
+.stat-card.maintenance{background:linear-gradient(135deg,#C97A00 0%,#A06200 100%);}
+.stat-num{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-1px;
+  color:#fff;
+  line-height:1;
+  margin-bottom:4px;
+}
+.stat-lbl{
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:rgba(255,255,255,0.8);
+}
+.stat-icon{
+  position:absolute;
+  bottom:-4px;right:-4px;
+  font-size:32px;
+  opacity:0.15;
+}
+
+/* ══════════════════════════════════════
+   SECTION LABEL
+══════════════════════════════════════ */
+.sec-hdr{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 16px 8px;
+}
+.sec-title{
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  color:var(--navy2);
+}
+.sec-count{
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+}
+.chip-clear{
+  font-size:12px;
+  font-weight:700;
+  color:var(--orange);
+  background:var(--orange-lt);
+  border:1px solid rgba(255,107,0,0.2);
+  border-radius:20px;
+  padding:4px 12px;
+  cursor:pointer;
+  display:none;
+}
+.chip-clear.vis{display:block;}
+
+/* ══════════════════════════════════════
+   CRANE CARDS — Premium data cards
+══════════════════════════════════════ */
+.crane-list{
+  padding:0 16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.crane-card{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  padding:0;
+  display:flex;
+  align-items:stretch;
+  cursor:pointer;
+  box-shadow:var(--sh1);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur);
+  overflow:hidden;
+  border:1px solid var(--grey1);
+}
+.crane-card:active{transform:scale(0.99);box-shadow:none;}
+.crane-card-stripe{
+  width:4px;
+  flex-shrink:0;
+}
+.crane-card-stripe.working{background:var(--green);}
+.crane-card-stripe.standby{background:var(--slate);}
+.crane-card-stripe.breakdown{background:var(--red);}
+.crane-card-stripe.maintenance{background:var(--amber);}
+.crane-card-stripe.inactive{background:var(--grey2);}
+.crane-card-body{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 14px 14px 12px;
+  min-width:0;
+}
+.crane-id-tag{
+  background:var(--navy);
+  border-radius:var(--r-sm);
+  padding:8px 10px;
+  min-width:64px;
+  text-align:center;
+  flex-shrink:0;
+}
+.crane-id-tag .cid{
+  font-size:13px;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:0.3px;
+  display:block;
+}
+.crane-id-tag .ctype{
+  font-size:10px;
+  font-weight:600;
+  color:rgba(255,255,255,0.55);
+  margin-top:2px;
+  display:block;
+}
+.crane-meta{flex:1;min-width:0;}
+.crane-loc{
+  font-size:15px;
+  font-weight:700;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  margin-bottom:3px;
+}
+.crane-sub{
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+/* Status badge */
+.sbadge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:20px;
+  padding:4px 10px;
+  font-size:11px;
+  font-weight:700;
+  flex-shrink:0;
+  letter-spacing:0.1px;
+}
+.sbadge.working{background:var(--green-lt);color:var(--green);}
+.sbadge.standby{background:var(--slate-lt);color:var(--slate);border:1px solid var(--grey1);}
+.sbadge.breakdown{background:var(--red-lt);color:var(--red);}
+.sbadge.maintenance{background:var(--amber-lt);color:var(--amber);}
+.sbadge.inactive{background:var(--grey1);color:var(--muted);}
+.sdot-sm{
+  width:6px;height:6px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.working .sdot-sm,.sbadge.working .sdot-sm{background:var(--green);}
+.standby .sdot-sm,.sbadge.standby .sdot-sm{background:var(--slate);}
+.breakdown .sdot-sm,.sbadge.breakdown .sdot-sm{background:var(--red);}
+.maintenance .sdot-sm,.sbadge.maintenance .sdot-sm{background:var(--amber);}
+.crane-chevron{
+  color:var(--grey2);
+  font-size:20px;
+  font-weight:300;
+  flex-shrink:0;
+}
+
+/* ══════════════════════════════════════
+   CRANE DETAIL — Hero + role sections
+══════════════════════════════════════ */
+.detail-hero{
+  background:var(--navy);
+  padding:20px 16px 22px;
+  position:relative;
+  overflow:hidden;
+}
+.detail-hero::before{
+  content:'';
+  position:absolute;
+  top:-40px;right:-40px;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  pointer-events:none;
+}
+.detail-crane-id{
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:-1.5px;
+  color:#fff;
+  margin-bottom:4px;
+}
+.detail-loc{
+  font-size:15px;
+  font-weight:600;
+  color:rgba(255,255,255,0.75);
+  margin-bottom:12px;
+}
+.detail-pills{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.detail-pill{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:20px;
+  padding:4px 12px;
+  font-size:12px;
+  font-weight:600;
+  color:rgba(255,255,255,0.85);
+}
+.detail-pill.status-working{background:rgba(13,155,74,0.25);border-color:rgba(13,155,74,0.4);color:#5EE89A;}
+.detail-pill.status-standby{background:rgba(90,112,144,0.25);border-color:rgba(90,112,144,0.4);color:#9BB5D0;}
+.detail-pill.status-breakdown{background:rgba(214,43,43,0.25);border-color:rgba(214,43,43,0.4);color:#F78080;}
+.detail-pill.status-maintenance{background:rgba(201,122,0,0.25);border-color:rgba(201,122,0,0.4);color:#FFCC66;}
+.detail-meta-row{
+  display:flex;
+  gap:8px;
+  padding:14px 16px;
+  background:var(--white);
+  border-bottom:1px solid var(--grey1);
+}
+.dmi{
+  flex:1;
+  background:var(--bg);
+  border-radius:var(--r-sm);
+  padding:10px;
+  text-align:center;
+}
+.dmi-lbl{
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--muted);
+  margin-bottom:3px;
+}
+.dmi-val{
+  font-size:14px;
+  font-weight:800;
+  color:var(--navy);
+}
+.detail-remarks{
+  margin:12px 16px 0;
+  background:var(--amber-lt);
+  border-left:3px solid var(--amber);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:10px 14px;
+  font-size:13px;
+  color:var(--text2);
+  line-height:1.6;
+}
+.detail-remarks strong{
+  display:block;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--amber);
+  margin-bottom:4px;
+  font-weight:800;
+}
+.admin-action-row{
+  display:flex;gap:8px;
+  padding:12px 16px 0;
+}
+.btn-sm-admin{
+  flex:1;
+  height:38px;
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;
+  border-radius:var(--r-sm);
+  font-size:13px;
+  font-weight:700;
+  border:1.5px solid var(--grey2);
+  background:var(--white);
+  color:var(--text2);
+  transition:all var(--dur);
+  box-shadow:var(--sh1);
+}
+.btn-sm-admin:active{background:var(--bg);}
+.btn-sm-admin.danger{
+  color:var(--red);
+  border-color:rgba(214,43,43,0.3);
+  background:var(--red-lt);
+}
+
+/* Role sections */
+.role-sections{padding:12px 16px;display:flex;flex-direction:column;gap:10px;}
+.role-block{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--sh1);
+  border:1px solid var(--grey1);
+}
+.role-hdr{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background var(--dur);
+  border-bottom:1px solid transparent;
+}
+.role-hdr:active{background:var(--bg);}
+.role-hdr.open{border-bottom-color:var(--grey1);}
+.role-hdr-lft{display:flex;align-items:center;gap:12px;}
+.role-ico{
+  width:40px;height:40px;
+  border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+}
+.role-ico.op{background:#EFF6FF;}
+.role-ico.sup{background:#F0FFF4;}
+.role-ico.own{background:#FFF7ED;}
+.role-name-lbl{
+  font-size:15px;
+  font-weight:800;
+  color:var(--navy);
+}
+.role-preview-txt{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:1px;
+}
+.role-hdr-rgt{display:flex;align-items:center;gap:8px;}
+.role-count-badge{
+  background:var(--navy);
+  color:#fff;
+  border-radius:20px;
+  padding:3px 10px;
+  font-size:12px;
+  font-weight:800;
+  min-width:28px;
+  text-align:center;
+}
+.role-chevron{
+  color:var(--grey3);
+  font-size:20px;
+  font-weight:300;
+  transition:transform var(--dur) var(--ease);
+}
+.role-chevron.open{transform:rotate(90deg);}
+.role-body{display:none;padding:10px 14px 14px;flex-direction:column;gap:8px;}
+.role-body.open{display:flex;}
+
+/* ══════════════════════════════════════
+   CONTACT CARDS — Clean, action-ready
+══════════════════════════════════════ */
+.contact-card{
+  background:var(--bg);
+  border:1px solid var(--grey1);
+  border-radius:var(--r);
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.cc-avatar{
+  width:44px;height:44px;
+  border-radius:var(--r-sm);
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+}
+.cc-info{flex:1;min-width:0;}
+.cc-name{
+  font-size:15px;
+  font-weight:800;
+  color:var(--navy);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.cc-company{font-size:12px;color:var(--muted);margin-top:1px;}
+.cc-phone{
+  font-size:13px;font-weight:600;
+  color:var(--text2);
+  display:flex;align-items:center;gap:5px;
+  margin-top:3px;
+}
+.cc-nophone{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px;}
+.cc-actions{display:flex;flex-direction:column;gap:6px;flex-shrink:0;align-items:flex-end;}
+.btn-call{
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  height:38px;padding:0 16px;
+  background:var(--green);
+  color:#fff;
+  border-radius:var(--r-sm);
+  font-size:13px;font-weight:800;
+  text-decoration:none;white-space:nowrap;
+  box-shadow:0 3px 10px rgba(13,155,74,0.3);
+  transition:background var(--dur),transform var(--dur);
+}
+.btn-call:active{background:#0A7A3A;transform:scale(0.97);}
+.cc-admin-row{display:flex;gap:6px;}
+.cc-admin-row.admin-only{display:none;}
+body.admin-mode .cc-admin-row.admin-only{display:flex;}
+.btn-edit2{
+  height:30px;padding:0 12px;
+  border-radius:var(--r-sm);
+  font-size:12px;font-weight:700;
+  border:1.5px solid var(--grey2);
+  background:var(--white);
+  color:var(--text2);
+  transition:all var(--dur);
+}
+.btn-edit2:active{background:var(--bg);}
+.btn-del2{
+  height:30px;padding:0 12px;
+  border-radius:var(--r-sm);
+  font-size:12px;font-weight:700;
+  border:1.5px solid rgba(214,43,43,0.3);
+  background:var(--red-lt);
+  color:var(--red);
+  transition:all var(--dur);
+}
+.btn-del2:active{opacity:0.7;}
+.add-role-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  height:42px;width:100%;
+  border:1.5px dashed var(--grey2);
+  border-radius:var(--r);
+  background:none;
+  color:var(--orange);
+  font-size:13px;font-weight:700;
+  cursor:pointer;
+  transition:border-color var(--dur),background var(--dur);
+}
+.add-role-btn:active{background:var(--orange-lt);border-color:var(--orange);}
+.add-role-btn.admin-only{display:none;}
+body.admin-mode .add-role-btn.admin-only{display:flex;}
+.no-contact-msg{
+  padding:8px 4px;
+  font-size:13px;
+  color:var(--muted);
+  font-style:italic;
+}
+
+/* ══════════════════════════════════════
+   FORMS
+══════════════════════════════════════ */
+.form-section{
+  background:var(--white);
+  margin:12px 16px;
+  border-radius:var(--r-lg);
+  border:1px solid var(--grey1);
+  box-shadow:var(--sh1);
+  overflow:hidden;
+}
+.form-section-title{
+  padding:14px 16px 12px;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  color:var(--navy);
+  border-bottom:1px solid var(--grey1);
+  background:var(--bg);
+}
+.form-body{padding:16px;display:flex;flex-direction:column;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--navy2);
+}
+.req{color:var(--red);}
+.form-input{
+  height:50px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:0 14px;
+  font-size:16px;
+  font-weight:500;
+  color:var(--text);
+  transition:border-color var(--dur),box-shadow var(--dur);
+  width:100%;
+}
+.form-input:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
+  background:var(--white);
+}
+.form-input.err{border-color:var(--red);}
+.form-select{
+  height:50px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:0 14px;
+  font-size:16px;
+  font-weight:500;
+  color:var(--text);
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A99B0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-color:var(--bg);
+  width:100%;
+  transition:border-color var(--dur),box-shadow var(--dur);
+}
+.form-select:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
+  background-color:var(--white);
+}
+.form-textarea{
+  min-height:88px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:12px 14px;
+  font-size:15px;
+  font-weight:500;
+  color:var(--text);
+  resize:vertical;
+  width:100%;
+  line-height:1.5;
+  transition:border-color var(--dur),box-shadow var(--dur);
+}
+.form-textarea:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
+  background:var(--white);
+}
+.form-hint{font-size:12px;color:var(--muted);}
+.form-err{font-size:12px;color:var(--red);display:none;}
+.form-err.vis{display:block;}
+.form-actions{padding:4px 16px 24px;display:flex;flex-direction:column;gap:10px;}
+
+/* ══════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════ */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  height:54px;border-radius:var(--r-lg);
+  font-size:16px;font-weight:800;
+  border:none;cursor:pointer;
+  transition:all var(--dur) var(--ease);
+  width:100%;letter-spacing:0.1px;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  color:#fff;
+  box-shadow:0 4px 16px rgba(255,107,0,0.35);
+}
+.btn-primary:active{opacity:0.9;transform:scale(0.99);box-shadow:0 2px 8px rgba(255,107,0,0.25);}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-secondary{
+  background:var(--white);
+  color:var(--text2);
+  border:2px solid var(--grey1);
+  box-shadow:var(--sh1);
+}
+.btn-secondary:active{background:var(--bg);}
+.btn-danger{
+  background:var(--red-lt);
+  color:var(--red);
+  border:2px solid rgba(214,43,43,0.25);
+}
+.btn-danger:active{background:rgba(214,43,43,0.1);}
+
+/* ══════════════════════════════════════
+   SETTINGS
+══════════════════════════════════════ */
+.settings-hero{
+  background:var(--navy);
+  padding:28px 20px 24px;
+  text-align:center;
+}
+.settings-logo{
+  font-size:28px;font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:4px;
+}
+.settings-logo span{color:var(--orange);}
+.settings-tagline{font-size:13px;color:rgba(255,255,255,0.55);}
+.settings-body{padding:16px;}
+.settings-card{
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--sh1);
+  margin-bottom:16px;
+}
+.settings-card-title{
+  padding:11px 16px;
+  font-size:11px;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--muted);
+  background:var(--bg);
+  border-bottom:1px solid var(--grey1);
+}
+.settings-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 16px;
+  border-bottom:1px solid var(--grey1);
+  cursor:pointer;
+  transition:background var(--dur);
+}
+.settings-row:last-child{border-bottom:none;}
+.settings-row:active{background:var(--bg);}
+.sr-lbl{font-size:15px;font-weight:700;color:var(--text);}
+.sr-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.sr-val{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.sr-chev{color:var(--grey2);font-size:18px;font-weight:300;}
+.admin-pin-wrap{padding:14px 16px;}
+.admin-pin-wrap label{
+  display:block;
+  font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+  color:var(--muted);margin-bottom:10px;
+}
+.pin-row{display:flex;gap:8px;}
+.pin-input{
+  flex:1;height:50px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:0 14px;
+  font-size:22px;font-weight:700;letter-spacing:6px;
+  color:var(--navy);text-align:center;
+  transition:border-color var(--dur),box-shadow var(--dur);
+}
+.pin-input:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
+}
+.btn-pin-enter{
+  height:50px;padding:0 20px;
+  background:var(--orange);
+  color:#fff;border:none;border-radius:var(--r);
+  font-size:15px;font-weight:800;
+  cursor:pointer;white-space:nowrap;
+  flex-shrink:0;
+  transition:background var(--dur);
+}
+.btn-pin-enter:active{background:var(--orange2);}
+.admin-active-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,107,0,0.12);
+  border:1px solid rgba(255,107,0,0.25);
+  border-radius:20px;padding:5px 14px;
+  font-size:13px;font-weight:700;color:var(--orange);
+}
+.pin-err{font-size:12px;color:var(--red);margin-top:8px;display:none;}
+.pin-err.vis{display:block;}
+
+/* ══════════════════════════════════════
+   INSTALL BANNER
+══════════════════════════════════════ */
+.install-banner{
+  margin:12px 16px 0;
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-left:4px solid var(--orange);
+  border-radius:var(--r);
+  padding:14px;
+  display:none;
+  align-items:center;gap:12px;
+  box-shadow:var(--sh1);
+}
+.install-banner.vis{display:flex;}
+.install-banner-text{flex:1;}
+.install-banner-text strong{display:block;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:2px;}
+.install-banner-text span{font-size:12px;color:var(--muted);}
+.install-btns{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.btn-install-sm{
+  height:36px;padding:0 16px;
+  background:var(--orange);color:#fff;
+  border:none;border-radius:var(--r-sm);
+  font-size:13px;font-weight:800;
+  cursor:pointer;white-space:nowrap;
+  transition:background var(--dur);
+}
+.btn-install-sm:active{background:var(--orange2);}
+.btn-dismiss-sm{
+  height:28px;background:none;border:none;
+  font-size:12px;color:var(--muted);cursor:pointer;text-align:center;
+}
+
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(11,31,58,0.5);
+  z-index:900;
+  display:none;align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(3px);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--white);
+  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  width:100%;max-width:620px;
+  max-height:90vh;overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform 0.25s var(--ease);
+  box-shadow:var(--sh3);
+}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-handle{
+  width:40px;height:4px;
+  background:var(--grey1);
+  border-radius:2px;margin:14px auto 18px;
+}
+.modal-title{font-size:20px;font-weight:900;color:var(--navy);padding:0 20px 4px;}
+.modal-subtitle{font-size:14px;color:var(--muted);padding:0 20px 16px;border-bottom:1px solid var(--grey1);}
+.modal-body{padding:16px 20px;}
+.confirm-box{
+  background:var(--bg);
+  border:1px solid var(--grey1);
+  border-radius:var(--r);
+  padding:14px;
+  margin-bottom:16px;
+}
+.confirm-name{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:3px;}
+.confirm-detail{font-size:13px;color:var(--muted);}
+.modal-actions{display:flex;gap:10px;padding:0 20px 20px;}
+.modal-actions .btn{height:50px;}
+
+/* ══════════════════════════════════════
+   SEARCH RESULTS
+══════════════════════════════════════ */
+.srp-card{
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-radius:var(--r-lg);
+  padding:14px;
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:8px;
+  cursor:pointer;
+  box-shadow:var(--sh1);
+  transition:transform var(--dur);
+}
+.srp-card:active{transform:scale(0.99);}
+.srp-info{flex:1;min-width:0;}
+.srp-name{font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.srp-role{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;
+}
+.srp-role.operator{color:#3B82F6;}
+.srp-role.supervisor{color:var(--green);}
+.srp-role.owner{color:var(--orange);}
+.srp-crane{font-size:12px;color:var(--muted);margin-top:2px;}
+mark{
+  background:rgba(255,107,0,0.15);
+  color:var(--orange2);
+  border-radius:2px;padding:0 1px;
+}
+
+/* ══════════════════════════════════════
+   EMPTY / LOADING
+══════════════════════════════════════ */
+.empty-state{
+  padding:60px 24px;text-align:center;
+}
+.empty-state .ei{font-size:56px;margin-bottom:16px;}
+.empty-state h3{font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.empty-state p{font-size:14px;color:var(--muted);max-width:280px;margin:0 auto;line-height:1.6;}
+.skel{
+  background:linear-gradient(90deg,var(--white) 0%,var(--grey1) 50%,var(--white) 100%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s infinite;
+  border-radius:var(--r-lg);
+  height:72px;
+  margin:0 16px 10px;
+}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.error-card{
+  margin:16px;
+  background:var(--red-lt);
+  border:1px solid rgba(214,43,43,0.2);
+  border-left:4px solid var(--red);
+  border-radius:var(--r);
+  padding:16px;
+}
+.error-card h3{font-size:15px;font-weight:800;color:var(--red);margin-bottom:4px;}
+.error-card p{font-size:13px;color:var(--muted);line-height:1.5;}
+.offline-bar{
+  background:var(--amber-lt);
+  border-bottom:1px solid rgba(201,122,0,0.2);
+  padding:8px 16px;
+  font-size:12px;font-weight:700;color:var(--amber);
+  display:none;text-align:center;
+}
+.offline-bar.vis{display:block;}
+
+/* ══════════════════════════════════════
+   TOAST
+══════════════════════════════════════ */
+.toast{
+  position:fixed;
+  bottom:90px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  background:var(--navy);color:#fff;
+  border-radius:30px;
+  padding:11px 22px;
+  font-size:14px;font-weight:700;
+  white-space:nowrap;max-width:calc(100vw - 32px);
+  z-index:9999;pointer-events:none;
+  opacity:0;transition:opacity 0.18s,transform 0.18s;
+  box-shadow:var(--sh3);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.success{background:var(--green);}
+.toast.error{background:var(--red);}
+
+/* ══════════════════════════════════════
+   BOTTOM NAV — Premium pill style
+══════════════════════════════════════ */
+.bottom-nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:620px;
+  background:var(--white);
+  border-top:1px solid var(--grey1);
+  display:flex;
+  z-index:300;
+  padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -4px 20px rgba(11,31,58,0.08);
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:10px 0;
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);
+  font-size:10px;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.5px;
+  position:relative;
+  transition:color var(--dur);
+}
+.ni{font-size:22px;line-height:1;}
+.nav-item.active{color:var(--orange);}
+.nav-item.active::after{
+  content:'';
+  position:absolute;top:0;left:25%;right:25%;
+  height:2.5px;background:var(--orange);
+  border-radius:0 0 3px 3px;
+}
+.nav-add .ni{
+  width:44px;height:44px;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  box-shadow:0 4px 14px rgba(255,107,0,0.4);
+  margin-bottom:2px;
+}
+.admin-only-nav{display:none;}
+body.admin-mode .admin-only-nav{display:flex;}
+
+/* ══════════════════════════════════════
+   SCREENS
+══════════════════════════════════════ */
+.screen{display:none;}
+.screen.active{display:block;}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ── HOME ── -->
+  <div id="scr-home" class="screen active">
+    <div class="hdr">
+      <div class="hdr-logo">Crane<span>Call</span></div>
+      <button class="hdr-act" onclick="showScreen('settings');renderSettings();" title="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" id="searchInput" placeholder="Search crane, person, phone, location..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+      </div>
+    </div>
+
+    <div class="sync-bar">
+      <div class="sync-pill">
+        <span class="sdot" id="syncDot"></span>
+        <span id="syncText">Loading...</span>
+      </div>
+      <button class="sync-btn" onclick="doRefresh()">
+        <span id="syncIcon">↻</span> Sync Now
+      </button>
+    </div>
+
+    <div id="offlineBar" class="offline-bar">⚡ Offline — showing last synced data. Changes cannot be saved.</div>
+
+    <!-- Install banner -->
+    <div class="install-banner" id="installBanner">
+      <div style="font-size:30px;flex-shrink:0;">📲</div>
+      <div class="install-banner-text">
+        <strong>Install CraneCall</strong>
+        <span>Works offline at any construction site</span>
+      </div>
+      <div class="install-btns">
+        <button class="btn-install-sm" onclick="triggerInstall()">Install</button>
+        <button class="btn-dismiss-sm" onclick="dismissInstall()">Not now</button>
+      </div>
+    </div>
+
+    <!-- Home main: dashboard + list -->
+    <div id="homeMain">
+      <div class="dash">
+        <div class="dash-header">
+          <div>
+            <div class="dash-total-num" id="totalCount">—</div>
+            <div class="dash-total-lbl">Total Cranes</div>
+          </div>
+          <div class="dash-date">
+            <strong id="dashDate">—</strong>
+            <span id="dashTime">—</span>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card working" onclick="filterStatus('Working')">
+            <div class="stat-num" id="cntWorking">—</div>
+            <div class="stat-lbl">Working</div>
+            <div class="stat-icon">⚙️</div>
+          </div>
+          <div class="stat-card standby" onclick="filterStatus('Standby')">
+            <div class="stat-num" id="cntStandby">—</div>
+            <div class="stat-lbl">Standby</div>
+            <div class="stat-icon">⏸</div>
+          </div>
+          <div class="stat-card breakdown" onclick="filterStatus('Breakdown')">
+            <div class="stat-num" id="cntBreakdown">—</div>
+            <div class="stat-lbl">Breakdown</div>
+            <div class="stat-icon">🔴</div>
+          </div>
+          <div class="stat-card maintenance" onclick="filterStatus('Maintenance')">
+            <div class="stat-num" id="cntMaint">—</div>
+            <div class="stat-lbl">Maint.</div>
+            <div class="stat-icon">🔧</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-hdr">
+        <div>
+          <div class="sec-title" id="listLabel">All Cranes</div>
+        </div>
+        <button class="chip-clear" id="clearFilterBtn" onclick="clearFilter()">✕ Clear Filter</button>
+      </div>
+      <div id="craneList" class="crane-list"></div>
+    </div>
+
+    <!-- Search results -->
+    <div id="searchSection" style="display:none;">
+      <div class="sec-hdr">
+        <div class="sec-title" id="searchResultLabel">Results</div>
+      </div>
+      <div id="searchResults" style="padding:0 16px;"></div>
+    </div>
+  </div>
+
+  <!-- ── CRANE DETAIL ── -->
+  <div id="scr-detail" class="screen">
+    <div class="hdr">
+      <div class="hdr-back" onclick="goBack()">‹</div>
+      <div class="hdr-title" id="detailHdrTitle">Crane</div>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+
+  <!-- ── CRANE FORM ── -->
+  <div id="scr-craneform" class="screen">
+    <div class="hdr">
+      <div class="hdr-back" onclick="goBack()">‹</div>
+      <div class="hdr-title" id="craneFormTitle">Add Crane</div>
+    </div>
+    <div id="craneFormContent"></div>
+  </div>
+
+  <!-- ── CONTACT FORM ── -->
+  <div id="scr-contactform" class="screen">
+    <div class="hdr">
+      <div class="hdr-back" onclick="goBack()">‹</div>
+      <div class="hdr-title" id="contactFormTitle">Add Contact</div>
+    </div>
+    <div id="contactFormContent"></div>
+  </div>
+
+  <!-- ── SETTINGS ── -->
+  <div id="scr-settings" class="screen">
+    <div class="hdr">
+      <div class="hdr-back" onclick="goBack()">‹</div>
+      <div class="hdr-title">Settings</div>
+    </div>
+    <div id="settingsContent"></div>
+  </div>
+
+</div><!-- /app -->
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button class="nav-item active" id="navHome" onclick="goHome()">
+    <span class="ni">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </span>Home
+  </button>
+  <button class="nav-item" id="navSearch" onclick="focusSearch()">
+    <span class="ni">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </span>Search
+  </button>
+  <button class="nav-item nav-add admin-only-nav" id="navAdd" onclick="openAddCrane()">
+    <span class="ni">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </span>Add
+  </button>
+  <button class="nav-item" id="navSettings" onclick="showScreen('settings');renderSettings();">
+    <span class="ni">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </span>Settings
+  </button>
+</nav>
+
+<!-- Delete Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalTitle">Confirm Delete</div>
+    <div class="modal-subtitle" id="modalSubtitle">This action cannot be undone.</div>
+    <div class="modal-body">
+      <div class="confirm-box" id="modalBody"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-danger" id="modalConfirmBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CraneCall v3.0 – Bug Fix + Premium UI
+   
+   CRITICAL FIX: Google Apps Script POST blocked by CORS preflight.
+   Solution: ALL mutations sent as GET requests with encoded params.
+   Apps Script handles GET with full CORS support — no preflight.
+   
+   DEVELOPER: Set API_BASE to your Apps Script Web App URL.
+   Users never see, type, or configure this URL.
+═══════════════════════════════════════════════════════════════ */
+
+// ── CONFIGURATION — ONLY THING A DEVELOPER NEEDS TO CHANGE ────
+const API_BASE = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+
+// Admin PIN — change before going live
+const ADMIN_PIN = '1234';
+
+// Cache config
+const CK_CRANES   = 'cc3_cranes';
+const CK_CONTACTS = 'cc3_contacts';
+const CK_TS       = 'cc3_ts';
+const CACHE_TTL   = 5 * 60 * 1000;
+
+// ── STATE ──────────────────────────────────────────────────────
+let cranes      = [];
+let contacts    = [];
+let isOnline    = navigator.onLine;
+let isAdmin     = false;
+let filterState = null;
+let currentCraneId = null;
+let navHistory  = ['home'];
+let expanded    = {}; // {craneId: {Operator,Supervisor,Owner: bool}}
+let deferredInstall = null;
+let toastTimer  = null;
+
+// ── HELPERS ────────────────────────────────────────────────────
+const H  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const R  = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const $  = id => document.getElementById(id);
+const SC = s => {const m={working:'working',standby:'standby',breakdown:'breakdown',maintenance:'maintenance',inactive:'inactive'};return m[(s||'').toLowerCase()]||'standby';};
+function fmtPhone(p){
+  if(!p)return '';
+  let n=String(p).replace(/[\s\-().+]/g,'');
+  if(n.startsWith('91')&&n.length===12)n=n.slice(2);
+  if(n.startsWith('+91'))n=n.slice(3);
+  return n;
+}
+function genId(){return 'C'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();}
+function shortType(t){if(!t)return '—';for(const k of['Tower','Mobile','Crawler','Overhead','Rough'])if(t.includes(k))return k;return t.slice(0,8);}
+
+// ── TOAST ──────────────────────────────────────────────────────
+function toast(msg,type='',dur=3000){
+  const t=$('toast');
+  t.textContent=msg;
+  t.className='toast show'+(type?' '+type:'');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.className='toast',dur);
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────
+function showScreen(name,push=true){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $('scr-'+name).classList.add('active');
+  if(push&&navHistory[navHistory.length-1]!==name)navHistory.push(name);
+  ['navHome','navSearch','navSettings'].forEach(id=>$(id)?.classList.remove('active'));
+  if(name==='home')$('navHome')?.classList.add('active');
+  if(name==='settings')$('navSettings')?.classList.add('active');
+  $('app').scrollTop=0;
+}
+function goBack(){
+  if(navHistory.length>1){navHistory.pop();showScreen(navHistory[navHistory.length-1],false);}
+  else goHome();
+}
+function goHome(){
+  navHistory=['home'];showScreen('home',false);
+  $('navHome')?.classList.add('active');
+}
+function focusSearch(){
+  goHome();
+  setTimeout(()=>$('searchInput')?.focus(),100);
+  $('navSearch')?.classList.add('active');
+}
+
+// ── CACHE ──────────────────────────────────────────────────────
+function saveCache(){
+  try{
+    localStorage.setItem(CK_CRANES,JSON.stringify(cranes));
+    localStorage.setItem(CK_CONTACTS,JSON.stringify(contacts));
+    localStorage.setItem(CK_TS,String(Date.now()));
+  }catch(e){}
+}
+function loadCache(){
+  try{
+    const c=JSON.parse(localStorage.getItem(CK_CRANES)||'null');
+    const ct=JSON.parse(localStorage.getItem(CK_CONTACTS)||'null');
+    const t=parseInt(localStorage.getItem(CK_TS)||'0');
+    if(c&&ct){cranes=c;contacts=ct;return t;}
+  }catch(e){}
+  return 0;
+}
+
+// ══════════════════════════════════════════════════════════════
+// API — ALL REQUESTS ARE GET (fixes CORS preflight block on POST)
+// Mutations are sent as GET with action + base64-encoded payload.
+// Code.gs handles them identically regardless of GET/POST.
+// ══════════════════════════════════════════════════════════════
+async function apiCall(action, data=null){
+  if(API_BASE==='PASTE_YOUR_APPS_SCRIPT_URL_HERE') throw new Error('NOT_CONFIGURED');
+
+  const params = new URLSearchParams({ action });
+  if(data) params.set('payload', btoa(unescape(encodeURIComponent(JSON.stringify(data)))));
+
+  const url = API_BASE + '?' + params.toString();
+  const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
+  if(!res.ok) throw new Error('Server error: HTTP ' + res.status);
+  const j = await res.json();
+  if(j.error) throw new Error(j.error);
+  return j;
+}
+
+async function apiMutate(action, data){
+  if(!isOnline) throw new Error('No internet connection. Please check your network and try again.');
+  return apiCall(action, data);
+}
+
+// ── LOAD DATA ──────────────────────────────────────────────────
+async function loadData(force=false){
+  setSyncUI('loading');
+  const cachedTs=loadCache();
+  const fresh=Date.now()-cachedTs<CACHE_TTL;
+
+  if(!force&&fresh&&cranes.length>0){renderAll();setSyncUI('ok',cachedTs);return;}
+  if(!isOnline&&cranes.length>0){renderAll();setSyncUI('offline',cachedTs);return;}
+
+  try{
+    const r=await apiCall('getData');
+    cranes=r.cranes||[];contacts=r.contacts||[];
+    saveCache();renderAll();setSyncUI('synced');
+  }catch(e){
+    if(e.message==='NOT_CONFIGURED'){
+      setSyncUI('config');
+      $('craneList').innerHTML=`<div class="error-card" style="margin-top:8px;"><h3>⚙️ Setup Required</h3><p>Open index.html and replace <strong>PASTE_YOUR_APPS_SCRIPT_URL_HERE</strong> with your Google Apps Script Web App URL. See setup-guide.md for instructions.</p></div>`;
+      renderDashboard();
+    }else if(cranes.length>0){
+      renderAll();setSyncUI('offline',cachedTs);
+      toast('⚠ Sync failed — showing cached data','error');
+    }else{
+      setSyncUI('error');
+      $('craneList').innerHTML=`<div class="error-card" style="margin-top:8px;"><h3>Unable to load data</h3><p>${H(e.message)}</p><br><button class="btn btn-secondary" style="height:44px;font-size:14px;" onclick="doRefresh()">↻ Retry</button></div>`;
+      renderDashboard();
+    }
+  }
+}
+
+async function doRefresh(){
+  $('syncIcon').classList.add('spinning');
+  await loadData(true);
+  $('syncIcon').classList.remove('spinning');
+}
+
+// ── SYNC UI ────────────────────────────────────────────────────
+function setSyncUI(state,ts_ms){
+  const dot=$('syncDot'),txt=$('syncText'),bar=$('offlineBar');
+  const fmt=t=>new Date(t).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+  switch(state){
+    case 'loading': dot.className='sdot off';txt.textContent='Syncing...';break;
+    case 'synced':  dot.className='sdot';txt.textContent='Synced';bar.classList.remove('vis');break;
+    case 'ok':      dot.className='sdot';txt.textContent='Last sync: '+fmt(ts_ms);bar.classList.remove('vis');break;
+    case 'offline': dot.className='sdot off';txt.textContent='Offline · '+fmt(ts_ms);bar.classList.add('vis');break;
+    case 'config':  dot.className='sdot err';txt.textContent='Setup needed';break;
+    case 'error':   dot.className='sdot err';txt.textContent='Connection error';break;
+  }
+}
+
+// ── DASHBOARD ──────────────────────────────────────────────────
+function renderDashboard(){
+  const c={Working:0,Standby:0,Breakdown:0,Maintenance:0};
+  cranes.forEach(x=>{const s=x.Status||'Standby';if(c[s]!==undefined)c[s]++;});
+  $('totalCount').textContent=cranes.length||'0';
+  $('cntWorking').textContent=c.Working;
+  $('cntStandby').textContent=c.Standby;
+  $('cntBreakdown').textContent=c.Breakdown;
+  $('cntMaint').textContent=c.Maintenance;
+  const now=new Date();
+  $('dashDate').textContent=now.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+  $('dashTime').textContent=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+}
+
+// ── CRANE LIST ─────────────────────────────────────────────────
+function renderAll(){
+  renderDashboard();
+  const list=filterState?cranes.filter(c=>(c.Status||'').toLowerCase()===filterState.toLowerCase()):cranes;
+  renderCraneList(list);
+  $('listLabel').textContent=filterState?`${filterState} (${list.length})`:`All Cranes (${list.length})`;
+}
+
+function renderCraneList(list){
+  const el=$('craneList');
+  if(!list||list.length===0){
+    el.innerHTML=`<div class="empty-state"><div class="ei">${cranes.length===0?'🏗️':'🔍'}</div><h3>${cranes.length===0?'No cranes yet':'No cranes match'}</h3><p>${cranes.length===0?'Add your first crane from the admin panel.':'Try a different filter.'}</p></div>`;
+    return;
+  }
+  el.innerHTML=list.map(c=>{
+    const sc=SC(c.Status);
+    const opCnt=contacts.filter(x=>x.Crane_ID===c.Crane_ID&&x.Role==='Operator'&&x.Active!=='FALSE').length;
+    return`<div class="crane-card" onclick="openCrane('${H(c.Crane_ID)}')">
+      <div class="crane-card-stripe ${sc}"></div>
+      <div class="crane-card-body">
+        <div class="crane-id-tag">
+          <span class="cid">${H(c.Crane_ID)}</span>
+          <span class="ctype">${H(shortType(c.Crane_Type))}</span>
+        </div>
+        <div class="crane-meta">
+          <div class="crane-loc">${H(c.Location||'—')}</div>
+          <div class="crane-sub">${H(c.Crane_Type||'—')}${c.Capacity?' · '+H(c.Capacity):''}${opCnt?' · '+opCnt+' operator'+(opCnt>1?'s':''):''}</div>
+        </div>
+        <span class="sbadge ${sc}"><span class="sdot-sm"></span>${H(c.Status||'Unknown')}</span>
+        <span class="crane-chevron">›</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterStatus(s){filterState=s;$('clearFilterBtn').classList.add('vis');renderAll();}
+function clearFilter(){filterState=null;$('clearFilterBtn').classList.remove('vis');renderAll();}
+
+// ── CRANE DETAIL ───────────────────────────────────────────────
+function openCrane(id){
+  currentCraneId=id;
+  const c=cranes.find(x=>x.Crane_ID===id);
+  if(!c){toast('Crane not found','error');return;}
+  if(!expanded[id])expanded[id]={Operator:true,Supervisor:false,Owner:false};
+
+  $('detailHdrTitle').textContent=id;
+  const sc=SC(c.Status);
+  const cContacts=contacts.filter(x=>x.Crane_ID===id&&x.Active!=='FALSE');
+
+  const roleSection=(role,icon,ico)=>{
+    const people=cContacts.filter(x=>x.Role===role);
+    const isOpen=expanded[id][role];
+    const preview=people.length>0?people.slice(0,2).map(p=>p.Name).join(', ')+(people.length>2?'…':''):'None assigned';
+    return`<div class="role-block">
+      <div class="role-hdr ${isOpen?'open':''}" onclick="toggleRole('${H(id)}','${role}',this)">
+        <div class="role-hdr-lft">
+          <div class="role-ico ${ico}">${icon}</div>
+          <div>
+            <div class="role-name-lbl">${role}</div>
+            <div class="role-preview-txt" id="rpt-${H(id)}-${role}">${H(preview)}</div>
+          </div>
+        </div>
+        <div class="role-hdr-rgt">
+          <span class="role-count-badge" id="rcb-${H(id)}-${role}">${people.length}</span>
+          <span class="role-chevron ${isOpen?'open':''}">›</span>
+        </div>
+      </div>
+      <div class="role-body ${isOpen?'open':''}" id="rb-${H(id)}-${role}">
+        <div id="rbc-${H(id)}-${role}">
+          ${people.length===0?`<div class="no-contact-msg">No ${role.toLowerCase()} assigned yet.</div>`:people.map(p=>renderContactCard(p)).join('')}
+        </div>
+        <button class="add-role-btn admin-only" onclick="openAddContact('${H(id)}','${role}')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add ${role}
+        </button>
+      </div>
+    </div>`;
+  };
+
+  let html=`
+    <div class="detail-hero">
+      <div class="detail-crane-id">${H(c.Crane_ID)}</div>
+      <div class="detail-loc">📍 ${H(c.Location||'—')}</div>
+      <div class="detail-pills">
+        <span class="detail-pill status-${sc}">${H(c.Status||'Unknown')}</span>
+        ${c.Crane_Type?`<span class="detail-pill">${H(c.Crane_Type)}</span>`:''}
+        ${c.Capacity?`<span class="detail-pill">${H(c.Capacity)}</span>`:''}
+      </div>
+    </div>
+    <div class="detail-meta-row">
+      <div class="dmi"><div class="dmi-lbl">Type</div><div class="dmi-val">${H(shortType(c.Crane_Type))}</div></div>
+      <div class="dmi"><div class="dmi-lbl">Capacity</div><div class="dmi-val">${H(c.Capacity||'—')}</div></div>
+      <div class="dmi"><div class="dmi-lbl">Contacts</div><div class="dmi-val">${cContacts.length}</div></div>
+    </div>
+    ${c.Remarks?`<div class="detail-remarks" style="margin-bottom:0"><strong>Note</strong>${H(c.Remarks)}</div>`:''}
+    ${isAdmin?`<div class="admin-action-row">
+      <button class="btn-sm-admin" onclick="openEditCrane()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Edit Crane
+      </button>
+      <button class="btn-sm-admin danger" onclick="confirmDeleteCrane('${H(c.Crane_ID)}')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+        Delete
+      </button>
+    </div>`:''}
+    <div class="role-sections">
+      ${roleSection('Operator','👷','op')}
+      ${roleSection('Supervisor','🦺','sup')}
+      ${roleSection('Owner','🏢','own')}
+    </div>`;
+
+  $('detailContent').innerHTML=html;
+  showScreen('detail');
+}
+
+function renderContactCard(p){
+  const phone=fmtPhone(p.Phone);
+  const hasPhone=!!phone;
+  const icon=p.Role==='Operator'?'👷':p.Role==='Supervisor'?'🦺':'🏢';
+  return`<div class="contact-card" id="cc-${H(p.Contact_ID)}">
+    <div class="cc-avatar">${icon}</div>
+    <div class="cc-info">
+      <div class="cc-name">${H(p.Name)}</div>
+      ${p.Company?`<div class="cc-company">${H(p.Company)}</div>`:''}
+      ${hasPhone
+        ?`<div class="cc-phone"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> ${H(p.Phone)}</div>`
+        :`<div class="cc-nophone">No phone number</div>`}
+    </div>
+    <div class="cc-actions">
+      ${hasPhone?`<a href="tel:${phone}" class="btn-call" onclick="event.stopPropagation()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}
+      <div class="cc-admin-row admin-only">
+        <button class="btn-edit2" onclick="openEditContact('${H(p.Contact_ID)}')">Edit</button>
+        <button class="btn-del2" onclick="confirmDeleteContact('${H(p.Contact_ID)}')">Del</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleRole(craneId,role,hdrEl){
+  if(!expanded[craneId])expanded[craneId]={};
+  const isOpen=!expanded[craneId][role];
+  expanded[craneId][role]=isOpen;
+  const body=$('rb-'+craneId+'-'+role);
+  const chev=hdrEl.querySelector('.role-chevron');
+  if(body){body.classList.toggle('open',isOpen);}
+  if(chev){chev.classList.toggle('open',isOpen);}
+  hdrEl.classList.toggle('open',isOpen);
+}
+
+// ── SURGICAL ROLE REFRESH (no full re-render) ──────────────────
+function refreshRole(craneId,role){
+  const cardsEl=$('rbc-'+craneId+'-'+role);
+  const countEl=$('rcb-'+craneId+'-'+role);
+  const prevEl=$('rpt-'+craneId+'-'+role);
+  if(!cardsEl)return;
+  const people=contacts.filter(x=>x.Crane_ID===craneId&&x.Role===role&&x.Active!=='FALSE');
+  cardsEl.innerHTML=people.length===0
+    ?`<div class="no-contact-msg">No ${role.toLowerCase()} assigned yet.</div>`
+    :people.map(p=>renderContactCard(p)).join('');
+  if(countEl)countEl.textContent=people.length;
+  if(prevEl)prevEl.textContent=people.length>0?people.slice(0,2).map(p=>p.Name).join(', ')+(people.length>2?'…':''):'None assigned';
+  // Keep section open
+  const body=$('rb-'+craneId+'-'+role);
+  if(body)body.classList.add('open');
+  if(!expanded[craneId])expanded[craneId]={};
+  expanded[craneId][role]=true;
+}
+
+// ── CRANE FORM ─────────────────────────────────────────────────
+function openAddCrane(){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  $('craneFormTitle').textContent='Add Crane';
+  renderCraneForm(null);showScreen('craneform');
+}
+function openEditCrane(){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  const c=cranes.find(x=>x.Crane_ID===currentCraneId);
+  if(!c)return;
+  $('craneFormTitle').textContent='Edit Crane';
+  renderCraneForm(c);showScreen('craneform');
+}
+function renderCraneForm(crane){
+  const isEdit=!!crane;
+  const v=f=>H(crane?crane[f]||'':'');
+  $('craneFormContent').innerHTML=`
+    <div class="form-section">
+      <div class="form-section-title">Crane Information</div>
+      <div class="form-body">
+        <div class="form-group">
+          <label class="form-label">Crane ID <span class="req">*</span></label>
+          <input class="form-input" id="fCraneId" type="text" placeholder="e.g. CR-001" value="${isEdit?v('Crane_ID'):''}" ${isEdit?'readonly style="opacity:0.6"':''}>
+          <div class="form-err" id="errCraneId">Crane ID is required</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location <span class="req">*</span></label>
+          <input class="form-input" id="fLoc" type="text" placeholder="e.g. Block A – Level 12" value="${v('Location')}">
+          <div class="form-err" id="errLoc">Location is required</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Crane Type</label>
+          <select class="form-select" id="fType">
+            ${['Tower Crane','Mobile Crane','Crawler Crane','Overhead Crane','Rough Terrain Crane','Other'].map(t=>`<option value="${t}"${crane&&crane.Crane_Type===t?' selected':''}>${t}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Capacity</label>
+          <input class="form-input" id="fCap" type="text" placeholder="e.g. 10T" value="${v('Capacity')}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="fStatus">
+            ${['Working','Standby','Breakdown','Maintenance','Inactive'].map(s=>`<option value="${s}"${crane&&crane.Status===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Remarks</label>
+          <textarea class="form-textarea" id="fRemarks" placeholder="Any notes...">${crane?H(crane.Remarks||''):''}</textarea>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="submitCraneForm(${isEdit})">${isEdit?'Save Changes':'Add Crane'}</button>
+      <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
+    </div>`;
+}
+async function submitCraneForm(isEdit){
+  const id=$('fCraneId').value.trim();
+  const loc=$('fLoc').value.trim();
+  let ok=true;
+  if(!id){$('errCraneId').classList.add('vis');$('fCraneId').classList.add('err');ok=false;}
+  else{$('errCraneId').classList.remove('vis');$('fCraneId').classList.remove('err');}
+  if(!loc){$('errLoc').classList.add('vis');$('fLoc').classList.add('err');ok=false;}
+  else{$('errLoc').classList.remove('vis');$('fLoc').classList.remove('err');}
+  if(!ok)return;
+  if(!isEdit&&cranes.find(c=>c.Crane_ID===id)){
+    $('errCraneId').textContent='This Crane ID already exists';
+    $('errCraneId').classList.add('vis');$('fCraneId').classList.add('err');return;
+  }
+  const data={Crane_ID:id,Location:loc,Crane_Type:$('fType').value,Capacity:$('fCap').value.trim(),Status:$('fStatus').value,Remarks:$('fRemarks').value.trim()};
+  const btn=document.querySelector('#craneFormContent .btn-primary');
+  btn.disabled=true;btn.textContent='Saving...';
+  try{
+    await apiMutate(isEdit?'updateCrane':'addCrane',data);
+    if(isEdit){const i=cranes.findIndex(c=>c.Crane_ID===id);if(i>=0)cranes[i]={...cranes[i],...data};}
+    else cranes.push(data);
+    saveCache();renderAll();
+    toast(isEdit?'✓ Crane updated':'✓ Crane added','success');
+    if(isEdit){goBack();openCrane(id);}else goHome();
+  }catch(e){
+    toast('⚠ '+e.message,'error');
+    btn.disabled=false;btn.textContent=isEdit?'Save Changes':'Add Crane';
+  }
+}
+
+// ── CONTACT FORM ───────────────────────────────────────────────
+function openAddContact(craneId,preRole){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  $('contactFormTitle').textContent='Add Contact';
+  renderContactForm(null,craneId,preRole);showScreen('contactform');
+}
+function openEditContact(contactId){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  const c=contacts.find(x=>x.Contact_ID===contactId);
+  if(!c){toast('Contact not found','error');return;}
+  $('contactFormTitle').textContent='Edit Contact';
+  renderContactForm(c,c.Crane_ID,c.Role);showScreen('contactform');
+}
+function renderContactForm(contact,prefillCrane,prefillRole){
+  const isEdit=!!contact;
+  const v=f=>H(contact?contact[f]||'':'');
+  $('contactFormContent').innerHTML=`
+    <div class="form-section">
+      <div class="form-section-title">${isEdit?'Edit Contact':'New Contact'}</div>
+      <div class="form-body">
+        <div class="form-group">
+          <label class="form-label">Crane <span class="req">*</span></label>
+          <select class="form-select" id="fCCrane">
+            ${cranes.map(c=>`<option value="${H(c.Crane_ID)}"${(prefillCrane||'')===c.Crane_ID?' selected':''}>${H(c.Crane_ID)} — ${H(c.Location)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Role <span class="req">*</span></label>
+          <select class="form-select" id="fCRole">
+            ${['Operator','Supervisor','Owner'].map(r=>`<option value="${r}"${(prefillRole||'')===r?' selected':''}>${r}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Full Name <span class="req">*</span></label>
+          <input class="form-input" id="fCName" type="text" placeholder="e.g. Rajesh Kumar" value="${v('Name')}">
+          <div class="form-err" id="errCName">Name is required</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" id="fCPhone" type="tel" placeholder="e.g. 9876543210" value="${v('Phone')}">
+          <div class="form-hint">10-digit Indian mobile number</div>
+          <div class="form-err" id="errCPhone">Enter a valid 10-digit mobile number</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:11px;">(optional)</span></label>
+          <input class="form-input" id="fCCompany" type="text" placeholder="e.g. ABC Cranes Pvt Ltd" value="${v('Company')}">
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="submitContactForm(${isEdit?`'${H(contact?.Contact_ID||'')}'`:'null'})">${isEdit?'Save Changes':'Add Contact'}</button>
+      <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
+    </div>`;
+}
+
+async function submitContactForm(contactId){
+  const name=$('fCName').value.trim();
+  const phone=$('fCPhone').value.trim();
+  let ok=true;
+  if(!name){$('errCName').classList.add('vis');$('fCName').classList.add('err');ok=false;}
+  else{$('errCName').classList.remove('vis');$('fCName').classList.remove('err');}
+  if(phone&&!/^[6-9]\d{9}$/.test(fmtPhone(phone))){
+    $('errCPhone').classList.add('vis');$('fCPhone').classList.add('err');ok=false;
+  }else{$('errCPhone').classList.remove('vis');$('fCPhone').classList.remove('err');}
+  if(!ok)return;
+
+  const isEdit=!!contactId;
+  const origContact=isEdit?contacts.find(c=>c.Contact_ID===contactId):null;
+  const origRole=origContact?origContact.Role:null;
+  const data={
+    Contact_ID:isEdit?contactId:genId(),
+    Crane_ID:$('fCCrane').value,
+    Role:$('fCRole').value,
+    Name:name,
+    Phone:fmtPhone(phone)||phone,
+    Company:$('fCCompany').value.trim(),
+    Active:'TRUE'
+  };
+  const btn=document.querySelector('#contactFormContent .btn-primary');
+  btn.disabled=true;btn.textContent='Saving...';
+  try{
+    await apiMutate(isEdit?'updateContact':'addContact',data);
+    if(isEdit){const i=contacts.findIndex(c=>c.Contact_ID===contactId);if(i>=0)contacts[i]=data;}
+    else contacts.push(data);
+    saveCache();renderAll();
+    toast(isEdit?'✓ Contact updated':'✓ '+data.Role+' added','success');
+    goBack();
+    if(currentCraneId===data.Crane_ID){
+      refreshRole(data.Crane_ID,data.Role);
+      if(origRole&&origRole!==data.Role)refreshRole(data.Crane_ID,origRole);
+    }
+  }catch(e){
+    toast('⚠ '+e.message,'error');
+    btn.disabled=false;btn.textContent=isEdit?'Save Changes':'Add Contact';
+  }
+}
+
+// ── DELETE ─────────────────────────────────────────────────────
+function showModal(title,subtitle,bodyHTML,onConfirm){
+  $('modalTitle').textContent=title;
+  $('modalSubtitle').textContent=subtitle;
+  $('modalBody').innerHTML=bodyHTML;
+  const btn=$('modalConfirmBtn');
+  btn.onclick=()=>{closeModal();onConfirm();};
+  $('modalOverlay').classList.add('open');
+}
+function closeModal(e){
+  if(e&&e.target!==$('modalOverlay'))return;
+  $('modalOverlay').classList.remove('open');
+}
+function confirmDeleteContact(contactId){
+  const c=contacts.find(x=>x.Contact_ID===contactId);if(!c)return;
+  showModal('Delete Contact?','This person will be removed from the crane.',
+    `<div class="confirm-name">${H(c.Name)}</div><div class="confirm-detail">${H(c.Role)} · ${H(c.Crane_ID)}</div>`,
+    ()=>doDeleteContact(contactId));
+}
+function confirmDeleteCrane(craneId){
+  const c=cranes.find(x=>x.Crane_ID===craneId);if(!c)return;
+  const cnt=contacts.filter(x=>x.Crane_ID===craneId).length;
+  showModal('Delete Crane '+craneId+'?',
+    `All ${cnt} contacts will also be removed. This cannot be undone.`,
+    `<div class="confirm-name">${H(c.Crane_ID)}</div><div class="confirm-detail">${H(c.Location)} · ${H(c.Crane_Type)}</div>`,
+    ()=>doDeleteCrane(craneId));
+}
+async function doDeleteContact(contactId){
+  const t=contacts.find(c=>c.Contact_ID===contactId);
+  const tRole=t?t.Role:null;const tCrane=t?t.Crane_ID:currentCraneId;
+  try{
+    await apiMutate('deleteContact',{Contact_ID:contactId});
+    contacts=contacts.filter(c=>c.Contact_ID!==contactId);
+    saveCache();renderAll();
+    toast('✓ Contact deleted','success');
+    if(tCrane&&tRole)refreshRole(tCrane,tRole);
+  }catch(e){toast('⚠ '+e.message,'error');}
+}
+async function doDeleteCrane(craneId){
+  try{
+    await apiMutate('deleteCrane',{Crane_ID:craneId});
+    cranes=cranes.filter(c=>c.Crane_ID!==craneId);
+    contacts=contacts.filter(c=>c.Crane_ID!==craneId);
+    saveCache();renderAll();
+    toast('✓ Crane deleted','success');goHome();
+  }catch(e){toast('⚠ '+e.message,'error');}
+}
+
+// ── SEARCH ─────────────────────────────────────────────────────
+function setupSearch(){
+  const inp=$('searchInput'),clr=$('searchClear');
+  inp.addEventListener('input',()=>{
+    const q=inp.value.trim();
+    clr.classList.toggle('vis',!!q);
+    if(!q){$('homeMain').style.display='';$('searchSection').style.display='none';}
+    else{$('homeMain').style.display='none';$('searchSection').style.display='';renderSearch(q);}
+  });
+}
+function clearSearch(){
+  const i=$('searchInput');i.value='';i.dispatchEvent(new Event('input'));i.focus();
+}
+function renderSearch(q){
+  const ql=q.toLowerCase(),res=$('searchResults');
+  const cm=cranes.filter(c=>[c.Crane_ID,c.Location,c.Crane_Type,c.Status,c.Remarks].some(f=>(f||'').toLowerCase().includes(ql)));
+  const pm=contacts.filter(p=>p.Active!=='FALSE'&&[p.Name,p.Phone,p.Company,p.Role].some(f=>(f||'').toLowerCase().includes(ql)));
+  $('searchResultLabel').textContent=`Results for "${q}" (${cm.length+pm.length})`;
+  if(!cm.length&&!pm.length){
+    res.innerHTML=`<div class="empty-state"><div class="ei">🔍</div><h3>No results</h3><p>Nothing matches "<strong>${H(q)}</strong>"</p></div>`;return;
+  }
+  let html='';
+  if(cm.length){
+    html+=`<div class="sec-hdr" style="padding-top:4px;"><div class="sec-title">Cranes</div><div class="sec-count">${cm.length}</div></div>`;
+    html+='<div class="crane-list" style="padding:0;margin-bottom:12px;">';
+    cm.forEach(c=>{
+      const sc=SC(c.Status);
+      html+=`<div class="crane-card" onclick="openCrane('${H(c.Crane_ID)}')">
+        <div class="crane-card-stripe ${sc}"></div>
+        <div class="crane-card-body">
+          <div class="crane-id-tag"><span class="cid">${hl(c.Crane_ID,q)}</span><span class="ctype">${H(shortType(c.Crane_Type))}</span></div>
+          <div class="crane-meta"><div class="crane-loc">${hl(c.Location||'—',q)}</div><div class="crane-sub">${hl(c.Crane_Type||'',q)}</div></div>
+          <span class="sbadge ${sc}"><span class="sdot-sm"></span>${H(c.Status||'')}</span>
+          <span class="crane-chevron">›</span>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  }
+  if(pm.length){
+    html+=`<div class="sec-hdr"><div class="sec-title">People</div><div class="sec-count">${pm.length}</div></div>`;
+    pm.forEach(p=>{
+      const crane=cranes.find(c=>c.Crane_ID===p.Crane_ID)||{};
+      const phone=fmtPhone(p.Phone);
+      const rc=p.Role.toLowerCase();
+      html+=`<div class="srp-card" onclick="openCrane('${H(p.Crane_ID)}')">
+        <div style="font-size:28px;flex-shrink:0;">${p.Role==='Operator'?'👷':p.Role==='Supervisor'?'🦺':'🏢'}</div>
+        <div class="srp-info">
+          <div class="srp-name">${hl(p.Name,q)}</div>
+          <div class="srp-role ${rc}">${p.Role}</div>
+          <div class="srp-crane">${H(p.Crane_ID)} · 📍 ${H(crane.Location||'—')}</div>
+          ${p.Phone?`<div style="font-size:12px;color:var(--muted);margin-top:1px;">${hl(p.Phone,q)}</div>`:''}
+        </div>
+        ${phone?`<a href="tel:${phone}" onclick="event.stopPropagation()" class="btn-call"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}
+      </div>`;
+    });
+  }
+  res.innerHTML=html;
+}
+function hl(t,q){if(!q||!t)return H(t||'');return H(t).replace(new RegExp('('+R(H(q))+')','gi'),'<mark>$1</mark>');}
+
+// ── SETTINGS ───────────────────────────────────────────────────
+function renderSettings(){
+  const cachedTs=parseInt(localStorage.getItem(CK_TS)||'0');
+  const syncInfo=cachedTs?new Date(cachedTs).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'Never';
+  $('settingsContent').innerHTML=`
+    <div class="settings-hero">
+      <div class="settings-logo">Crane<span>Call</span></div>
+      <div class="settings-tagline">Construction Crane Contact Management</div>
+    </div>
+    <div class="settings-body">
+      <div class="settings-card">
+        <div class="settings-card-title">Data</div>
+        <div class="settings-row" onclick="doRefresh()">
+          <div><div class="sr-lbl">↻ Sync Now</div><div class="sr-sub">Fetch latest from server</div></div>
+          <div class="sr-val"><span class="sr-chev">›</span></div>
+        </div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Last Synced</div><div class="sr-val">${syncInfo}</div>
+        </div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Cranes</div><div class="sr-val">${cranes.length}</div>
+        </div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Contacts</div><div class="sr-val">${contacts.length}</div>
+        </div>
+      </div>
+      <div class="settings-card" id="installCard">
+        <div class="settings-card-title">App</div>
+        <div class="settings-row" id="installRow" onclick="triggerInstall()" style="${window.matchMedia('(display-mode: standalone)').matches?'display:none':''}">
+          <div><div class="sr-lbl">📱 Install CraneCall</div><div class="sr-sub">Add to home screen for faster access</div></div>
+          <div class="sr-val"><span class="sr-chev">›</span></div>
+        </div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Version</div><div class="sr-val">3.0</div>
+        </div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Admin Access</div>
+        ${isAdmin?`
+          <div class="settings-row" style="cursor:default;">
+            <div><div class="sr-lbl"><span class="admin-active-badge">🔓 Admin Mode Active</span></div></div>
+          </div>
+          <div class="settings-row" onclick="exitAdmin()">
+            <div><div class="sr-lbl" style="color:var(--red);">Exit Admin Mode</div></div>
+            <div class="sr-val"><span class="sr-chev">›</span></div>
+          </div>
+        `:`
+          <div class="admin-pin-wrap">
+            <label>Enter Admin PIN to manage cranes and contacts</label>
+            <div class="pin-row">
+              <input type="password" id="pinInput" class="pin-input" maxlength="8" placeholder="••••" autocomplete="off">
+              <button class="btn-pin-enter" onclick="tryLogin()">Enter</button>
+            </div>
+            <div class="pin-err" id="pinErr">Incorrect PIN. Try again.</div>
+          </div>
+        `}
+      </div>
+    </div>`;
+  const pin=$('pinInput');
+  if(pin)pin.addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin();});
+}
+function tryLogin(){
+  const p=$('pinInput')?.value||'';
+  if(p===ADMIN_PIN){
+    isAdmin=true;document.body.classList.add('admin-mode');
+    renderSettings();toast('🔓 Admin mode enabled','success');
+  }else{$('pinErr')?.classList.add('vis');}
+}
+function exitAdmin(){
+  isAdmin=false;document.body.classList.remove('admin-mode');
+  renderSettings();toast('Admin mode disabled');
+}
+
+// ── PWA INSTALL ────────────────────────────────────────────────
+function setupInstall(){
+  if(window.matchMedia('(display-mode: standalone)').matches)return;
+  if(navigator.standalone===true)return;
+  if(localStorage.getItem('cc3_dismissed'))return;
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();deferredInstall=e;
+    $('installBanner').classList.add('vis');
+  });
+  window.addEventListener('appinstalled',()=>{
+    $('installBanner').classList.remove('vis');
+    deferredInstall=null;toast('✓ CraneCall installed','success');
+  });
+}
+async function triggerInstall(){
+  if(deferredInstall){
+    deferredInstall.prompt();
+    const{outcome}=await deferredInstall.userChoice;
+    if(outcome==='accepted'){$('installBanner').classList.remove('vis');deferredInstall=null;}
+  }else{
+    toast('Tap browser menu → Add to Home Screen to install');
+  }
+}
+function dismissInstall(){
+  $('installBanner').classList.remove('vis');
+  localStorage.setItem('cc3_dismissed','1');
+}
+
+// ── QR DEEP LINK ───────────────────────────────────────────────
+function handleDeepLink(){
+  const cid=new URLSearchParams(window.location.search).get('crane');
+  if(!cid)return;
+  if(cranes.length>0){openCrane(cid);return;}
+  const t=setInterval(()=>{if(cranes.length>0){clearInterval(t);openCrane(cid);}},200);
+  setTimeout(()=>clearInterval(t),8000);
+}
+
+// ── ONLINE / OFFLINE ───────────────────────────────────────────
+window.addEventListener('online',()=>{isOnline=true;loadData(true);});
+window.addEventListener('offline',()=>{
+  isOnline=false;
+  const t=parseInt(localStorage.getItem(CK_TS)||'0');
+  setSyncUI('offline',t);$('offlineBar').classList.add('vis');
+});
+
+// ── SERVICE WORKER ─────────────────────────────────────────────
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js')
+    .then(reg=>{
+      reg.addEventListener('updatefound',()=>{
+        reg.installing?.addEventListener('statechange',e=>{
+          if(e.target.state==='installed'&&navigator.serviceWorker.controller)
+            toast('Update available — reload for new version');
+        });
+      });
+    }).catch(()=>{});
+}
+
+// ── INIT ───────────────────────────────────────────────────────
+function init(){
+  setupSearch();setupInstall();
+  $('craneList').innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+  loadData();
+  setTimeout(handleDeepLink,400);
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
