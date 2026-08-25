@@ -3,1415 +3,1281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#F97316">
+<meta name="theme-color" content="#FF6B00">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="description" content="CraneCall – Construction Crane Contact Management">
-<title>CraneCall</title>
+<meta name="description" content="AssetCall – Equipment & Asset Contact Management">
+<title>AssetCall</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <style>
-/* ═══════════════════════════════════════════════════════════════
-   CRANECALL v2 – DESIGN SYSTEM
-   Light-first, daylight-readable, construction-site optimized
-   Palette: Off-white surfaces, Orange accent, Deep charcoal text
-   Type: System UI — loads instantly, legible at arm's length
-   Signature: Clean card shadows, orange accent stripe on active
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   ASSETCALL v3 — PREMIUM EQUIPMENT MANAGEMENT APP
+   Design: Engineering-grade, daylight-optimized, touch-first
+   Palette: Warm white · Deep navy · Safety orange · Clean greys
+   Signature: Subtle depth, bold hierarchy, no decorative clutter
+═══════════════════════════════════════════════════════ */
 :root {
-  /* Backgrounds */
-  --bg:          #F5F7FA;
-  --surface:     #FFFFFF;
-  --surface2:    #F0F3F8;
-  --surface3:    #E8ECF4;
-
-  /* Borders */
-  --border:      #E2E8F0;
-  --border2:     #CBD5E1;
-
-  /* Text */
-  --text:        #172033;
-  --text2:       #3D4F6A;
-  --muted:       #667085;
-
-  /* Brand */
-  --orange:      #F97316;
-  --orange-dk:   #EA6C0A;
-  --orange-lt:   #FFF4ED;
-  --orange-ring: rgba(249,115,22,0.2);
-
-  /* Status */
-  --green:       #16A34A;
-  --green-lt:    #F0FDF4;
-  --green-ring:  rgba(22,163,74,0.15);
-  --amber:       #D97706;
-  --amber-lt:    #FFFBEB;
-  --red:         #DC2626;
-  --red-lt:      #FEF2F2;
-  --red-ring:    rgba(220,38,38,0.15);
-  --slate:       #64748B;
-  --slate-lt:    #F8FAFC;
-
-  /* Spacing / radius */
-  --r:           10px;
-  --r-lg:        14px;
-  --r-xl:        18px;
-  --shadow:      0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md:   0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
-  --shadow-lg:   0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
-
-  /* Type */
-  --font:        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  --mono:        'SF Mono', 'Fira Code', 'Consolas', monospace;
-
-  /* Transitions */
-  --t:           0.15s ease;
-  --t-slow:      0.25s ease;
+  --bg:         #F4F6F9;
+  --white:      #FFFFFF;
+  --navy:       #0B1F3A;
+  --navy2:      #1A3558;
+  --navy3:      #253F66;
+  --orange:     #FF6B00;
+  --orange2:    #E55F00;
+  --orange-lt:  #FFF3EB;
+  --orange-glow:rgba(255,107,0,0.18);
+  --grey1:      #E4E9F0;
+  --grey2:      #C9D3E0;
+  --grey3:      #8A99B0;
+  --text:       #0B1F3A;
+  --text2:      #334E6B;
+  --muted:      #8A99B0;
+  --green:      #0D9B4A;
+  --green-lt:   #E8F8EF;
+  --amber:      #C97A00;
+  --amber-lt:   #FFF8E6;
+  --red:        #D62B2B;
+  --red-lt:     #FEF1F1;
+  --slate:      #5A7090;
+  --slate-lt:   #EEF2F7;
+  --r-sm:       8px;
+  --r:          12px;
+  --r-lg:       16px;
+  --r-xl:       22px;
+  --sh1:        0 1px 4px rgba(11,31,58,0.07),0 2px 8px rgba(11,31,58,0.05);
+  --sh2:        0 4px 16px rgba(11,31,58,0.10),0 2px 6px rgba(11,31,58,0.06);
+  --sh3:        0 12px 40px rgba(11,31,58,0.14),0 4px 12px rgba(11,31,58,0.08);
+  --font:       -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --dur:        0.14s;
+  --ease:       cubic-bezier(.4,0,.2,1);
 }
-
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
-html, body { height: 100%; overflow: hidden; }
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  font-size: 16px;
-  line-height: 1.5;
-  -webkit-tap-highlight-color: transparent;
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-  margin: 0 auto;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+html,body{height:100%;overflow:hidden;}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-tap-highlight-color:transparent;
+  display:flex;
+  flex-direction:column;
+  max-width:620px;
+  margin:0 auto;
 }
-button { font-family: var(--font); cursor: pointer; }
-input, select, textarea { font-family: var(--font); }
-a { color: inherit; text-decoration: none; }
+button{font-family:var(--font);cursor:pointer;border:none;background:none;}
+input,select,textarea{font-family:var(--font);}
+a{color:inherit;text-decoration:none;}
 
-/* ── App Shell ── */
-#app {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  padding-bottom: 76px;
+/* ── App container ── */
+#app{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:80px;
 }
 
-/* ══════════════════════════════════════════════
-   HEADER
-══════════════════════════════════════════════ */
-.hdr {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 0 16px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  position: sticky;
-  top: 0;
-  z-index: 200;
+/* ══════════════════════════════════════
+   HEADER — Navy bar, bold identity
+══════════════════════════════════════ */
+.hdr{
+  background:var(--navy);
+  padding:0 16px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:200;
+  box-shadow:0 2px 12px rgba(11,31,58,0.25);
 }
-.hdr-logo {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text);
-  flex: 1;
+.hdr-logo{
+  flex:1;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:-0.5px;
+  color:#fff;
 }
-.hdr-logo b { color: var(--orange); font-weight: 800; }
-.hdr-back {
-  width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  cursor: pointer;
-  flex-shrink: 0;
-  color: var(--text);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1;
-  transition: background var(--t);
+.hdr-logo span{color:var(--orange);}
+.hdr-back{
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.1);
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  color:#fff;
+  font-size:22px;
+  font-weight:300;
+  line-height:1;
+  flex-shrink:0;
+  transition:background var(--dur) var(--ease);
 }
-.hdr-back:active { background: var(--surface3); }
-.hdr-title {
-  flex: 1;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.hdr-back:active{background:rgba(255,255,255,0.2);}
+.hdr-title{
+  flex:1;
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
-.hdr-action {
-  display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px;
-  background: none;
-  border: none;
-  border-radius: var(--r);
-  color: var(--muted);
-  font-size: 18px;
-  transition: background var(--t), color var(--t);
-  flex-shrink: 0;
+.hdr-act{
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.1);
+  border-radius:var(--r-sm);
+  color:rgba(255,255,255,0.8);
+  transition:background var(--dur);
+  flex-shrink:0;
 }
-.hdr-action:active { background: var(--surface2); color: var(--text); }
+.hdr-act:active{background:rgba(255,255,255,0.2);}
 
-/* ══════════════════════════════════════════════
-   SEARCH BAR
-══════════════════════════════════════════════ */
-.search-wrap {
-  padding: 12px 16px 8px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 56px;
-  z-index: 190;
+/* ══════════════════════════════════════
+   SEARCH BAR — Large, obvious, sticky
+══════════════════════════════════════ */
+.search-wrap{
+  background:var(--navy);
+  padding:0 16px 14px;
+  position:sticky;
+  top:58px;
+  z-index:190;
 }
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--bg);
-  border: 1.5px solid var(--border2);
-  border-radius: var(--r-lg);
-  padding: 0 14px;
-  height: 48px;
-  transition: border-color var(--t), box-shadow var(--t);
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(255,255,255,0.12);
+  border:1.5px solid rgba(255,255,255,0.18);
+  border-radius:var(--r-lg);
+  padding:0 14px;
+  height:50px;
+  transition:border-color var(--dur),background var(--dur);
 }
-.search-box:focus-within {
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px var(--orange-ring);
+.search-box:focus-within{
+  background:rgba(255,255,255,0.18);
+  border-color:var(--orange);
 }
-.search-box svg { flex-shrink: 0; color: var(--muted); }
-.search-box input {
-  flex: 1;
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: var(--text);
-  font-weight: 500;
+.search-box svg{color:rgba(255,255,255,0.55);flex-shrink:0;}
+.search-box input{
+  flex:1;
+  background:none;
+  border:none;
+  outline:none;
+  font-size:16px;
+  font-weight:500;
+  color:#fff;
 }
-.search-box input::placeholder { color: var(--muted); font-weight: 400; }
-.search-clear {
-  background: var(--surface3);
-  border: none;
-  border-radius: 50%;
-  width: 22px; height: 22px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: var(--muted);
-  cursor: pointer;
-  flex-shrink: 0;
+.search-box input::placeholder{color:rgba(255,255,255,0.45);font-weight:400;}
+.search-clear{
+  width:24px;height:24px;
+  background:rgba(255,255,255,0.15);
+  border-radius:50%;
+  color:#fff;
+  font-size:13px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
 }
-.search-clear.vis { display: flex; }
+.search-clear.vis{display:flex;}
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════
    SYNC BAR
-══════════════════════════════════════════════ */
-.sync-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 16px;
-  font-size: 12px;
-  color: var(--muted);
-  background: var(--bg);
+══════════════════════════════════════ */
+.sync-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  font-size:12px;
+  color:var(--muted);
+  background:var(--bg);
+  border-bottom:1px solid var(--grey1);
 }
-.sync-status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.sync-pill{
+  display:flex;align-items:center;gap:6px;
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-radius:20px;
+  padding:4px 10px;
+  font-size:12px;
+  font-weight:600;
+  box-shadow:var(--sh1);
 }
-.sync-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
+.sdot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--green);
+  flex-shrink:0;
 }
-.sync-dot.off { background: var(--amber); }
-.sync-dot.err { background: var(--red); }
-.sync-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  color: var(--orange);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 4px 0;
-  transition: opacity var(--t);
+.sdot.off{background:var(--amber);}
+.sdot.err{background:var(--red);}
+.sync-btn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--orange-lt);
+  border:1px solid rgba(255,107,0,0.2);
+  border-radius:20px;
+  padding:4px 12px;
+  font-size:12px;
+  font-weight:700;
+  color:var(--orange);
+  transition:background var(--dur);
 }
-.sync-btn:active { opacity: 0.6; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.spinning { animation: spin 1s linear infinite; display: inline-block; }
+.sync-btn:active{background:rgba(255,107,0,0.15);}
+@keyframes spin{to{transform:rotate(360deg);}}
+.spinning{animation:spin 0.9s linear infinite;display:inline-block;}
 
-/* ══════════════════════════════════════════════
-   DASHBOARD
-══════════════════════════════════════════════ */
-.dash-hero {
-  padding: 16px 16px 8px;
+/* ══════════════════════════════════════
+   DASHBOARD — Navy gradient hero cards
+══════════════════════════════════════ */
+.dash{
+  background:var(--white);
+  padding:16px;
+  border-bottom:1px solid var(--grey1);
 }
-.dash-total {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 12px;
+.dash-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
 }
-.dash-total-num {
-  font-size: 36px;
-  font-weight: 900;
-  letter-spacing: -2px;
-  color: var(--orange);
-  line-height: 1;
+.dash-total-num{
+  font-size:40px;
+  font-weight:900;
+  letter-spacing:-2px;
+  color:var(--navy);
+  line-height:1;
 }
-.dash-total-lbl {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text2);
+.dash-total-lbl{
+  font-size:13px;
+  font-weight:600;
+  color:var(--muted);
+  margin-top:2px;
 }
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+.dash-date{
+  text-align:right;
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.5;
 }
-.stat-pill {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 12px 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform var(--t), box-shadow var(--t);
-  box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
+.dash-date strong{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:var(--text2);
 }
-.stat-pill::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
 }
-.stat-pill.working::after { background: var(--green); }
-.stat-pill.standby::after { background: var(--slate); }
-.stat-pill.breakdown::after { background: var(--red); }
-.stat-pill.maintenance::after { background: var(--amber); }
-.stat-pill:active { transform: scale(0.97); }
-.stat-pill .sv {
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  line-height: 1;
-  margin-bottom: 3px;
+.stat-card{
+  border-radius:var(--r);
+  padding:12px 10px 14px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur);
+  box-shadow:var(--sh1);
 }
-.stat-pill.working .sv { color: var(--green); }
-.stat-pill.standby .sv { color: var(--slate); }
-.stat-pill.breakdown .sv { color: var(--red); }
-.stat-pill.maintenance .sv { color: var(--amber); }
-.stat-pill .sl {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--muted);
+.stat-card:active{transform:scale(0.96);}
+.stat-card.working{background:linear-gradient(135deg,#0D9B4A 0%,#0A7A3A 100%);}
+.stat-card.standby{background:linear-gradient(135deg,#3B6EA8 0%,#2E5585 100%);}
+.stat-card.breakdown{background:linear-gradient(135deg,#D62B2B 0%,#B02020 100%);}
+.stat-card.maintenance{background:linear-gradient(135deg,#C97A00 0%,#A06200 100%);}
+.stat-num{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-1px;
+  color:#fff;
+  line-height:1;
+  margin-bottom:4px;
 }
-
-/* ══════════════════════════════════════════════
-   SECTION LABELS
-══════════════════════════════════════════════ */
-.sec-lbl {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px 8px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--muted);
+.stat-lbl{
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:rgba(255,255,255,0.8);
 }
-.clear-filter {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--orange);
-  background: var(--orange-lt);
-  border: 1px solid rgba(249,115,22,0.2);
-  border-radius: 20px;
-  padding: 3px 10px;
-  cursor: pointer;
-  display: none;
-}
-.clear-filter.vis { display: block; }
-
-/* ══════════════════════════════════════════════
-   CRANE CARDS
-══════════════════════════════════════════════ */
-.crane-list {
-  padding: 0 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-bottom: 8px;
-}
-.crane-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
-  position: relative;
-}
-.crane-card:active {
-  transform: scale(0.99);
-  box-shadow: none;
-  border-color: var(--orange);
-}
-.crane-id-badge {
-  background: var(--orange-lt);
-  border: 1.5px solid rgba(249,115,22,0.2);
-  border-radius: var(--r);
-  padding: 8px 10px;
-  min-width: 66px;
-  text-align: center;
-  flex-shrink: 0;
-}
-.crane-id-badge .cid {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--orange);
-  letter-spacing: 0.3px;
-  display: block;
-  white-space: nowrap;
-}
-.crane-id-badge .ctype {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--muted);
-  margin-top: 2px;
-  display: block;
-}
-.crane-info { flex: 1; min-width: 0; }
-.crane-loc {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.crane-sub {
-  font-size: 12px;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 700;
-  flex-shrink: 0;
-  letter-spacing: 0.2px;
-}
-.status-badge.working { background: var(--green-lt); color: var(--green); }
-.status-badge.standby { background: var(--slate-lt); color: var(--slate); border: 1px solid var(--border); }
-.status-badge.breakdown { background: var(--red-lt); color: var(--red); }
-.status-badge.maintenance { background: var(--amber-lt); color: var(--amber); }
-.status-badge.inactive { background: var(--surface3); color: var(--muted); }
-.status-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.working .status-dot { background: var(--green); }
-.standby .status-dot { background: var(--slate); }
-.breakdown .status-dot { background: var(--red); }
-.maintenance .status-dot { background: var(--amber); }
-.inactive .status-dot { background: var(--muted); }
-.card-chevron {
-  color: var(--border2);
-  flex-shrink: 0;
-  font-size: 18px;
-  font-weight: 300;
+.stat-icon{
+  position:absolute;
+  bottom:-4px;right:-4px;
+  font-size:32px;
+  opacity:0.15;
 }
 
-/* ══════════════════════════════════════════════
-   CRANE DETAIL
-══════════════════════════════════════════════ */
-.detail-hero {
-  background: var(--surface);
-  padding: 20px 16px 16px;
-  border-bottom: 1px solid var(--border);
+/* ══════════════════════════════════════
+   SECTION LABEL
+══════════════════════════════════════ */
+.sec-hdr{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 16px 8px;
 }
-.detail-cid {
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  color: var(--text);
-  margin-bottom: 4px;
+.sec-title{
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  color:var(--navy2);
 }
-.detail-loc {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text2);
-  margin-bottom: 8px;
+.sec-count{
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
 }
-.detail-sub {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 12px;
+.chip-clear{
+  font-size:12px;
+  font-weight:700;
+  color:var(--orange);
+  background:var(--orange-lt);
+  border:1px solid rgba(255,107,0,0.2);
+  border-radius:20px;
+  padding:4px 12px;
+  cursor:pointer;
+  display:none;
 }
-.detail-meta {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
+.chip-clear.vis{display:block;}
+
+/* ══════════════════════════════════════
+   CRANE CARDS — Premium data cards
+══════════════════════════════════════ */
+.crane-list{
+  padding:0 16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
-.meta-item .mi-label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--muted);
-  margin-bottom: 3px;
+.crane-card{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  padding:0;
+  display:flex;
+  align-items:stretch;
+  cursor:pointer;
+  box-shadow:var(--sh1);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur);
+  overflow:hidden;
+  border:1px solid var(--grey1);
 }
-.meta-item .mi-val {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
+.crane-card:active{transform:scale(0.99);box-shadow:none;}
+.crane-card-stripe{
+  width:4px;
+  flex-shrink:0;
 }
-.detail-remarks {
-  margin: 12px 16px 0;
-  background: var(--amber-lt);
-  border: 1px solid rgba(217,119,6,0.2);
-  border-radius: var(--r);
-  padding: 12px 14px;
-  font-size: 13px;
-  color: var(--text2);
-  line-height: 1.6;
+.crane-card-stripe.working{background:var(--green);}
+.crane-card-stripe.standby{background:var(--slate);}
+.crane-card-stripe.breakdown{background:var(--red);}
+.crane-card-stripe.maintenance{background:var(--amber);}
+.crane-card-stripe.inactive{background:var(--grey2);}
+.crane-card-body{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 14px 14px 12px;
+  min-width:0;
 }
-.detail-remarks strong {
-  display: block;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--amber);
-  margin-bottom: 4px;
-  font-weight: 800;
+.crane-id-tag{
+  background:var(--navy);
+  border-radius:var(--r-sm);
+  padding:8px 10px;
+  min-width:64px;
+  text-align:center;
+  flex-shrink:0;
+}
+.crane-id-tag .cid{
+  font-size:13px;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:0.3px;
+  display:block;
+}
+.crane-id-tag .ctype{
+  font-size:10px;
+  font-weight:600;
+  color:rgba(255,255,255,0.55);
+  margin-top:2px;
+  display:block;
+}
+.crane-meta{flex:1;min-width:0;}
+.crane-loc{
+  font-size:15px;
+  font-weight:700;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  margin-bottom:3px;
+}
+.crane-sub{
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+/* Status badge */
+.sbadge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:20px;
+  padding:4px 10px;
+  font-size:11px;
+  font-weight:700;
+  flex-shrink:0;
+  letter-spacing:0.1px;
+}
+.sbadge.working{background:var(--green-lt);color:var(--green);}
+.sbadge.standby{background:var(--slate-lt);color:var(--slate);border:1px solid var(--grey1);}
+.sbadge.breakdown{background:var(--red-lt);color:var(--red);}
+.sbadge.maintenance{background:var(--amber-lt);color:var(--amber);}
+.sbadge.inactive{background:var(--grey1);color:var(--muted);}
+.sdot-sm{
+  width:6px;height:6px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.working .sdot-sm,.sbadge.working .sdot-sm{background:var(--green);}
+.standby .sdot-sm,.sbadge.standby .sdot-sm{background:var(--slate);}
+.breakdown .sdot-sm,.sbadge.breakdown .sdot-sm{background:var(--red);}
+.maintenance .sdot-sm,.sbadge.maintenance .sdot-sm{background:var(--amber);}
+.crane-chevron{
+  color:var(--grey2);
+  font-size:20px;
+  font-weight:300;
+  flex-shrink:0;
 }
 
-/* Role buttons on detail screen */
-.role-sections { padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
-.role-section {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow);
+/* ══════════════════════════════════════
+   CRANE DETAIL — Hero + role sections
+══════════════════════════════════════ */
+.detail-hero{
+  background:var(--navy);
+  padding:20px 16px 22px;
+  position:relative;
+  overflow:hidden;
 }
-.role-section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
-  cursor: pointer;
-  transition: background var(--t);
-  border-bottom: 1px solid transparent;
+.detail-hero::before{
+  content:'';
+  position:absolute;
+  top:-40px;right:-40px;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  pointer-events:none;
 }
-.role-section-header:active { background: var(--bg); }
-.role-section-header.expanded { border-bottom-color: var(--border); }
-.role-section-lft { display: flex; align-items: center; gap: 10px; }
-.role-icon-wrap {
-  width: 38px; height: 38px;
-  border-radius: var(--r);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+.detail-crane-id{
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:-1.5px;
+  color:#fff;
+  margin-bottom:4px;
 }
-.role-icon-wrap.op { background: #EFF6FF; }
-.role-icon-wrap.sup { background: #F0FFF4; }
-.role-icon-wrap.own { background: #FFF7ED; }
-.role-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
+.detail-loc{
+  font-size:15px;
+  font-weight:600;
+  color:rgba(255,255,255,0.75);
+  margin-bottom:12px;
 }
-.role-preview {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 1px;
+.detail-pills{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
 }
-.role-count {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 3px 10px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text2);
+.detail-pill{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:20px;
+  padding:4px 12px;
+  font-size:12px;
+  font-weight:600;
+  color:rgba(255,255,255,0.85);
 }
-.role-chevron {
-  color: var(--muted);
-  font-size: 18px;
-  transition: transform var(--t-slow);
+.detail-pill.status-working{background:rgba(13,155,74,0.25);border-color:rgba(13,155,74,0.4);color:#5EE89A;}
+.detail-pill.status-standby{background:rgba(90,112,144,0.25);border-color:rgba(90,112,144,0.4);color:#9BB5D0;}
+.detail-pill.status-breakdown{background:rgba(214,43,43,0.25);border-color:rgba(214,43,43,0.4);color:#F78080;}
+.detail-pill.status-maintenance{background:rgba(201,122,0,0.25);border-color:rgba(201,122,0,0.4);color:#FFCC66;}
+.detail-meta-row{
+  display:flex;
+  gap:8px;
+  padding:14px 16px;
+  background:var(--white);
+  border-bottom:1px solid var(--grey1);
 }
-.role-chevron.open { transform: rotate(90deg); }
-.role-contacts { display: none; padding: 10px 16px 14px; flex-direction: column; gap: 10px; }
-.role-contacts.open { display: flex; }
-
-/* Admin action buttons at detail level */
-.detail-admin-row {
-  display: flex;
-  gap: 8px;
-  padding: 12px 16px 4px;
+.dmi{
+  flex:1;
+  background:var(--bg);
+  border-radius:var(--r-sm);
+  padding:10px;
+  text-align:center;
 }
-.detail-admin-row .btn-sm {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  height: 40px;
-  border-radius: var(--r);
-  font-size: 13px;
-  font-weight: 600;
-  border: 1.5px solid var(--border2);
-  background: var(--surface);
-  color: var(--text2);
-  transition: all var(--t);
+.dmi-lbl{
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--muted);
+  margin-bottom:3px;
 }
-.detail-admin-row .btn-sm:active { background: var(--surface2); }
-.detail-admin-row .btn-sm.danger { color: var(--red); border-color: rgba(220,38,38,0.3); background: var(--red-lt); }
-
-/* ══════════════════════════════════════════════
-   CONTACT CARDS
-══════════════════════════════════════════════ */
-.contact-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.dmi-val{
+  font-size:14px;
+  font-weight:800;
+  color:var(--navy);
 }
-.contact-avatar {
-  width: 46px; height: 46px;
-  border-radius: var(--r);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
+.detail-remarks{
+  margin:12px 16px 0;
+  background:var(--amber-lt);
+  border-left:3px solid var(--amber);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:10px 14px;
+  font-size:13px;
+  color:var(--text2);
+  line-height:1.6;
 }
-.contact-info { flex: 1; min-width: 0; }
-.contact-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.detail-remarks strong{
+  display:block;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--amber);
+  margin-bottom:4px;
+  font-weight:800;
 }
-.contact-company {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 1px;
+.admin-action-row{
+  display:flex;gap:8px;
+  padding:12px 16px 0;
 }
-.contact-phone {
-  font-size: 13px;
-  color: var(--text2);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 2px;
+.btn-sm-admin{
+  flex:1;
+  height:38px;
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;
+  border-radius:var(--r-sm);
+  font-size:13px;
+  font-weight:700;
+  border:1.5px solid var(--grey2);
+  background:var(--white);
+  color:var(--text2);
+  transition:all var(--dur);
+  box-shadow:var(--sh1);
 }
-.no-phone-msg {
-  font-size: 12px;
-  color: var(--muted);
-  font-style: italic;
-  margin-top: 3px;
-}
-.contact-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.btn-call {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  height: 36px;
-  padding: 0 14px;
-  background: var(--green);
-  color: #fff;
-  border: none;
-  border-radius: var(--r);
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background var(--t);
-  box-shadow: 0 2px 8px var(--green-ring);
-}
-.btn-call:active { background: #15803D; }
-.contact-admin-row {
-  display: flex;
-  gap: 6px;
-}
-.btn-edit, .btn-del {
-  height: 30px;
-  padding: 0 10px;
-  border-radius: var(--r);
-  font-size: 12px;
-  font-weight: 700;
-  border: 1.5px solid var(--border2);
-  background: var(--surface);
-  color: var(--text2);
-  transition: all var(--t);
-  white-space: nowrap;
-}
-.btn-edit:active { background: var(--surface2); }
-.btn-del {
-  color: var(--red);
-  border-color: rgba(220,38,38,0.3);
-  background: var(--red-lt);
-}
-.btn-del:active { background: var(--red-lt); opacity: 0.7; }
-.add-contact-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 44px;
-  border: 1.5px dashed var(--border2);
-  border-radius: var(--r-lg);
-  background: none;
-  color: var(--orange);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  transition: border-color var(--t), background var(--t);
-}
-.add-contact-btn:active { background: var(--orange-lt); border-color: var(--orange); }
-.add-contact-btn.admin-only { display: none; }
-body.admin-mode .add-contact-btn.admin-only { display: flex; }
-
-/* contact Edit/Del row — hidden for normal users, shown for admin */
-.contact-admin-row.admin-only { display: none; }
-body.admin-mode .contact-admin-row.admin-only { display: flex; }
-
-/* ══════════════════════════════════════════════
-   FORMS (Add / Edit)
-══════════════════════════════════════════════ */
-.form-body { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-label {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text2);
-}
-.form-label .req { color: var(--red); }
-.form-input {
-  height: 48px;
-  background: var(--surface);
-  border: 1.5px solid var(--border2);
-  border-radius: var(--r);
-  padding: 0 14px;
-  font-size: 15px;
-  color: var(--text);
-  transition: border-color var(--t), box-shadow var(--t);
-  width: 100%;
-}
-.form-input:focus {
-  outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px var(--orange-ring);
-}
-.form-input.error { border-color: var(--red); }
-.form-textarea {
-  height: 90px;
-  resize: vertical;
-  padding: 12px 14px;
-  font-size: 15px;
-  color: var(--text);
-  background: var(--surface);
-  border: 1.5px solid var(--border2);
-  border-radius: var(--r);
-  transition: border-color var(--t), box-shadow var(--t);
-  width: 100%;
-  line-height: 1.5;
-}
-.form-textarea:focus {
-  outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px var(--orange-ring);
-}
-.form-select {
-  height: 48px;
-  background: var(--surface);
-  border: 1.5px solid var(--border2);
-  border-radius: var(--r);
-  padding: 0 14px;
-  font-size: 15px;
-  color: var(--text);
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23667085' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  width: 100%;
-  transition: border-color var(--t), box-shadow var(--t);
-}
-.form-select:focus {
-  outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px var(--orange-ring);
-}
-.form-hint {
-  font-size: 12px;
-  color: var(--muted);
-}
-.form-err {
-  font-size: 12px;
-  color: var(--red);
-  display: none;
-}
-.form-err.vis { display: block; }
-.form-divider {
-  height: 1px;
-  background: var(--border);
-}
-.form-actions {
-  padding: 0 16px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.btn-sm-admin:active{background:var(--bg);}
+.btn-sm-admin.danger{
+  color:var(--red);
+  border-color:rgba(214,43,43,0.3);
+  background:var(--red-lt);
 }
 
-/* ══════════════════════════════════════════════
+/* Role sections */
+.role-sections{padding:12px 16px;display:flex;flex-direction:column;gap:10px;}
+.role-block{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--sh1);
+  border:1px solid var(--grey1);
+}
+.role-hdr{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background var(--dur);
+  border-bottom:1px solid transparent;
+}
+.role-hdr:active{background:var(--bg);}
+.role-hdr.open{border-bottom-color:var(--grey1);}
+.role-hdr-lft{display:flex;align-items:center;gap:12px;}
+.role-ico{
+  width:40px;height:40px;
+  border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+}
+.role-ico.op{background:#EFF6FF;}
+.role-ico.sup{background:#F0FFF4;}
+.role-ico.own{background:#FFF7ED;}
+.role-name-lbl{
+  font-size:15px;
+  font-weight:800;
+  color:var(--navy);
+}
+.role-preview-txt{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:1px;
+}
+.role-hdr-rgt{display:flex;align-items:center;gap:8px;}
+.role-count-badge{
+  background:var(--navy);
+  color:#fff;
+  border-radius:20px;
+  padding:3px 10px;
+  font-size:12px;
+  font-weight:800;
+  min-width:28px;
+  text-align:center;
+}
+.role-chevron{
+  color:var(--grey3);
+  font-size:20px;
+  font-weight:300;
+  transition:transform var(--dur) var(--ease);
+}
+.role-chevron.open{transform:rotate(90deg);}
+.role-body{display:none;padding:10px 14px 14px;flex-direction:column;gap:8px;}
+.role-body.open{display:flex;}
+
+/* ══════════════════════════════════════
+   CONTACT CARDS — Clean, action-ready
+══════════════════════════════════════ */
+.contact-card{
+  background:var(--bg);
+  border:1px solid var(--grey1);
+  border-radius:var(--r);
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.cc-avatar{
+  width:44px;height:44px;
+  border-radius:var(--r-sm);
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+}
+.cc-info{flex:1;min-width:0;}
+.cc-name{
+  font-size:15px;
+  font-weight:800;
+  color:var(--navy);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.cc-company{font-size:12px;color:var(--muted);margin-top:1px;}
+.cc-phone{
+  font-size:13px;font-weight:600;
+  color:var(--text2);
+  display:flex;align-items:center;gap:5px;
+  margin-top:3px;
+}
+.cc-nophone{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px;}
+.cc-actions{display:flex;flex-direction:column;gap:6px;flex-shrink:0;align-items:flex-end;}
+.btn-call{
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  height:38px;padding:0 16px;
+  background:var(--green);
+  color:#fff;
+  border-radius:var(--r-sm);
+  font-size:13px;font-weight:800;
+  text-decoration:none;white-space:nowrap;
+  box-shadow:0 3px 10px rgba(13,155,74,0.3);
+  transition:background var(--dur),transform var(--dur);
+}
+.btn-call:active{background:#0A7A3A;transform:scale(0.97);}
+.cc-admin-row{display:flex;gap:6px;}
+.cc-admin-row.admin-only{display:none;}
+body.admin-mode .cc-admin-row.admin-only{display:flex;}
+.btn-edit2{
+  height:30px;padding:0 12px;
+  border-radius:var(--r-sm);
+  font-size:12px;font-weight:700;
+  border:1.5px solid var(--grey2);
+  background:var(--white);
+  color:var(--text2);
+  transition:all var(--dur);
+}
+.btn-edit2:active{background:var(--bg);}
+.btn-del2{
+  height:30px;padding:0 12px;
+  border-radius:var(--r-sm);
+  font-size:12px;font-weight:700;
+  border:1.5px solid rgba(214,43,43,0.3);
+  background:var(--red-lt);
+  color:var(--red);
+  transition:all var(--dur);
+}
+.btn-del2:active{opacity:0.7;}
+.add-role-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  height:42px;width:100%;
+  border:1.5px dashed var(--grey2);
+  border-radius:var(--r);
+  background:none;
+  color:var(--orange);
+  font-size:13px;font-weight:700;
+  cursor:pointer;
+  transition:border-color var(--dur),background var(--dur);
+}
+.add-role-btn:active{background:var(--orange-lt);border-color:var(--orange);}
+.add-role-btn.admin-only{display:none;}
+body.admin-mode .add-role-btn.admin-only{display:flex;}
+.no-contact-msg{
+  padding:8px 4px;
+  font-size:13px;
+  color:var(--muted);
+  font-style:italic;
+}
+
+/* ══════════════════════════════════════
+   FORMS
+══════════════════════════════════════ */
+.form-section{
+  background:var(--white);
+  margin:12px 16px;
+  border-radius:var(--r-lg);
+  border:1px solid var(--grey1);
+  box-shadow:var(--sh1);
+  overflow:hidden;
+}
+.form-section-title{
+  padding:14px 16px 12px;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  color:var(--navy);
+  border-bottom:1px solid var(--grey1);
+  background:var(--bg);
+}
+.form-body{padding:16px;display:flex;flex-direction:column;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:var(--navy2);
+}
+.req{color:var(--red);}
+.form-input{
+  height:50px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:0 14px;
+  font-size:16px;
+  font-weight:500;
+  color:var(--text);
+  transition:border-color var(--dur),box-shadow var(--dur);
+  width:100%;
+}
+.form-input:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
+  background:var(--white);
+}
+.form-input.err{border-color:var(--red);}
+.form-select{
+  height:50px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:0 14px;
+  font-size:16px;
+  font-weight:500;
+  color:var(--text);
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A99B0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-color:var(--bg);
+  width:100%;
+  transition:border-color var(--dur),box-shadow var(--dur);
+}
+.form-select:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
+  background-color:var(--white);
+}
+.form-textarea{
+  min-height:88px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:12px 14px;
+  font-size:15px;
+  font-weight:500;
+  color:var(--text);
+  resize:vertical;
+  width:100%;
+  line-height:1.5;
+  transition:border-color var(--dur),box-shadow var(--dur);
+}
+.form-textarea:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
+  background:var(--white);
+}
+.form-hint{font-size:12px;color:var(--muted);}
+.form-err{font-size:12px;color:var(--red);display:none;}
+.form-err.vis{display:block;}
+.form-actions{padding:4px 16px 24px;display:flex;flex-direction:column;gap:10px;}
+
+/* ══════════════════════════════════════
    BUTTONS
-══════════════════════════════════════════════ */
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 52px;
-  border-radius: var(--r-lg);
-  font-size: 16px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: all var(--t);
-  width: 100%;
+══════════════════════════════════════ */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  height:54px;border-radius:var(--r-lg);
+  font-size:16px;font-weight:800;
+  border:none;cursor:pointer;
+  transition:all var(--dur) var(--ease);
+  width:100%;letter-spacing:0.1px;
 }
-.btn-primary {
-  background: var(--orange);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(249,115,22,0.3);
+.btn-primary{
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  color:#fff;
+  box-shadow:0 4px 16px rgba(255,107,0,0.35);
 }
-.btn-primary:active { background: var(--orange-dk); box-shadow: none; }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn-secondary {
-  background: var(--surface);
-  color: var(--text2);
-  border: 1.5px solid var(--border2);
+.btn-primary:active{opacity:0.9;transform:scale(0.99);box-shadow:0 2px 8px rgba(255,107,0,0.25);}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-secondary{
+  background:var(--white);
+  color:var(--text2);
+  border:2px solid var(--grey1);
+  box-shadow:var(--sh1);
 }
-.btn-secondary:active { background: var(--surface2); }
-.btn-danger {
-  background: var(--red-lt);
-  color: var(--red);
-  border: 1.5px solid rgba(220,38,38,0.3);
+.btn-secondary:active{background:var(--bg);}
+.btn-danger{
+  background:var(--red-lt);
+  color:var(--red);
+  border:2px solid rgba(214,43,43,0.25);
 }
-.btn-danger:active { background: rgba(220,38,38,0.12); }
+.btn-danger:active{background:rgba(214,43,43,0.1);}
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════
    SETTINGS
-══════════════════════════════════════════════ */
-.settings-hero {
-  padding: 24px 16px 20px;
-  text-align: center;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+══════════════════════════════════════ */
+.settings-hero{
+  background:var(--navy);
+  padding:28px 20px 24px;
+  text-align:center;
 }
-.settings-hero .logo {
-  font-size: 32px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  margin-bottom: 4px;
+.settings-logo{
+  font-size:28px;font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:4px;
 }
-.settings-hero .logo b { color: var(--orange); }
-.settings-hero p {
-  font-size: 13px;
-  color: var(--muted);
+.settings-logo span{color:var(--orange);}
+.settings-tagline{font-size:13px;color:rgba(255,255,255,0.55);}
+.settings-body{padding:16px;}
+.settings-card{
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--sh1);
+  margin-bottom:16px;
 }
-.settings-section { padding: 16px; }
-.settings-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  margin-bottom: 16px;
+.settings-card-title{
+  padding:11px 16px;
+  font-size:11px;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--muted);
+  background:var(--bg);
+  border-bottom:1px solid var(--grey1);
 }
-.settings-card-title {
-  padding: 12px 16px;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
+.settings-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 16px;
+  border-bottom:1px solid var(--grey1);
+  cursor:pointer;
+  transition:background var(--dur);
 }
-.settings-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background var(--t);
+.settings-row:last-child{border-bottom:none;}
+.settings-row:active{background:var(--bg);}
+.sr-lbl{font-size:15px;font-weight:700;color:var(--text);}
+.sr-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.sr-val{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.sr-chev{color:var(--grey2);font-size:18px;font-weight:300;}
+.admin-pin-wrap{padding:14px 16px;}
+.admin-pin-wrap label{
+  display:block;
+  font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+  color:var(--muted);margin-bottom:10px;
 }
-.settings-row:last-child { border-bottom: none; }
-.settings-row:active { background: var(--bg); }
-.settings-row .sr-lft { }
-.settings-row .sr-lbl {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text);
+.pin-row{display:flex;gap:8px;}
+.pin-input{
+  flex:1;height:50px;
+  background:var(--bg);
+  border:2px solid var(--grey1);
+  border-radius:var(--r);
+  padding:0 14px;
+  font-size:22px;font-weight:700;letter-spacing:6px;
+  color:var(--navy);text-align:center;
+  transition:border-color var(--dur),box-shadow var(--dur);
 }
-.settings-row .sr-sub {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 2px;
+.pin-input:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-glow);
 }
-.settings-row .sr-val {
-  font-size: 13px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.btn-pin-enter{
+  height:50px;padding:0 20px;
+  background:var(--orange);
+  color:#fff;border:none;border-radius:var(--r);
+  font-size:15px;font-weight:800;
+  cursor:pointer;white-space:nowrap;
+  flex-shrink:0;
+  transition:background var(--dur);
 }
-.settings-row .sr-chevron { color: var(--border2); font-size: 18px; }
+.btn-pin-enter:active{background:var(--orange2);}
+.admin-active-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,107,0,0.12);
+  border:1px solid rgba(255,107,0,0.25);
+  border-radius:20px;padding:5px 14px;
+  font-size:13px;font-weight:700;color:var(--orange);
+}
+.pin-err{font-size:12px;color:var(--red);margin-top:8px;display:none;}
+.pin-err.vis{display:block;}
 
-/* Admin mode section */
-.admin-enter {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 16px;
-  margin: 0 0 16px;
-  box-shadow: var(--shadow);
-}
-.admin-enter label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-.admin-enter .pin-row {
-  display: flex;
-  gap: 8px;
-}
-.admin-enter .pin-row input {
-  flex: 1;
-  height: 48px;
-  background: var(--bg);
-  border: 1.5px solid var(--border2);
-  border-radius: var(--r);
-  padding: 0 14px;
-  font-size: 20px;
-  letter-spacing: 4px;
-  color: var(--text);
-  text-align: center;
-}
-.admin-enter .pin-row input:focus {
-  outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px var(--orange-ring);
-}
-.admin-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--orange-lt);
-  border: 1px solid rgba(249,115,22,0.3);
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--orange);
-}
-
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════
    INSTALL BANNER
-══════════════════════════════════════════════ */
-.install-banner {
-  margin: 12px 16px 4px;
-  background: var(--surface);
-  border: 1.5px solid var(--orange);
-  border-radius: var(--r-lg);
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 4px 14px rgba(249,115,22,0.12);
-  display: none;
+══════════════════════════════════════ */
+.install-banner{
+  margin:12px 16px 0;
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-left:4px solid var(--orange);
+  border-radius:var(--r);
+  padding:14px;
+  display:none;
+  align-items:center;gap:12px;
+  box-shadow:var(--sh1);
 }
-.install-banner.vis { display: flex; }
-.install-banner-ico {
-  font-size: 32px;
-  flex-shrink: 0;
+.install-banner.vis{display:flex;}
+.install-banner-text{flex:1;}
+.install-banner-text strong{display:block;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:2px;}
+.install-banner-text span{font-size:12px;color:var(--muted);}
+.install-btns{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.btn-install-sm{
+  height:36px;padding:0 16px;
+  background:var(--orange);color:#fff;
+  border:none;border-radius:var(--r-sm);
+  font-size:13px;font-weight:800;
+  cursor:pointer;white-space:nowrap;
+  transition:background var(--dur);
 }
-.install-banner-txt { flex: 1; }
-.install-banner-txt strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-.install-banner-txt span {
-  font-size: 12px;
-  color: var(--muted);
-}
-.install-banner-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.btn-install {
-  height: 34px;
-  padding: 0 14px;
-  background: var(--orange);
-  color: #fff;
-  border: none;
-  border-radius: var(--r);
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background var(--t);
-}
-.btn-install:active { background: var(--orange-dk); }
-.btn-dismiss {
-  height: 28px;
-  padding: 0 14px;
-  background: none;
-  color: var(--muted);
-  border: none;
-  font-size: 12px;
-  cursor: pointer;
-  text-align: center;
+.btn-install-sm:active{background:var(--orange2);}
+.btn-dismiss-sm{
+  height:28px;background:none;border:none;
+  font-size:12px;color:var(--muted);cursor:pointer;text-align:center;
 }
 
-/* ══════════════════════════════════════════════
-   MODAL / DIALOG
-══════════════════════════════════════════════ */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 900;
-  display: none;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: env(safe-area-inset-bottom);
-  backdrop-filter: blur(2px);
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(11,31,58,0.5);
+  z-index:900;
+  display:none;align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(3px);
+  padding-bottom:env(safe-area-inset-bottom);
 }
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--surface);
-  border-radius: var(--r-xl) var(--r-xl) 0 0;
-  width: 100%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  transform: translateY(100%);
-  transition: transform var(--t-slow);
-  box-shadow: 0 -8px 40px rgba(0,0,0,0.2);
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--white);
+  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  width:100%;max-width:620px;
+  max-height:90vh;overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform 0.25s var(--ease);
+  box-shadow:var(--sh3);
 }
-.modal-overlay.open .modal { transform: translateY(0); }
-.modal-handle {
-  width: 36px; height: 4px;
-  background: var(--border2);
-  border-radius: 2px;
-  margin: 12px auto 16px;
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-handle{
+  width:40px;height:4px;
+  background:var(--grey1);
+  border-radius:2px;margin:14px auto 18px;
 }
-.modal-title {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text);
-  padding: 0 20px 4px;
+.modal-title{font-size:20px;font-weight:900;color:var(--navy);padding:0 20px 4px;}
+.modal-subtitle{font-size:14px;color:var(--muted);padding:0 20px 16px;border-bottom:1px solid var(--grey1);}
+.modal-body{padding:16px 20px;}
+.confirm-box{
+  background:var(--bg);
+  border:1px solid var(--grey1);
+  border-radius:var(--r);
+  padding:14px;
+  margin-bottom:16px;
 }
-.modal-subtitle {
-  font-size: 14px;
-  color: var(--muted);
-  padding: 0 20px 16px;
-  border-bottom: 1px solid var(--border);
-}
-.modal-body { padding: 16px 20px; }
-.confirm-subject {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 14px;
-  margin-bottom: 16px;
-}
-.confirm-subject .cs-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 3px;
-}
-.confirm-subject .cs-detail {
-  font-size: 13px;
-  color: var(--muted);
-}
-.modal-actions {
-  display: flex;
-  gap: 10px;
-  padding: 0 20px 20px;
-}
-.modal-actions .btn { height: 48px; }
+.confirm-name{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:3px;}
+.confirm-detail{font-size:13px;color:var(--muted);}
+.modal-actions{display:flex;gap:10px;padding:0 20px 20px;}
+.modal-actions .btn{height:50px;}
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════
    SEARCH RESULTS
-══════════════════════════════════════════════ */
-.search-results { padding: 8px 16px 0; }
-.search-person-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: all var(--t);
+══════════════════════════════════════ */
+.srp-card{
+  background:var(--white);
+  border:1px solid var(--grey1);
+  border-radius:var(--r-lg);
+  padding:14px;
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:8px;
+  cursor:pointer;
+  box-shadow:var(--sh1);
+  transition:transform var(--dur);
 }
-.search-person-card:active { transform: scale(0.99); }
-.spc-info { flex: 1; min-width: 0; }
-.spc-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.srp-card:active{transform:scale(0.99);}
+.srp-info{flex:1;min-width:0;}
+.srp-name{font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.srp-role{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;
 }
-.spc-role-lbl {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
-}
-.spc-role-lbl.operator { color: #3B82F6; }
-.spc-role-lbl.supervisor { color: var(--green); }
-.spc-role-lbl.owner { color: var(--orange); }
-.spc-crane { font-size: 12px; color: var(--muted); margin-top: 2px; }
-mark {
-  background: rgba(249,115,22,0.2);
-  color: var(--orange-dk);
-  border-radius: 2px;
-  padding: 0 1px;
+.srp-role.operator{color:#3B82F6;}
+.srp-role.supervisor{color:var(--green);}
+.srp-role.owner{color:var(--orange);}
+.srp-crane{font-size:12px;color:var(--muted);margin-top:2px;}
+mark{
+  background:rgba(255,107,0,0.15);
+  color:var(--orange2);
+  border-radius:2px;padding:0 1px;
 }
 
-/* ══════════════════════════════════════════════
-   EMPTY / ERROR STATES
-══════════════════════════════════════════════ */
-.empty-state {
-  padding: 60px 24px;
-  text-align: center;
+/* ══════════════════════════════════════
+   EMPTY / LOADING
+══════════════════════════════════════ */
+.empty-state{
+  padding:60px 24px;text-align:center;
 }
-.empty-state .es-ico { font-size: 56px; margin-bottom: 16px; }
-.empty-state h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 6px;
+.empty-state .ei{font-size:56px;margin-bottom:16px;}
+.empty-state h3{font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.empty-state p{font-size:14px;color:var(--muted);max-width:280px;margin:0 auto;line-height:1.6;}
+.skel{
+  background:linear-gradient(90deg,var(--white) 0%,var(--grey1) 50%,var(--white) 100%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s infinite;
+  border-radius:var(--r-lg);
+  height:72px;
+  margin:0 16px 10px;
 }
-.empty-state p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
-  max-width: 280px;
-  margin: 0 auto;
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.error-card{
+  margin:16px;
+  background:var(--red-lt);
+  border:1px solid rgba(214,43,43,0.2);
+  border-left:4px solid var(--red);
+  border-radius:var(--r);
+  padding:16px;
 }
-.empty-state .btn { margin: 16px auto 0; max-width: 200px; }
-.skeleton {
-  background: linear-gradient(90deg, var(--surface) 0%, var(--surface3) 50%, var(--surface) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: var(--r-lg);
-  height: 74px;
-  margin: 0 16px 8px;
+.error-card h3{font-size:15px;font-weight:800;color:var(--red);margin-bottom:4px;}
+.error-card p{font-size:13px;color:var(--muted);line-height:1.5;}
+.offline-bar{
+  background:var(--amber-lt);
+  border-bottom:1px solid rgba(201,122,0,0.2);
+  padding:8px 16px;
+  font-size:12px;font-weight:700;color:var(--amber);
+  display:none;text-align:center;
 }
-@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-.error-notice {
-  margin: 16px;
-  background: var(--red-lt);
-  border: 1px solid rgba(220,38,38,0.2);
-  border-radius: var(--r-lg);
-  padding: 16px;
-  text-align: center;
-}
-.error-notice .en-ico { font-size: 32px; margin-bottom: 8px; }
-.error-notice h3 { font-size: 15px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
-.error-notice p { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
-.offline-notice {
-  background: var(--amber-lt);
-  border: 1px solid rgba(217,119,6,0.2);
-  border-radius: var(--r);
-  padding: 10px 14px;
-  margin: 8px 16px;
-  font-size: 13px;
-  color: var(--amber);
-  font-weight: 600;
-  display: none;
-}
-.offline-notice.vis { display: block; }
+.offline-bar.vis{display:block;}
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════
    TOAST
-══════════════════════════════════════════════ */
-.toast {
-  position: fixed;
-  bottom: 88px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--text);
-  color: #fff;
-  border-radius: 30px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  z-index: 999;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s, transform 0.2s;
-  box-shadow: var(--shadow-lg);
-  max-width: calc(100vw - 32px);
+══════════════════════════════════════ */
+.toast{
+  position:fixed;
+  bottom:90px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  background:var(--navy);color:#fff;
+  border-radius:30px;
+  padding:11px 22px;
+  font-size:14px;font-weight:700;
+  white-space:nowrap;max-width:calc(100vw - 32px);
+  z-index:9999;pointer-events:none;
+  opacity:0;transition:opacity 0.18s,transform 0.18s;
+  box-shadow:var(--sh3);
 }
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-.toast.success { background: var(--green); }
-.toast.error { background: var(--red); }
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.success{background:var(--green);}
+.toast.error{background:var(--red);}
 
-/* ══════════════════════════════════════════════
-   BOTTOM NAV
-══════════════════════════════════════════════ */
-.bottom-nav {
-  position: fixed;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 100%; max-width: 600px;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  display: flex;
-  z-index: 300;
-  padding-bottom: env(safe-area-inset-bottom);
-  box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+/* ══════════════════════════════════════
+   BOTTOM NAV — Premium pill style
+══════════════════════════════════════ */
+.bottom-nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:620px;
+  background:var(--white);
+  border-top:1px solid var(--grey1);
+  display:flex;
+  z-index:300;
+  padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -4px 20px rgba(11,31,58,0.08);
 }
-.nav-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  padding: 10px 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: color var(--t);
-  position: relative;
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:10px 0;
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);
+  font-size:10px;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.5px;
+  position:relative;
+  transition:color var(--dur);
 }
-.nav-item .ni-ico { font-size: 22px; line-height: 1; }
-.nav-item.active { color: var(--orange); }
-.nav-item.active::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 20%; right: 20%;
-  height: 2px;
-  background: var(--orange);
-  border-radius: 0 0 2px 2px;
+.ni{font-size:22px;line-height:1;}
+.nav-item.active{color:var(--orange);}
+.nav-item.active::after{
+  content:'';
+  position:absolute;top:0;left:25%;right:25%;
+  height:2.5px;background:var(--orange);
+  border-radius:0 0 3px 3px;
 }
-.nav-add .ni-ico {
-  width: 40px; height: 40px;
-  background: var(--orange);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  box-shadow: 0 4px 12px rgba(249,115,22,0.35);
-  margin-bottom: 2px;
+.nav-add .ni{
+  width:44px;height:44px;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  box-shadow:0 4px 14px rgba(255,107,0,0.4);
+  margin-bottom:2px;
 }
-.nav-item.admin-only-nav { display: none; }
-body.admin-mode .admin-only-nav { display: flex; }
+.admin-only-nav{display:none;}
+body.admin-mode .admin-only-nav{display:flex;}
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════
    SCREENS
-══════════════════════════════════════════════ */
-.screen { display: none; }
-.screen.active { display: block; }
+══════════════════════════════════════ */
+.screen{display:none;}
+.screen.active{display:block;}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     SCREENS
-══════════════════════════════════════ -->
 <div id="app">
 
-  <!-- HOME -->
+  <!-- ── HOME ── -->
   <div id="scr-home" class="screen active">
     <div class="hdr">
-      <div class="hdr-logo">Crane<b>Call</b></div>
-      <button class="hdr-action" onclick="showScreen('settings')" title="Settings">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <div class="hdr-logo">Asset<span>Call</span></div>
+      <button class="hdr-act" onclick="showScreen('settings');renderSettings();" title="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
     </div>
     <div class="search-wrap">
       <div class="search-box">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="search" id="searchInput" placeholder="Search crane, person, phone, location..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <input type="search" id="searchInput" placeholder="Search asset, person, phone, location..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
         <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
       </div>
     </div>
 
     <div class="sync-bar">
-      <div class="sync-status">
-        <span class="sync-dot" id="syncDot"></span>
+      <div class="sync-pill">
+        <span class="sdot" id="syncDot"></span>
         <span id="syncText">Loading...</span>
       </div>
       <button class="sync-btn" onclick="doRefresh()">
-        <span id="syncIcon">↻</span> Sync
+        <span id="syncIcon">↻</span> Sync Now
       </button>
     </div>
 
-    <div id="offlineBanner" class="offline-notice">⚠ Offline — showing last synced data</div>
+    <div id="offlineBar" class="offline-bar">⚡ Offline — showing last synced data. Changes cannot be saved.</div>
 
     <!-- Install banner -->
     <div class="install-banner" id="installBanner">
-      <div class="install-banner-ico">📱</div>
-      <div class="install-banner-txt">
-        <strong>Install CraneCall</strong>
-        <span>Fast access at the construction site</span>
+      <div style="font-size:30px;flex-shrink:0;">📲</div>
+      <div class="install-banner-text">
+        <strong>Install AssetCall</strong>
+        <span>Works offline at any construction site</span>
       </div>
-      <div class="install-banner-actions">
-        <button class="btn-install" onclick="triggerInstall()">Install</button>
-        <button class="btn-dismiss" onclick="dismissInstall()">Not now</button>
+      <div class="install-btns">
+        <button class="btn-install-sm" onclick="triggerInstall()">Install</button>
+        <button class="btn-dismiss-sm" onclick="dismissInstall()">Not now</button>
       </div>
     </div>
 
-    <!-- Main content: dashboard + list OR search results -->
+    <!-- Home main: dashboard + list -->
     <div id="homeMain">
-      <!-- Dashboard -->
-      <div class="dash-hero">
-        <div class="dash-total">
-          <div class="dash-total-num" id="totalCount">—</div>
-          <div class="dash-total-lbl">Cranes</div>
+      <div class="dash">
+        <div class="dash-header">
+          <div>
+            <div class="dash-total-num" id="totalCount">—</div>
+            <div class="dash-total-lbl">Total Assets</div>
+          </div>
+          <div class="dash-date">
+            <strong id="dashDate">—</strong>
+            <span id="dashTime">—</span>
+          </div>
         </div>
-        <div class="stats-row">
-          <div class="stat-pill working" onclick="filterStatus('Working')">
-            <div class="sv" id="cntWorking">—</div>
-            <div class="sl">Working</div>
+        <div class="stats-grid">
+          <div class="stat-card working" onclick="filterStatus('Working')">
+            <div class="stat-num" id="cntWorking">—</div>
+            <div class="stat-lbl">Working</div>
+            <div class="stat-icon">⚙️</div>
           </div>
-          <div class="stat-pill standby" onclick="filterStatus('Standby')">
-            <div class="sv" id="cntStandby">—</div>
-            <div class="sl">Standby</div>
+          <div class="stat-card standby" onclick="filterStatus('Standby')">
+            <div class="stat-num" id="cntStandby">—</div>
+            <div class="stat-lbl">Standby</div>
+            <div class="stat-icon">⏸</div>
           </div>
-          <div class="stat-pill breakdown" onclick="filterStatus('Breakdown')">
-            <div class="sv" id="cntBreakdown">—</div>
-            <div class="sl">Down</div>
+          <div class="stat-card breakdown" onclick="filterStatus('Breakdown')">
+            <div class="stat-num" id="cntBreakdown">—</div>
+            <div class="stat-lbl">Breakdown</div>
+            <div class="stat-icon">🔴</div>
           </div>
-          <div class="stat-pill maintenance" onclick="filterStatus('Maintenance')">
-            <div class="sv" id="cntMaint">—</div>
-            <div class="sl">Maint.</div>
+          <div class="stat-card maintenance" onclick="filterStatus('Maintenance')">
+            <div class="stat-num" id="cntMaint">—</div>
+            <div class="stat-lbl">Maint.</div>
+            <div class="stat-icon">🔧</div>
           </div>
         </div>
       </div>
 
-      <div class="sec-lbl">
-        <span id="listLabel">All Cranes</span>
-        <button class="clear-filter" id="clearFilterBtn" onclick="clearFilter()">✕ Clear Filter</button>
+      <div class="sec-hdr">
+        <div>
+          <div class="sec-title" id="listLabel">All Assets</div>
+        </div>
+        <button class="chip-clear" id="clearFilterBtn" onclick="clearFilter()">✕ Clear Filter</button>
       </div>
-      <div id="craneList" class="crane-list"></div>
+      <div id="assetList" class="crane-list"></div>
     </div>
 
-    <div id="searchResultsSection" style="display:none">
-      <div class="sec-lbl"><span id="searchResultLabel">Results</span></div>
-      <div id="searchResults" class="search-results"></div>
+    <!-- Search results -->
+    <div id="searchSection" style="display:none;">
+      <div class="sec-hdr">
+        <div class="sec-title" id="searchResultLabel">Results</div>
+      </div>
+      <div id="searchResults" style="padding:0 16px;"></div>
     </div>
   </div>
 
-  <!-- CRANE DETAIL -->
+  <!-- ── ASSET DETAIL ── -->
   <div id="scr-detail" class="screen">
     <div class="hdr">
       <div class="hdr-back" onclick="goBack()">‹</div>
-      <div class="hdr-title" id="detailHdrTitle">Crane</div>
-      <button class="hdr-action admin-only-nav" id="editCraneBtn" onclick="openEditCrane()" title="Edit Crane">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      </button>
+      <div class="hdr-title" id="detailHdrTitle">Asset</div>
     </div>
     <div id="detailContent"></div>
   </div>
 
-  <!-- ADD / EDIT CRANE -->
+  <!-- ── ASSET FORM ── -->
   <div id="scr-craneform" class="screen">
     <div class="hdr">
       <div class="hdr-back" onclick="goBack()">‹</div>
-      <div class="hdr-title" id="craneFormTitle">Add Crane</div>
+      <div class="hdr-title" id="craneFormTitle">Add Asset</div>
     </div>
     <div id="craneFormContent"></div>
   </div>
 
-  <!-- ADD / EDIT CONTACT -->
+  <!-- ── CONTACT FORM ── -->
   <div id="scr-contactform" class="screen">
     <div class="hdr">
       <div class="hdr-back" onclick="goBack()">‹</div>
@@ -1420,7 +1286,7 @@ body.admin-mode .admin-only-nav { display: flex; }
     <div id="contactFormContent"></div>
   </div>
 
-  <!-- SETTINGS -->
+  <!-- ── SETTINGS ── -->
   <div id="scr-settings" class="screen">
     <div class="hdr">
       <div class="hdr-back" onclick="goBack()">‹</div>
@@ -1434,39 +1300,35 @@ body.admin-mode .admin-only-nav { display: flex; }
 <!-- Bottom Nav -->
 <nav class="bottom-nav">
   <button class="nav-item active" id="navHome" onclick="goHome()">
-    <span class="ni-ico">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    </span>
-    Home
+    <span class="ni">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </span>Home
   </button>
   <button class="nav-item" id="navSearch" onclick="focusSearch()">
-    <span class="ni-ico">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    </span>
-    Search
+    <span class="ni">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </span>Search
   </button>
-  <button class="nav-item nav-add admin-only-nav" id="navAdd" onclick="openAddCrane()">
-    <span class="ni-ico">
+  <button class="nav-item nav-add admin-only-nav" id="navAdd" onclick="openAddAsset()">
+    <span class="ni">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    </span>
-    Add
+    </span>Add
   </button>
-  <button class="nav-item" id="navSettings" onclick="showScreen('settings'); renderSettings();">
-    <span class="ni-ico">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    </span>
-    Settings
+  <button class="nav-item" id="navSettings" onclick="showScreen('settings');renderSettings();">
+    <span class="ni">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </span>Settings
   </button>
 </nav>
 
-<!-- Delete Confirm Modal -->
+<!-- Delete Modal -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
+  <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-title" id="modalTitle">Confirm Delete</div>
     <div class="modal-subtitle" id="modalSubtitle">This action cannot be undone.</div>
     <div class="modal-body">
-      <div class="confirm-subject" id="modalSubject"></div>
+      <div class="confirm-box" id="modalBody"></div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
@@ -1475,1130 +1337,884 @@ body.admin-mode .admin-only-nav { display: flex; }
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   CraneCall v2.0
-   Production Construction Crane Contact Management PWA
-   Architecture: GitHub Pages frontend → Google Apps Script API
-   Database: Google Sheets (Cranes + Contacts sheets)
+   AssetCall v3.0 – Equipment & Asset Contact Management PWA
+   
+   CRITICAL FIX: Google Apps Script POST blocked by CORS preflight.
+   Solution: ALL mutations sent as GET requests with encoded params.
+   Apps Script handles GET with full CORS support — no preflight.
+
+   BACK BUTTON FIX: History API used throughout. Android hardware
+   back button navigates within the app via popstate event.
+   
+   DEVELOPER: Set API_BASE to your Apps Script Web App URL.
+   Users never see, type, or configure this URL.
 ═══════════════════════════════════════════════════════════════ */
 
-// ── CONFIGURATION ──────────────────────────────────────────────
-// DEVELOPER: Replace this URL after deploying Code.gs as a Web App.
-// This URL is the only backend reference in the frontend.
-// Normal users never see or configure this.
-const API_BASE = 'https://script.google.com/macros/s/AKfycbwE9L2trAhOU_4sMrSFampv_rIzdrG36UVnoowKJ9T5HmOq5JdWSxT5YAHNelHPq6vR/exec';
+// ── CONFIGURATION — ONLY THING A DEVELOPER NEEDS TO CHANGE ────
+const API_BASE = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
 
-// Cache keys and TTL
-const CACHE_CRANES   = 'cc2_cranes';
-const CACHE_CONTACTS = 'cc2_contacts';
-const CACHE_TS       = 'cc2_ts';
-const CACHE_TTL      = 5 * 60 * 1000; // 5 minutes
-
-// Admin PIN (change before deploying — stored only in code, not UI)
+// Admin PIN — change before going live
 const ADMIN_PIN = '1234';
 
+// Cache config
+const CK_ASSETS   = 'cc3_assets';
+const CK_CONTACTS = 'cc3_contacts';
+const CK_TS       = 'cc3_ts';
+const CACHE_TTL   = 5 * 60 * 1000;
+
 // ── STATE ──────────────────────────────────────────────────────
-let cranes      = [];   // [{Crane_ID, Location, Crane_Type, Capacity, Status, Remarks}]
-let contacts    = [];   // [{Contact_ID, Crane_ID, Role, Name, Phone, Company, Active}]
+let assets      = [];   // was: cranes
+let contacts    = [];
 let isOnline    = navigator.onLine;
 let isAdmin     = false;
-let filterState = null; // null or status string
-let currentCraneId = null;
+let filterState = null;
+let currentAssetId = null;
 let navHistory  = ['home'];
-let expandedRoles = {}; // {craneId: {Operator:bool, Supervisor:bool, Owner:bool}}
-let deferredInstall = null; // PWA install prompt
+let expanded    = {}; // {assetId: {Operator,Supervisor,Owner: bool}}
+let deferredInstall = null;
 let toastTimer  = null;
 
-// ── UTILITIES ──────────────────────────────────────────────────
-const H = (s) => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-const R = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const $  = (id) => document.getElementById(id);
-const ts = () => new Date().toLocaleString('en-IN', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
-
-function statusClass(s) {
-  const m = {working:'working', standby:'standby', breakdown:'breakdown', maintenance:'maintenance', inactive:'inactive'};
-  return m[(s||'').toLowerCase()] || 'standby';
-}
-
-function normalizePhone(p) {
-  if (!p) return '';
-  let n = String(p).replace(/[\s\-().+]/g,'');
-  if (n.startsWith('91') && n.length === 12) n = n.slice(2);
-  if (n.startsWith('+91')) n = n.slice(3);
+// ── HELPERS ────────────────────────────────────────────────────
+const H  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const R  = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const $  = id => document.getElementById(id);
+const SC = s => {const m={working:'working',standby:'standby',breakdown:'breakdown',maintenance:'maintenance',inactive:'inactive'};return m[(s||'').toLowerCase()]||'standby';};
+function fmtPhone(p){
+  if(!p)return '';
+  let n=String(p).replace(/[\s\-().+]/g,'');
+  if(n.startsWith('91')&&n.length===12)n=n.slice(2);
+  if(n.startsWith('+91'))n=n.slice(3);
   return n;
 }
-
-function genContactId() {
-  return 'C' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,5).toUpperCase();
-}
+function genId(){return 'C'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();}
+function shortType(t){if(!t)return '—';// Show first word of type, up to 10 chars
+const first=t.split(/[\s\/\-]/)[0];return first.length<=10?first:t.slice(0,10);}
 
 // ── TOAST ──────────────────────────────────────────────────────
-function toast(msg, type = '', dur = 3000) {
-  const t = $('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (type ? ' ' + type : '');
+function toast(msg,type='',dur=3000){
+  const t=$('toast');
+  t.textContent=msg;
+  t.className='toast show'+(type?' '+type:'');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.className = 'toast', dur);
+  toastTimer=setTimeout(()=>t.className='toast',dur);
 }
 
-// ── SCREEN NAVIGATION ──────────────────────────────────────────
-function showScreen(name, addHistory = true) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  $('scr-' + name).classList.add('active');
-  if (addHistory && navHistory[navHistory.length-1] !== name) navHistory.push(name);
+// ── NAVIGATION ─────────────────────────────────────────────────
+// Uses History API so Android back button navigates within the app
+// instead of closing it. Each screen push adds a history entry.
+function showScreen(name, push=true){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $('scr-'+name).classList.add('active');
 
-  // Update nav highlights
-  ['navHome','navSearch','navSettings'].forEach(id => $?.(id)?.classList.remove('active'));
-  if (name === 'home') $('navHome')?.classList.add('active');
-  if (name === 'settings') $('navSettings')?.classList.add('active');
+  if(push && navHistory[navHistory.length-1]!==name){
+    navHistory.push(name);
+    // Push a real browser history entry so Android back button fires popstate
+    window.history.pushState({screen:name, depth:navHistory.length}, '', '#'+name);
+  }
 
+  ['navHome','navSearch','navSettings'].forEach(id=>$(id)?.classList.remove('active'));
+  if(name==='home')    $('navHome')?.classList.add('active');
+  if(name==='settings')$('navSettings')?.classList.add('active');
   $('app').scrollTop = 0;
 }
 
-function goBack() {
-  if (navHistory.length > 1) {
-    navHistory.pop();
-    showScreen(navHistory[navHistory.length-1], false);
+function goBack(){
+  if(navHistory.length > 1){
+    // Let the browser handle it — popstate listener will call _goBack
+    window.history.back();
   } else {
     goHome();
   }
 }
 
-function goHome() {
-  navHistory = ['home'];
+// Internal back — called by popstate, not directly by user buttons
+function _goBack(){
+  if(navHistory.length > 1){
+    navHistory.pop();
+    showScreen(navHistory[navHistory.length-1], false);
+  } else {
+    _goHome();
+  }
+}
+
+function goHome(){
+  navHistory=['home'];
+  // Replace all history entries so "back" from home exits the app naturally
+  window.history.replaceState({screen:'home', depth:1}, '', '#home');
   showScreen('home', false);
   $('navHome')?.classList.add('active');
 }
 
-function focusSearch() {
+function _goHome(){
+  navHistory=['home'];
+  showScreen('home', false);
+  $('navHome')?.classList.add('active');
+}
+
+function focusSearch(){
   goHome();
-  setTimeout(() => { $('searchInput')?.focus(); }, 100);
+  setTimeout(()=>$('searchInput')?.focus(), 100);
   $('navSearch')?.classList.add('active');
 }
 
-// ── CACHE ──────────────────────────────────────────────────────
-function saveCache() {
-  try {
-    localStorage.setItem(CACHE_CRANES,   JSON.stringify(cranes));
-    localStorage.setItem(CACHE_CONTACTS, JSON.stringify(contacts));
-    localStorage.setItem(CACHE_TS,       String(Date.now()));
-  } catch(e) {}
-}
+// Listen for Android hardware back button / browser back
+window.addEventListener('popstate', (e)=>{
+  // If a modal is open, close it first
+  if($('modalOverlay').classList.contains('open')){
+    closeModal(); return;
+  }
+  // If search is active, clear it
+  const searchInput = $('searchInput');
+  if(searchInput && searchInput.value.trim()){
+    clearSearch(); return;
+  }
+  // Navigate back within app
+  if(navHistory.length > 1){
+    _goBack();
+  }
+  // If we're at home, let the browser handle it (minimise / exit)
+});
 
-function loadCache() {
-  try {
-    const c  = JSON.parse(localStorage.getItem(CACHE_CRANES)   || 'null');
-    const ct = JSON.parse(localStorage.getItem(CACHE_CONTACTS)  || 'null');
-    const ts = parseInt(localStorage.getItem(CACHE_TS) || '0');
-    if (c && ct) { cranes = c; contacts = ct; return ts; }
-  } catch(e) {}
+// ── CACHE ──────────────────────────────────────────────────────
+function saveCache(){
+  try{
+    localStorage.setItem(CK_ASSETS,  JSON.stringify(assets));
+    localStorage.setItem(CK_CONTACTS,JSON.stringify(contacts));
+    localStorage.setItem(CK_TS,      String(Date.now()));
+  }catch(e){}
+}
+function loadCache(){
+  try{
+    const a =JSON.parse(localStorage.getItem(CK_ASSETS)  ||'null');
+    const ct=JSON.parse(localStorage.getItem(CK_CONTACTS)||'null');
+    const t =parseInt(localStorage.getItem(CK_TS)||'0');
+    if(a&&ct){assets=a;contacts=ct;return t;}
+  }catch(e){}
   return 0;
 }
 
-// ── API ────────────────────────────────────────────────────────
-async function apiFetch(params, method = 'GET', body = null) {
-  const url = API_BASE !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'
-    ? API_BASE + '?' + new URLSearchParams(params)
-    : null;
+// ══════════════════════════════════════════════════════════════
+// API — ALL REQUESTS ARE GET (fixes CORS preflight block on POST)
+// Mutations are sent as GET with action + base64-encoded payload.
+// Code.gs handles them identically regardless of GET/POST.
+// ══════════════════════════════════════════════════════════════
+async function apiCall(action, data=null){
+  if(API_BASE==='PASTE_YOUR_APPS_SCRIPT_URL_HERE') throw new Error('NOT_CONFIGURED');
 
-  if (!url) throw new Error('NOT_CONFIGURED');
+  const params = new URLSearchParams({ action });
+  if(data) params.set('payload', btoa(unescape(encodeURIComponent(JSON.stringify(data)))));
 
-  const opts = { signal: AbortSignal.timeout(15000) };
-  if (method === 'POST') {
-    opts.method = 'POST';
-    opts.headers = { 'Content-Type': 'application/json' };
-    opts.body = JSON.stringify(body);
-  }
-  const res = await fetch(url, opts);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const url = API_BASE + '?' + params.toString();
+  const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
+  if(!res.ok) throw new Error('Server error: HTTP ' + res.status);
   const j = await res.json();
-  if (j.error) throw new Error(j.error);
+  if(j.error) throw new Error(j.error);
   return j;
 }
 
-async function loadData(force = false) {
-  setSyncStatus('loading');
-  const cachedTs = loadCache();
-  const fresh = Date.now() - cachedTs < CACHE_TTL;
+async function apiMutate(action, data){
+  if(!isOnline) throw new Error('No internet connection. Please check your network and try again.');
+  return apiCall(action, data);
+}
 
-  if (!force && fresh && cranes.length > 0) {
-    renderAll();
-    setSyncStatus('cached', cachedTs);
-    return;
-  }
+// ── LOAD DATA ──────────────────────────────────────────────────
+async function loadData(force=false){
+  setSyncUI('loading');
+  const cachedTs=loadCache();
+  const fresh=Date.now()-cachedTs<CACHE_TTL;
 
-  if (!isOnline && cranes.length > 0) {
-    renderAll();
-    setSyncStatus('offline', cachedTs);
-    return;
-  }
+  if(!force&&fresh&&assets.length>0){renderAll();setSyncUI('ok',cachedTs);return;}
+  if(!isOnline&&assets.length>0){renderAll();setSyncUI('offline',cachedTs);return;}
 
-  try {
-    const r = await apiFetch({ action: 'getData' });
-    cranes   = r.cranes   || [];
-    contacts = r.contacts || [];
-    saveCache();
-    renderAll();
-    setSyncStatus('synced');
-  } catch(e) {
-    if (e.message === 'NOT_CONFIGURED') {
-      // Dev placeholder: tell developer, show no fake data
-      setSyncStatus('notconfigured');
-      renderCraneList([]);
+  try{
+    const r=await apiCall('getData');
+    assets=r.cranes||r.assets||[];  // support both key names from backend
+    contacts=r.contacts||[];
+    saveCache();renderAll();setSyncUI('synced');
+  }catch(e){
+    if(e.message==='NOT_CONFIGURED'){
+      setSyncUI('config');
+      $('assetList').innerHTML=`<div class="error-card" style="margin-top:8px;"><h3>⚙️ Setup Required</h3><p>Open index.html and replace <strong>PASTE_YOUR_APPS_SCRIPT_URL_HERE</strong> with your Google Apps Script Web App URL. See setup-guide.md for instructions.</p></div>`;
       renderDashboard();
-      $('craneList').innerHTML = `
-        <div class="error-notice">
-          <div class="en-ico">⚙️</div>
-          <h3>Backend Not Connected</h3>
-          <p>Open index.html and set the <code>API_BASE</code> constant to your Google Apps Script Web App URL.</p>
-        </div>`;
-    } else if (cranes.length > 0) {
-      renderAll();
-      setSyncStatus('offline', cachedTs);
-      toast('Unable to sync — showing cached data', 'error');
-    } else {
-      setSyncStatus('error');
-      $('craneList').innerHTML = `
-        <div class="error-notice">
-          <div class="en-ico">🚫</div>
-          <h3>Unable to load crane data</h3>
-          <p>${H(e.message)}</p>
-          <button class="btn btn-secondary" style="margin-top:12px;max-width:180px" onclick="doRefresh()">↻ Retry</button>
-        </div>`;
+    }else if(assets.length>0){
+      renderAll();setSyncUI('offline',cachedTs);
+      toast('⚠ Sync failed — showing cached data','error');
+    }else{
+      setSyncUI('error');
+      $('assetList').innerHTML=`<div class="error-card" style="margin-top:8px;"><h3>Unable to load data</h3><p>${H(e.message)}</p><br><button class="btn btn-secondary" style="height:44px;font-size:14px;" onclick="doRefresh()">↻ Retry</button></div>`;
       renderDashboard();
     }
   }
 }
 
-async function apiMutate(action, payload) {
-  if (!isOnline) throw new Error('You are offline. Please reconnect to save changes.');
-  const r = await apiFetch({ action }, 'POST', payload);
-  return r;
-}
-
-async function doRefresh() {
-  const icon = $('syncIcon');
-  icon.classList.add('spinning');
+async function doRefresh(){
+  $('syncIcon').classList.add('spinning');
   await loadData(true);
-  icon.classList.remove('spinning');
+  $('syncIcon').classList.remove('spinning');
 }
 
-// ── SYNC STATUS BAR ────────────────────────────────────────────
-function setSyncStatus(state, ts_ms) {
-  const dot = $('syncDot');
-  const txt = $('syncText');
-  const fmtTs = (t) => new Date(t).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
-  const offline = $('offlineBanner');
-
-  switch(state) {
-    case 'loading':
-      dot.className = 'sync-dot off'; txt.textContent = 'Syncing...'; break;
-    case 'synced':
-      dot.className = 'sync-dot'; txt.textContent = 'Synced · ' + ts(); offline.classList.remove('vis'); break;
-    case 'cached':
-      dot.className = 'sync-dot'; txt.textContent = 'Last synced: ' + fmtTs(ts_ms); offline.classList.remove('vis'); break;
-    case 'offline':
-      dot.className = 'sync-dot off'; txt.textContent = 'Offline · ' + fmtTs(ts_ms); offline.classList.add('vis'); break;
-    case 'error':
-      dot.className = 'sync-dot err'; txt.textContent = 'Connection error'; break;
-    case 'notconfigured':
-      dot.className = 'sync-dot err'; txt.textContent = 'Backend not configured'; break;
+// ── SYNC UI ────────────────────────────────────────────────────
+function setSyncUI(state,ts_ms){
+  const dot=$('syncDot'),txt=$('syncText'),bar=$('offlineBar');
+  const fmt=t=>new Date(t).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+  switch(state){
+    case 'loading': dot.className='sdot off';txt.textContent='Syncing...';break;
+    case 'synced':  dot.className='sdot';txt.textContent='Synced';bar.classList.remove('vis');break;
+    case 'ok':      dot.className='sdot';txt.textContent='Last sync: '+fmt(ts_ms);bar.classList.remove('vis');break;
+    case 'offline': dot.className='sdot off';txt.textContent='Offline · '+fmt(ts_ms);bar.classList.add('vis');break;
+    case 'config':  dot.className='sdot err';txt.textContent='Setup needed';break;
+    case 'error':   dot.className='sdot err';txt.textContent='Connection error';break;
   }
 }
 
 // ── DASHBOARD ──────────────────────────────────────────────────
-function renderDashboard() {
-  const counts = { Working:0, Standby:0, Breakdown:0, Maintenance:0 };
-  cranes.forEach(c => {
-    const s = c.Status || 'Standby';
-    if (counts[s] !== undefined) counts[s]++;
-  });
-  $('totalCount').textContent    = cranes.length || '0';
-  $('cntWorking').textContent    = counts.Working;
-  $('cntStandby').textContent    = counts.Standby;
-  $('cntBreakdown').textContent  = counts.Breakdown;
-  $('cntMaint').textContent      = counts.Maintenance;
+function renderDashboard(){
+  const c={Working:0,Standby:0,Breakdown:0,Maintenance:0};
+  assets.forEach(x=>{const s=x.Status||'Standby';if(c[s]!==undefined)c[s]++;});
+  $('totalCount').textContent=assets.length||'0';
+  $('cntWorking').textContent=c.Working;
+  $('cntStandby').textContent=c.Standby;
+  $('cntBreakdown').textContent=c.Breakdown;
+  $('cntMaint').textContent=c.Maintenance;
+  const now=new Date();
+  $('dashDate').textContent=now.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+  $('dashTime').textContent=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
 }
 
 // ── CRANE LIST ─────────────────────────────────────────────────
-function renderAll() {
+function renderAll(){
   renderDashboard();
-  const list = filterState
-    ? cranes.filter(c => (c.Status||'').toLowerCase() === filterState.toLowerCase())
-    : cranes;
-  renderCraneList(list);
-  $('listLabel').textContent = filterState
-    ? `${filterState} (${list.length})`
-    : `All Cranes (${list.length})`;
+  const list=filterState?assets.filter(a=>(a.Status||'').toLowerCase()===filterState.toLowerCase()):assets;
+  renderAssetList(list);
+  $('listLabel').textContent=filterState?`${filterState} (${list.length})`:`All Assets (${list.length})`;
 }
 
-function renderCraneList(list) {
-  // Show skeleton during initial load
-  const el = $('craneList');
-  if (!list || list.length === 0) {
-    el.innerHTML = cranes.length === 0
-      ? `<div class="empty-state"><div class="es-ico">🏗️</div><h3>No cranes yet</h3><p>Add cranes from the Admin panel to get started.</p></div>`
-      : `<div class="empty-state"><div class="es-ico">🔍</div><h3>No cranes match this filter</h3></div>`;
+function renderAssetList(list){
+  const el=$('assetList');
+  if(!list||list.length===0){
+    el.innerHTML=`<div class="empty-state"><div class="ei">${assets.length===0?'🏗️':'🔍'}</div><h3>${assets.length===0?'No assets yet':'No assets match'}</h3><p>${assets.length===0?'Add your first asset from the admin panel.':'Try a different filter.'}</p></div>`;
     return;
   }
-
-  el.innerHTML = list.map(c => {
-    const sc  = statusClass(c.Status);
-    const ctype = shortType(c.Crane_Type);
-    const cContacts = contacts.filter(x => x.Crane_ID === c.Crane_ID && x.Active !== 'FALSE');
-    const opCount = cContacts.filter(x => x.Role === 'Operator').length;
-    return `<div class="crane-card" onclick="openCrane('${H(c.Crane_ID)}')">
-      <div class="crane-id-badge">
-        <span class="cid">${H(c.Crane_ID)}</span>
-        <span class="ctype">${H(ctype)}</span>
+  el.innerHTML=list.map(a=>{
+    const sc=SC(a.Status);
+    // Asset_ID falls back to Crane_ID for backwards compatibility with existing sheets
+    const aid=a.Asset_ID||a.Crane_ID||'—';
+    const atype=a.Asset_Type||a.Crane_Type||'';
+    const opCnt=contacts.filter(x=>(x.Asset_ID||x.Crane_ID)===aid&&x.Role==='Operator'&&x.Active!=='FALSE').length;
+    return`<div class="crane-card" onclick="openAsset('${H(aid)}')">
+      <div class="crane-card-stripe ${sc}"></div>
+      <div class="crane-card-body">
+        <div class="crane-id-tag">
+          <span class="cid">${H(aid)}</span>
+          <span class="ctype">${H(shortType(atype))}</span>
+        </div>
+        <div class="crane-meta">
+          <div class="crane-loc">${H(a.Location||'—')}</div>
+          <div class="crane-sub">${H(atype||'—')}${a.Capacity?' · '+H(a.Capacity):''}${opCnt?' · '+opCnt+' operator'+(opCnt>1?'s':''):''}</div>
+        </div>
+        <span class="sbadge ${sc}"><span class="sdot-sm"></span>${H(a.Status||'Unknown')}</span>
+        <span class="crane-chevron">›</span>
       </div>
-      <div class="crane-info">
-        <div class="crane-loc">${H(c.Location||'—')}</div>
-        <div class="crane-sub">${H(c.Crane_Type||'—')}${c.Capacity ? ' · ' + H(c.Capacity) : ''}${opCount > 0 ? ' · ' + opCount + ' op.' : ''}</div>
-      </div>
-      <span class="status-badge ${sc}"><span class="status-dot"></span>${H(c.Status||'Unknown')}</span>
-      <span class="card-chevron">›</span>
     </div>`;
   }).join('');
 }
 
-function shortType(t) {
-  if (!t) return '—';
-  const m = {Tower:'Tower', Mobile:'Mobile', Crawler:'Crawler'};
-  for (const k in m) if (t.includes(k)) return m[k];
-  return t.slice(0,8);
-}
+function filterStatus(s){filterState=s;$('clearFilterBtn').classList.add('vis');renderAll();}
+function clearFilter(){filterState=null;$('clearFilterBtn').classList.remove('vis');renderAll();}
 
-function filterStatus(s) {
-  filterState = s;
-  $('clearFilterBtn').classList.add('vis');
-  renderAll();
-}
+// ── ASSET DETAIL ───────────────────────────────────────────────
+function openAsset(id){
+  currentAssetId=id;
+  // Support both Asset_ID and Crane_ID keys (backwards compat)
+  const c=assets.find(x=>(x.Asset_ID||x.Crane_ID)===id);
+  if(!c){toast('Asset not found','error');return;}
+  if(!expanded[id])expanded[id]={Operator:true,Supervisor:false,Owner:false};
 
-function clearFilter() {
-  filterState = null;
-  $('clearFilterBtn').classList.remove('vis');
-  renderAll();
-}
+  $('detailHdrTitle').textContent=id;
+  const sc=SC(c.Status);
+  const atype=c.Asset_Type||c.Crane_Type||'';
+  // Support both Asset_ID and Crane_ID on contacts (backwards compat)
+  const cContacts=contacts.filter(x=>(x.Asset_ID||x.Crane_ID)===id&&x.Active!=='FALSE');
 
-// ── CRANE DETAIL ───────────────────────────────────────────────
-function openCrane(id) {
-  currentCraneId = id;
-  const c = cranes.find(x => x.Crane_ID === id);
-  if (!c) { toast('Crane not found', 'error'); return; }
-
-  if (!expandedRoles[id]) expandedRoles[id] = {Operator:false, Supervisor:false, Owner:false};
-
-  $('detailHdrTitle').textContent = id;
-
-  const sc = statusClass(c.Status);
-  const cContacts = contacts.filter(x => x.Crane_ID === id && x.Active !== 'FALSE');
-  const byRole = role => cContacts.filter(x => x.Role === role);
-
-  const renderRoleSection = (role, icon, cssClass) => {
-    const people = byRole(role);
-    // Auto-expand: open if has contacts OR was previously expanded
-    const isOpen = expandedRoles[id][role] || people.length > 0;
-    expandedRoles[id][role] = isOpen; // keep state in sync
-    const preview = people.length > 0
-      ? people.slice(0,2).map(p => p.Name).join(', ') + (people.length > 2 ? '…' : '')
-      : 'None assigned';
-
-    return `
-      <div class="role-section" id="rs-${H(id)}-${role}">
-        <div class="role-section-header ${isOpen ? 'expanded' : ''}" onclick="toggleRole('${H(id)}','${role}',this)">
-          <div class="role-section-lft">
-            <div class="role-icon-wrap ${cssClass}">${icon}</div>
-            <div>
-              <div class="role-name">${role}</div>
-              <div class="role-preview" id="rp-${H(id)}-${role}">${H(preview)}</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span class="role-count" id="rc-count-${H(id)}-${role}">${people.length}</span>
-            <span class="role-chevron ${isOpen ? 'open' : ''}">›</span>
+  const roleSection=(role,icon,ico)=>{
+    const people=cContacts.filter(x=>x.Role===role);
+    const isOpen=expanded[id][role];
+    const preview=people.length>0?people.slice(0,2).map(p=>p.Name).join(', ')+(people.length>2?'…':''):'None assigned';
+    return`<div class="role-block">
+      <div class="role-hdr ${isOpen?'open':''}" onclick="toggleRole('${H(aid)}','${role}',this)">
+        <div class="role-hdr-lft">
+          <div class="role-ico ${ico}">${icon}</div>
+          <div>
+            <div class="role-name-lbl">${role}</div>
+            <div class="role-preview-txt" id="rpt-${H(aid)}-${role}">${H(preview)}</div>
           </div>
         </div>
-        <div class="role-contacts ${isOpen ? 'open' : ''}" id="rc-${H(id)}-${role}">
-          <div id="rc-cards-${H(id)}-${role}">
-            ${people.length === 0
-              ? `<div class="no-contacts-msg" id="nc-${H(id)}-${role}" style="padding:6px 0 4px;font-size:13px;color:var(--muted);">No ${role.toLowerCase()} assigned yet</div>`
-              : people.map(p => renderContactCard(p)).join('')}
-          </div>
-          <button class="add-contact-btn admin-only" onclick="openAddContact('${H(id)}','${role}')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add ${role}
-          </button>
-        </div>
-      </div>`;
-  };
-
-  let html = `
-    <div class="detail-hero">
-      <div class="detail-cid">${H(c.Crane_ID)}</div>
-      <div class="detail-loc">${H(c.Location||'—')}</div>
-      <div class="detail-sub">${H(c.Crane_Type||'—')}${c.Capacity ? ' · ' + H(c.Capacity) : ''}</div>
-      <span class="status-badge ${sc}"><span class="status-dot"></span>${H(c.Status||'Unknown')}</span>
-      <div class="detail-meta">
-        <div class="meta-item">
-          <div class="mi-label">Type</div>
-          <div class="mi-val">${H(c.Crane_Type||'—')}</div>
-        </div>
-        <div class="meta-item">
-          <div class="mi-label">Capacity</div>
-          <div class="mi-val">${H(c.Capacity||'—')}</div>
-        </div>
-        <div class="meta-item">
-          <div class="mi-label">Contacts</div>
-          <div class="mi-val">${cContacts.length}</div>
+        <div class="role-hdr-rgt">
+          <span class="role-count-badge" id="rcb-${H(aid)}-${role}">${people.length}</span>
+          <span class="role-chevron ${isOpen?'open':''}">›</span>
         </div>
       </div>
+      <div class="role-body ${isOpen?'open':''}" id="rb-${H(aid)}-${role}">
+        <div id="rbc-${H(aid)}-${role}">
+          ${people.length===0?`<div class="no-contact-msg">No ${role.toLowerCase()} assigned yet.</div>`:people.map(p=>renderContactCard(p)).join('')}
+        </div>
+        <button class="add-role-btn admin-only" onclick="openAddContact('${H(aid)}','${role}')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add ${role}
+        </button>
+      </div>
+    </div>`;
+  };
+
+  const aid=c.Asset_ID||c.Crane_ID||id;
+  let html=`
+    <div class="detail-hero">
+      <div class="detail-crane-id">${H(aid)}</div>
+      <div class="detail-loc">📍 ${H(c.Location||'—')}</div>
+      <div class="detail-pills">
+        <span class="detail-pill status-${sc}">${H(c.Status||'Unknown')}</span>
+        ${atype?`<span class="detail-pill">${H(atype)}</span>`:''}
+        ${c.Capacity?`<span class="detail-pill">${H(c.Capacity)}</span>`:''}
+      </div>
     </div>
-    ${c.Remarks ? `<div class="detail-remarks"><strong>Remarks</strong>${H(c.Remarks)}</div>` : ''}
-    ${isAdmin ? `
-    <div class="detail-admin-row">
-      <button class="btn-sm" onclick="openEditCrane()">
+    <div class="detail-meta-row">
+      <div class="dmi"><div class="dmi-lbl">Type</div><div class="dmi-val">${H(shortType(atype))}</div></div>
+      <div class="dmi"><div class="dmi-lbl">Capacity</div><div class="dmi-val">${H(c.Capacity||'—')}</div></div>
+      <div class="dmi"><div class="dmi-lbl">Contacts</div><div class="dmi-val">${cContacts.length}</div></div>
+    </div>
+    ${c.Remarks?`<div class="detail-remarks" style="margin-bottom:0"><strong>Note</strong>${H(c.Remarks)}</div>`:''}
+    ${isAdmin?`<div class="admin-action-row">
+      <button class="btn-sm-admin" onclick="openEditAsset()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        Edit Crane
+        Edit Asset
       </button>
-      <button class="btn-sm danger" onclick="confirmDeleteCrane('${H(c.Crane_ID)}')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-        Delete Crane
+      <button class="btn-sm-admin danger" onclick="confirmDeleteAsset('${H(aid)}')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+        Delete
       </button>
-    </div>` : ''}
+    </div>`:''}
     <div class="role-sections">
-      ${renderRoleSection('Operator', '👷', 'op')}
-      ${renderRoleSection('Supervisor', '🦺', 'sup')}
-      ${renderRoleSection('Owner', '🏢', 'own')}
+      ${roleSection('Operator','👷','op')}
+      ${roleSection('Supervisor','🦺','sup')}
+      ${roleSection('Owner','🏢','own')}
     </div>`;
 
-  $('detailContent').innerHTML = html;
+  $('detailContent').innerHTML=html;
   showScreen('detail');
 }
 
-function renderContactCard(p) {
-  const phone = normalizePhone(p.Phone);
-  const hasPhone = !!phone;
-  const roleIcon = p.Role === 'Operator' ? '👷' : p.Role === 'Supervisor' ? '🦺' : '🏢';
-  return `
-    <div class="contact-card" id="card-${H(p.Contact_ID)}">
-      <div class="contact-avatar">${roleIcon}</div>
-      <div class="contact-info">
-        <div class="contact-name">${H(p.Name)}</div>
-        ${p.Company ? `<div class="contact-company">${H(p.Company)}</div>` : ''}
-        ${hasPhone
-          ? `<div class="contact-phone">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              ${H(p.Phone)}
-             </div>`
-          : `<div class="no-phone-msg">Phone number unavailable</div>`}
+function renderContactCard(p){
+  const phone=fmtPhone(p.Phone);
+  const hasPhone=!!phone;
+  const icon=p.Role==='Operator'?'👷':p.Role==='Supervisor'?'🦺':'🏢';
+  return`<div class="contact-card" id="cc-${H(p.Contact_ID)}">
+    <div class="cc-avatar">${icon}</div>
+    <div class="cc-info">
+      <div class="cc-name">${H(p.Name)}</div>
+      ${p.Company?`<div class="cc-company">${H(p.Company)}</div>`:''}
+      ${hasPhone
+        ?`<div class="cc-phone"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> ${H(p.Phone)}</div>`
+        :`<div class="cc-nophone">No phone number</div>`}
+    </div>
+    <div class="cc-actions">
+      ${hasPhone?`<a href="tel:${phone}" class="btn-call" onclick="event.stopPropagation()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}
+      <div class="cc-admin-row admin-only">
+        <button class="btn-edit2" onclick="openEditContact('${H(p.Contact_ID)}')">Edit</button>
+        <button class="btn-del2" onclick="confirmDeleteContact('${H(p.Contact_ID)}')">Del</button>
       </div>
-      <div class="contact-actions">
-        ${hasPhone
-          ? `<a href="tel:${H(phone)}" class="btn-call" onclick="event.stopPropagation()">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              Call
-            </a>`
-          : ''}
-        <div class="contact-admin-row admin-only">
-          <button class="btn-edit" onclick="openEditContact('${H(p.Contact_ID)}')">Edit</button>
-          <button class="btn-del" onclick="confirmDeleteContact('${H(p.Contact_ID)}')">Del</button>
+    </div>
+  </div>`;
+}
+
+function toggleRole(craneId,role,hdrEl){
+  if(!expanded[craneId])expanded[craneId]={};
+  const isOpen=!expanded[craneId][role];
+  expanded[craneId][role]=isOpen;
+  const body=$('rb-'+craneId+'-'+role);
+  const chev=hdrEl.querySelector('.role-chevron');
+  if(body){body.classList.toggle('open',isOpen);}
+  if(chev){chev.classList.toggle('open',isOpen);}
+  hdrEl.classList.toggle('open',isOpen);
+}
+
+// ── SURGICAL ROLE REFRESH (no full re-render) ──────────────────
+function refreshRole(assetId,role){
+  const cardsEl=$('rbc-'+assetId+'-'+role);
+  const countEl=$('rcb-'+assetId+'-'+role);
+  const prevEl =$('rpt-'+assetId+'-'+role);
+  if(!cardsEl)return;
+  const people=contacts.filter(x=>(x.Asset_ID||x.Crane_ID)===assetId&&x.Role===role&&x.Active!=='FALSE');
+  cardsEl.innerHTML=people.length===0
+    ?`<div class="no-contact-msg">No ${role.toLowerCase()} assigned yet.</div>`
+    :people.map(p=>renderContactCard(p)).join('');
+  if(countEl)countEl.textContent=people.length;
+  if(prevEl)prevEl.textContent=people.length>0?people.slice(0,2).map(p=>p.Name).join(', ')+(people.length>2?'…':''):'None assigned';
+  const body=$('rb-'+assetId+'-'+role);
+  if(body)body.classList.add('open');
+  if(!expanded[assetId])expanded[assetId]={};
+  expanded[assetId][role]=true;
+}
+
+// ── ASSET FORM ─────────────────────────────────────────────────
+function openAddAsset(){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  $('craneFormTitle').textContent='Add Asset';
+  renderAssetForm(null);showScreen('craneform');
+}
+function openEditAsset(){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  const a=assets.find(x=>(x.Asset_ID||x.Crane_ID)===currentAssetId);
+  if(!a)return;
+  $('craneFormTitle').textContent='Edit Asset';
+  renderAssetForm(a);showScreen('craneform');
+}
+function renderAssetForm(asset){
+  const isEdit=!!asset;
+  const v=f=>H(asset?asset[f]||'':'');
+  // Support both Asset_ID and Crane_ID keys
+  const assetId=asset?(asset.Asset_ID||asset.Crane_ID||''):'';
+  const assetType=asset?(asset.Asset_Type||asset.Crane_Type||''):'';
+  $('craneFormContent').innerHTML=`
+    <div class="form-section">
+      <div class="form-section-title">Asset Information</div>
+      <div class="form-body">
+        <div class="form-group">
+          <label class="form-label">Asset ID <span class="req">*</span></label>
+          <input class="form-input" id="fAssetId" type="text" placeholder="e.g. CR-001, EX-002, PU-003" value="${isEdit?H(assetId):''}" ${isEdit?'readonly style="opacity:0.6"':''}>
+          <div class="form-hint">Unique ID for this equipment (crane, excavator, pump, etc.)</div>
+          <div class="form-err" id="errAssetId">Asset ID is required</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location <span class="req">*</span></label>
+          <input class="form-input" id="fLoc" type="text" placeholder="e.g. Block A – Level 12" value="${v('Location')}">
+          <div class="form-err" id="errLoc">Location is required</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asset Type</label>
+          <input class="form-input" id="fType" type="text" placeholder="e.g. Tower Crane, Excavator, Pump, Generator" value="${H(assetType)}">
+          <div class="form-hint">Enter any equipment type — crane, excavator, pump, compressor, etc.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Capacity / Spec</label>
+          <input class="form-input" id="fCap" type="text" placeholder="e.g. 10T, 200HP, 5000L" value="${v('Capacity')}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="fStatus">
+            ${['Working','Standby','Breakdown','Maintenance','Inactive'].map(s=>`<option value="${s}"${asset&&asset.Status===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Remarks</label>
+          <textarea class="form-textarea" id="fRemarks" placeholder="Any notes about this asset...">${asset?H(asset.Remarks||''):''}</textarea>
         </div>
       </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="submitAssetForm(${isEdit})">${isEdit?'Save Changes':'Add Asset'}</button>
+      <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
     </div>`;
 }
-
-function toggleRole(craneId, role, headerEl) {
-  if (!expandedRoles[craneId]) expandedRoles[craneId] = {};
-  const isOpen = expandedRoles[craneId][role];
-  expandedRoles[craneId][role] = !isOpen;
-
-  const container = $('rc-' + craneId + '-' + role);
-  const chevron = headerEl.querySelector('.role-chevron');
-  if (container) container.classList.toggle('open', !isOpen);
-  if (chevron)   chevron.classList.toggle('open', !isOpen);
-  headerEl.classList.toggle('expanded', !isOpen);
+async function submitAssetForm(isEdit){
+  const id=$('fAssetId').value.trim();
+  const loc=$('fLoc').value.trim();
+  let ok=true;
+  if(!id){$('errAssetId').classList.add('vis');$('fAssetId').classList.add('err');ok=false;}
+  else{$('errAssetId').classList.remove('vis');$('fAssetId').classList.remove('err');}
+  if(!loc){$('errLoc').classList.add('vis');$('fLoc').classList.add('err');ok=false;}
+  else{$('errLoc').classList.remove('vis');$('fLoc').classList.remove('err');}
+  if(!ok)return;
+  if(!isEdit&&assets.find(a=>(a.Asset_ID||a.Crane_ID)===id)){
+    $('errAssetId').textContent='This Asset ID already exists';
+    $('errAssetId').classList.add('vis');$('fAssetId').classList.add('err');return;
+  }
+  // Send both Crane_ID and Asset_ID for backend compatibility
+  const data={
+    Asset_ID:id, Crane_ID:id,
+    Location:loc,
+    Asset_Type:$('fType').value.trim(), Crane_Type:$('fType').value.trim(),
+    Capacity:$('fCap').value.trim(),
+    Status:$('fStatus').value,
+    Remarks:$('fRemarks').value.trim()
+  };
+  const btn=document.querySelector('#craneFormContent .btn-primary');
+  btn.disabled=true;btn.textContent='Saving...';
+  try{
+    await apiMutate(isEdit?'updateCrane':'addCrane',data);
+    if(isEdit){const i=assets.findIndex(a=>(a.Asset_ID||a.Crane_ID)===id);if(i>=0)assets[i]={...assets[i],...data};}
+    else assets.push(data);
+    saveCache();renderAll();
+    toast(isEdit?'✓ Asset updated':'✓ Asset added','success');
+    if(isEdit){goBack();openAsset(id);}else goHome();
+  }catch(e){
+    toast('⚠ '+e.message,'error');
+    btn.disabled=false;btn.textContent=isEdit?'Save Changes':'Add Asset';
+  }
 }
 
-// ── ADD / EDIT CRANE FORM ──────────────────────────────────────
-function openAddCrane() {
-  if (!isAdmin) { toast('Admin access required', 'error'); return; }
-  $('craneFormTitle').textContent = 'Add Crane';
-  renderCraneForm(null);
-  showScreen('craneform');
+// ── CONTACT FORM ───────────────────────────────────────────────
+function openAddContact(assetId,preRole){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  $('contactFormTitle').textContent='Add Contact';
+  renderContactForm(null,assetId,preRole);showScreen('contactform');
 }
-
-function openEditCrane() {
-  if (!isAdmin) { toast('Admin access required', 'error'); return; }
-  const c = cranes.find(x => x.Crane_ID === currentCraneId);
-  if (!c) return;
-  $('craneFormTitle').textContent = 'Edit Crane';
-  renderCraneForm(c);
-  showScreen('craneform');
+function openEditContact(contactId){
+  if(!isAdmin){toast('Admin access required','error');return;}
+  const c=contacts.find(x=>x.Contact_ID===contactId);
+  if(!c){toast('Contact not found','error');return;}
+  $('contactFormTitle').textContent='Edit Contact';
+  renderContactForm(c,c.Crane_ID,c.Role);showScreen('contactform');
 }
-
-function renderCraneForm(crane) {
-  const isEdit = !!crane;
-  const v = (f) => H(crane ? crane[f] || '' : '');
-
-  $('craneFormContent').innerHTML = `
-    <div class="form-body">
-      <div class="form-group">
-        <label class="form-label">Crane ID <span class="req">*</span></label>
-        <input class="form-input" id="fCraneId" type="text" placeholder="e.g. CR-001" value="${isEdit ? v('Crane_ID') : ''}" ${isEdit ? 'readonly' : ''}>
-        <div class="form-err" id="errCraneId">Crane ID is required</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Location <span class="req">*</span></label>
-        <input class="form-input" id="fLocation" type="text" placeholder="e.g. Block A – Level 12" value="${v('Location')}">
-        <div class="form-err" id="errLocation">Location is required</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Crane Type</label>
-        <select class="form-select" id="fCraneType">
-          ${['Tower Crane','Mobile Crane','Crawler Crane','Overhead Crane','Rough Terrain Crane','Other'].map(t =>
-            `<option value="${t}" ${crane && crane.Crane_Type === t ? 'selected' : ''}>${t}</option>`
-          ).join('')}
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Capacity</label>
-        <input class="form-input" id="fCapacity" type="text" placeholder="e.g. 10T" value="${v('Capacity')}">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Status</label>
-        <select class="form-select" id="fStatus">
-          ${['Working','Standby','Breakdown','Maintenance','Inactive'].map(s =>
-            `<option value="${s}" ${crane && crane.Status === s ? 'selected' : ''}>${s}</option>`
-          ).join('')}
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Remarks</label>
-        <textarea class="form-textarea" id="fRemarks" placeholder="Any notes about this crane...">${crane ? H(crane.Remarks||'') : ''}</textarea>
+function renderContactForm(contact,prefillCrane,prefillRole){
+  const isEdit=!!contact;
+  const v=f=>H(contact?contact[f]||'':'');
+  $('contactFormContent').innerHTML=`
+    <div class="form-section">
+      <div class="form-section-title">${isEdit?'Edit Contact':'New Contact'}</div>
+      <div class="form-body">
+        <div class="form-group">
+          <label class="form-label">Asset <span class="req">*</span></label>
+          <select class="form-select" id="fCCrane">
+            ${assets.map(a=>{const aid=a.Asset_ID||a.Crane_ID||'';return`<option value="${H(aid)}"${(prefillCrane||'')===aid?' selected':''}>${H(aid)} — ${H(a.Location)}</option>`;}).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Role <span class="req">*</span></label>
+          <select class="form-select" id="fCRole">
+            ${['Operator','Supervisor','Owner'].map(r=>`<option value="${r}"${(prefillRole||'')===r?' selected':''}>${r}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Full Name <span class="req">*</span></label>
+          <input class="form-input" id="fCName" type="text" placeholder="e.g. Rajesh Kumar" value="${v('Name')}">
+          <div class="form-err" id="errCName">Name is required</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" id="fCPhone" type="tel" placeholder="e.g. 9876543210" value="${v('Phone')}">
+          <div class="form-hint">10-digit Indian mobile number</div>
+          <div class="form-err" id="errCPhone">Enter a valid 10-digit mobile number</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:11px;">(optional)</span></label>
+          <input class="form-input" id="fCCompany" type="text" placeholder="e.g. ABC Cranes Pvt Ltd" value="${v('Company')}">
+        </div>
       </div>
     </div>
-    <div class="form-divider"></div>
     <div class="form-actions">
-      <button class="btn btn-primary" onclick="submitCraneForm(${isEdit ? 'true' : 'false'})">
-        ${isEdit ? 'Save Changes' : 'Add Crane'}
-      </button>
+      <button class="btn btn-primary" onclick="submitContactForm(${isEdit?`'${H(contact?.Contact_ID||'')}'`:'null'})">${isEdit?'Save Changes':'Add Contact'}</button>
       <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
     </div>`;
 }
 
-async function submitCraneForm(isEdit) {
-  const id       = $('fCraneId').value.trim();
-  const location = $('fLocation').value.trim();
-  let valid = true;
+async function submitContactForm(contactId){
+  const name=$('fCName').value.trim();
+  const phone=$('fCPhone').value.trim();
+  let ok=true;
+  if(!name){$('errCName').classList.add('vis');$('fCName').classList.add('err');ok=false;}
+  else{$('errCName').classList.remove('vis');$('fCName').classList.remove('err');}
+  if(phone&&!/^[6-9]\d{9}$/.test(fmtPhone(phone))){
+    $('errCPhone').classList.add('vis');$('fCPhone').classList.add('err');ok=false;
+  }else{$('errCPhone').classList.remove('vis');$('fCPhone').classList.remove('err');}
+  if(!ok)return;
 
-  if (!id) { $('errCraneId').classList.add('vis'); $('fCraneId').classList.add('error'); valid = false; }
-  else { $('errCraneId').classList.remove('vis'); $('fCraneId').classList.remove('error'); }
-  if (!location) { $('errLocation').classList.add('vis'); $('fLocation').classList.add('error'); valid = false; }
-  else { $('errLocation').classList.remove('vis'); $('fLocation').classList.remove('error'); }
-  if (!valid) return;
-
-  // Duplicate check for add
-  if (!isEdit && cranes.find(c => c.Crane_ID === id)) {
-    $('errCraneId').textContent = 'Crane ID already exists';
-    $('errCraneId').classList.add('vis'); $('fCraneId').classList.add('error');
-    return;
-  }
-
-  const data = {
-    Crane_ID:   id,
-    Location:   location,
-    Crane_Type: $('fCraneType').value,
-    Capacity:   $('fCapacity').value.trim(),
-    Status:     $('fStatus').value,
-    Remarks:    $('fRemarks').value.trim(),
+  const isEdit=!!contactId;
+  const origContact=isEdit?contacts.find(c=>c.Contact_ID===contactId):null;
+  const origRole=origContact?origContact.Role:null;
+  const selectedAssetId=$('fCCrane').value;
+  const data={
+    Contact_ID:isEdit?contactId:genId(),
+    Asset_ID:selectedAssetId,
+    Crane_ID:selectedAssetId,  // backwards compat with existing sheets
+    Role:$('fCRole').value,
+    Name:name,
+    Phone:fmtPhone(phone)||phone,
+    Company:$('fCCompany').value.trim(),
+    Active:'TRUE'
   };
-
-  const btn = document.querySelector('#craneFormContent .btn-primary');
-  btn.disabled = true; btn.textContent = 'Saving...';
-
-  try {
-    await apiMutate(isEdit ? 'updateCrane' : 'addCrane', data);
-    if (isEdit) {
-      const i = cranes.findIndex(c => c.Crane_ID === id);
-      if (i >= 0) cranes[i] = { ...cranes[i], ...data };
-    } else {
-      cranes.push(data);
-    }
-    saveCache();
-    renderAll();
-    toast(isEdit ? '✓ Crane updated' : '✓ Crane added', 'success');
-    if (isEdit) {
-      goBack();
-      // Refresh detail
-      openCrane(id);
-    } else {
-      goHome();
-    }
-  } catch(e) {
-    toast('⚠ ' + e.message, 'error');
-    btn.disabled = false; btn.textContent = isEdit ? 'Save Changes' : 'Add Crane';
-  }
-}
-
-// ── ADD / EDIT CONTACT FORM ────────────────────────────────────
-function openAddContact(craneId, preRole) {
-  if (!isAdmin) { toast('Admin access required', 'error'); return; }
-  $('contactFormTitle').textContent = 'Add Contact';
-  renderContactForm(null, craneId, preRole);
-  showScreen('contactform');
-}
-
-function openEditContact(contactId) {
-  if (!isAdmin) { toast('Admin access required', 'error'); return; }
-  const c = contacts.find(x => x.Contact_ID === contactId);
-  if (!c) { toast('Contact not found', 'error'); return; }
-  $('contactFormTitle').textContent = 'Edit Contact';
-  renderContactForm(c, c.Crane_ID, c.Role);
-  showScreen('contactform');
-}
-
-function renderContactForm(contact, prefillCraneId, prefillRole) {
-  const isEdit = !!contact;
-  const v = (f) => H(contact ? contact[f] || '' : '');
-
-  $('contactFormContent').innerHTML = `
-    <div class="form-body">
-      <div class="form-group">
-        <label class="form-label">Crane ID <span class="req">*</span></label>
-        <select class="form-select" id="fContactCraneId">
-          ${cranes.map(c => `<option value="${H(c.Crane_ID)}" ${(prefillCraneId || '') === c.Crane_ID ? 'selected' : ''}>${H(c.Crane_ID)} – ${H(c.Location)}</option>`).join('')}
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Role <span class="req">*</span></label>
-        <select class="form-select" id="fRole">
-          ${['Operator','Supervisor','Owner'].map(r =>
-            `<option value="${r}" ${(prefillRole||'') === r ? 'selected' : ''}>${r}</option>`
-          ).join('')}
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Full Name <span class="req">*</span></label>
-        <input class="form-input" id="fName" type="text" placeholder="e.g. Rajesh Kumar" value="${v('Name')}">
-        <div class="form-err" id="errName">Name is required</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Phone Number</label>
-        <input class="form-input" id="fPhone" type="tel" placeholder="e.g. 9876543210" value="${v('Phone')}">
-        <div class="form-hint">10-digit Indian mobile number</div>
-        <div class="form-err" id="errPhone">Enter a valid 10-digit mobile number</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Company (optional)</label>
-        <input class="form-input" id="fCompany" type="text" placeholder="e.g. ABC Cranes Pvt Ltd" value="${v('Company')}">
-      </div>
-    </div>
-    <div class="form-divider"></div>
-    <div class="form-actions">
-      <button class="btn btn-primary" onclick="submitContactForm(${isEdit ? `'${H(contact?.Contact_ID||'')}'` : 'null'})">
-        ${isEdit ? 'Save Changes' : 'Add Contact'}
-      </button>
-      <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
-    </div>`;
-}
-
-async function submitContactForm(contactId) {
-  const name  = $('fName').value.trim();
-  const phone = $('fPhone').value.trim();
-  let valid = true;
-
-  if (!name) { $('errName').classList.add('vis'); $('fName').classList.add('error'); valid = false; }
-  else { $('errName').classList.remove('vis'); $('fName').classList.remove('error'); }
-
-  if (phone && !/^[6-9]\d{9}$/.test(normalizePhone(phone))) {
-    $('errPhone').classList.add('vis'); $('fPhone').classList.add('error'); valid = false;
-  } else { $('errPhone').classList.remove('vis'); $('fPhone').classList.remove('error'); }
-
-  if (!valid) return;
-
-  const isEdit = !!contactId;
-  // Capture original role (in case admin changes role during edit)
-  const originalContact = isEdit ? contacts.find(c => c.Contact_ID === contactId) : null;
-  const originalRole    = originalContact ? originalContact.Role : null;
-
-  const data = {
-    Contact_ID: isEdit ? contactId : genContactId(),
-    Crane_ID:   $('fContactCraneId').value,
-    Role:       $('fRole').value,
-    Name:       name,
-    Phone:      normalizePhone(phone) || phone,
-    Company:    $('fCompany').value.trim(),
-    Active:     'TRUE',
-  };
-
-  const btn = document.querySelector('#contactFormContent .btn-primary');
-  btn.disabled = true; btn.textContent = 'Saving...';
-
-  try {
-    await apiMutate(isEdit ? 'updateContact' : 'addContact', data);
-    if (isEdit) {
-      const i = contacts.findIndex(c => c.Contact_ID === contactId);
-      if (i >= 0) contacts[i] = data;
-    } else {
-      contacts.push(data);
-    }
-    saveCache();
-    renderAll();
-    toast(isEdit ? '✓ Contact updated' : '✓ ' + data.Role + ' added', 'success');
+  const btn=document.querySelector('#contactFormContent .btn-primary');
+  btn.disabled=true;btn.textContent='Saving...';
+  try{
+    await apiMutate(isEdit?'updateContact':'addContact',data);
+    if(isEdit){const i=contacts.findIndex(c=>c.Contact_ID===contactId);if(i>=0)contacts[i]=data;}
+    else contacts.push(data);
+    saveCache();renderAll();
+    toast(isEdit?'✓ Contact updated':'✓ '+data.Role+' added','success');
     goBack();
-    // Refresh the crane detail if it is the current open crane
-    if (currentCraneId === data.Crane_ID) {
-      if (!expandedRoles[data.Crane_ID]) expandedRoles[data.Crane_ID] = {};
-      expandedRoles[data.Crane_ID][data.Role] = true;
-      // If role changed during edit, also refresh the old role section
-      if (originalRole && originalRole !== data.Role) {
-        expandedRoles[data.Crane_ID][originalRole] = true;
-        refreshRoleSection(data.Crane_ID, originalRole);
-      }
-      refreshRoleSection(data.Crane_ID, data.Role);
+    const assetId=data.Asset_ID||data.Crane_ID;
+    if(currentAssetId===assetId){
+      refreshRole(assetId,data.Role);
+      if(origRole&&origRole!==data.Role)refreshRole(assetId,origRole);
     }
-  } catch(e) {
-    toast('⚠ ' + e.message, 'error');
-    btn.disabled = false; btn.textContent = isEdit ? 'Save Changes' : 'Add Contact';
+  }catch(e){
+    toast('⚠ '+e.message,'error');
+    btn.disabled=false;btn.textContent=isEdit?'Save Changes':'Add Contact';
   }
 }
 
-// ── DELETE CONFIRMATIONS ───────────────────────────────────────
-function showModal(title, subtitle, subjectHTML, onConfirm, danger = true) {
-  $('modalTitle').textContent    = title;
-  $('modalSubtitle').textContent = subtitle;
-  $('modalSubject').innerHTML    = subjectHTML;
-  const btn = $('modalConfirmBtn');
-  btn.textContent = 'Delete';
-  btn.className   = danger ? 'btn btn-danger' : 'btn btn-primary';
-  btn.onclick     = () => { closeModal(); onConfirm(); };
+// ── DELETE ─────────────────────────────────────────────────────
+function showModal(title,subtitle,bodyHTML,onConfirm){
+  $('modalTitle').textContent=title;
+  $('modalSubtitle').textContent=subtitle;
+  $('modalBody').innerHTML=bodyHTML;
+  const btn=$('modalConfirmBtn');
+  btn.onclick=()=>{closeModal();onConfirm();};
   $('modalOverlay').classList.add('open');
 }
-
-function closeModal(e) {
-  if (e && e.target !== $('modalOverlay')) return;
+function closeModal(e){
+  if(e&&e.target!==$('modalOverlay'))return;
   $('modalOverlay').classList.remove('open');
 }
-
-function confirmDeleteContact(contactId) {
-  const c = contacts.find(x => x.Contact_ID === contactId);
-  if (!c) return;
-  showModal(
-    'Delete Contact?',
-    'This will permanently remove this person from the crane.',
-    `<div class="cs-name">${H(c.Name)}</div><div class="cs-detail">${H(c.Role)} · ${H(c.Crane_ID)}</div>`,
-    () => doDeleteContact(contactId)
-  );
+function confirmDeleteContact(contactId){
+  const c=contacts.find(x=>x.Contact_ID===contactId);if(!c)return;
+  showModal('Delete Contact?','This person will be removed from the crane.',
+    `<div class="confirm-name">${H(c.Name)}</div><div class="confirm-detail">${H(c.Role)} · ${H(c.Crane_ID)}</div>`,
+    ()=>doDeleteContact(contactId));
+}
+function confirmDeleteAsset(assetId){
+  const a=assets.find(x=>(x.Asset_ID||x.Crane_ID)===assetId);if(!a)return;
+  const cnt=contacts.filter(x=>(x.Asset_ID||x.Crane_ID)===assetId).length;
+  showModal('Delete Asset '+assetId+'?',
+    `All ${cnt} contact${cnt!==1?'s':''} will also be removed. This cannot be undone.`,
+    `<div class="confirm-name">${H(assetId)}</div><div class="confirm-detail">${H(a.Location)} · ${H(a.Asset_Type||a.Crane_Type||'')}</div>`,
+    ()=>doDeleteAsset(assetId));
+}
+async function doDeleteContact(contactId){
+  const t=contacts.find(c=>c.Contact_ID===contactId);
+  const tRole=t?t.Role:null;
+  const tAsset=t?(t.Asset_ID||t.Crane_ID):currentAssetId;
+  try{
+    await apiMutate('deleteContact',{Contact_ID:contactId});
+    contacts=contacts.filter(c=>c.Contact_ID!==contactId);
+    saveCache();renderAll();
+    toast('✓ Contact deleted','success');
+    if(tAsset&&tRole)refreshRole(tAsset,tRole);
+  }catch(e){toast('⚠ '+e.message,'error');}
+}
+async function doDeleteAsset(assetId){
+  try{
+    await apiMutate('deleteCrane',{Crane_ID:assetId,Asset_ID:assetId});
+    assets=assets.filter(a=>(a.Asset_ID||a.Crane_ID)!==assetId);
+    contacts=contacts.filter(c=>(c.Asset_ID||c.Crane_ID)!==assetId);
+    saveCache();renderAll();
+    toast('✓ Asset deleted','success');goHome();
+  }catch(e){toast('⚠ '+e.message,'error');}
 }
 
-function confirmDeleteCrane(craneId) {
-  const c = cranes.find(x => x.Crane_ID === craneId);
-  const cnt = contacts.filter(x => x.Crane_ID === craneId).length;
-  if (!c) return;
-  showModal(
-    'Delete Crane ' + craneId + '?',
-    `This will also remove ${cnt} associated contact${cnt !== 1 ? 's' : ''}. This cannot be undone.`,
-    `<div class="cs-name">${H(c.Crane_ID)}</div><div class="cs-detail">${H(c.Location)} · ${H(c.Crane_Type)}</div>`,
-    () => doDeleteCrane(craneId)
-  );
-}
-
-async function doDeleteContact(contactId) {
-  // Remember which role this contact had before removing from array
-  const target = contacts.find(c => c.Contact_ID === contactId);
-  const targetRole = target ? target.Role : null;
-  const targetCrane = target ? target.Crane_ID : currentCraneId;
-
-  try {
-    await apiMutate('deleteContact', { Contact_ID: contactId });
-    contacts = contacts.filter(c => c.Contact_ID !== contactId);
-    saveCache();
-    renderAll();
-    toast('✓ Contact deleted', 'success');
-    // Surgically refresh only the affected role section
-    if (targetCrane && targetRole) {
-      if (!expandedRoles[targetCrane]) expandedRoles[targetCrane] = {};
-      expandedRoles[targetCrane][targetRole] = true; // keep open after delete
-      refreshRoleSection(targetCrane, targetRole);
-    }
-  } catch(e) {
-    toast('⚠ ' + e.message, 'error');
-  }
-}
-
-async function doDeleteCrane(craneId) {
-  try {
-    await apiMutate('deleteCrane', { Crane_ID: craneId });
-    cranes   = cranes.filter(c => c.Crane_ID !== craneId);
-    contacts = contacts.filter(c => c.Crane_ID !== craneId);
-    saveCache();
-    renderAll();
-    toast('✓ Crane deleted', 'success');
-    goHome();
-  } catch(e) {
-    toast('⚠ ' + e.message, 'error');
-  }
-}
-
-// ── SURGICAL ROLE SECTION REFRESH ─────────────────────────────
-// Updates cards + count + preview for one role without re-rendering
-// the entire detail screen, preserving scroll position and other
-// open role sections.
-function refreshRoleSection(craneId, role) {
-  const cardsEl   = $('rc-cards-' + craneId + '-' + role);
-  const countEl   = $('rc-count-' + craneId + '-' + role);
-  const previewEl = $('rp-'       + craneId + '-' + role);
-  const noMsgEl   = $('nc-'       + craneId + '-' + role);
-
-  // Only do in-place refresh if the detail screen shows this crane
-  if (!cardsEl) return;
-
-  const activeContacts = contacts.filter(
-    x => x.Crane_ID === craneId && x.Role === role && x.Active !== 'FALSE'
-  );
-
-  // Re-render the cards area
-  if (activeContacts.length === 0) {
-    cardsEl.innerHTML = `<div class="no-contacts-msg" id="nc-${H(craneId)}-${role}" style="padding:6px 0 4px;font-size:13px;color:var(--muted);">No ${role.toLowerCase()} assigned yet</div>`;
-  } else {
-    cardsEl.innerHTML = activeContacts.map(p => renderContactCard(p)).join('');
-  }
-
-  // Update count badge
-  if (countEl) countEl.textContent = activeContacts.length;
-
-  // Update preview text
-  if (previewEl) {
-    previewEl.textContent = activeContacts.length > 0
-      ? activeContacts.slice(0,2).map(p => p.Name).join(', ') + (activeContacts.length > 2 ? '…' : '')
-      : 'None assigned';
-  }
-
-  // Ensure the section container is open
-  const container = $('rc-' + craneId + '-' + role);
-  if (container) container.classList.add('open');
-}
-
-// ── SEARCH ────────────────────────────────────────────────────
-function setupSearch() {
-  const inp = $('searchInput');
-  const clearBtn = $('searchClear');
-  inp.addEventListener('input', () => {
-    const q = inp.value.trim();
-    clearBtn.classList.toggle('vis', !!q);
-    if (!q) {
-      $('homeMain').style.display = '';
-      $('searchResultsSection').style.display = 'none';
-    } else {
-      $('homeMain').style.display = 'none';
-      $('searchResultsSection').style.display = '';
-      renderSearchResults(q);
-    }
+// ── SEARCH ─────────────────────────────────────────────────────
+function setupSearch(){
+  const inp=$('searchInput'),clr=$('searchClear');
+  inp.addEventListener('input',()=>{
+    const q=inp.value.trim();
+    clr.classList.toggle('vis',!!q);
+    if(!q){$('homeMain').style.display='';$('searchSection').style.display='none';}
+    else{$('homeMain').style.display='none';$('searchSection').style.display='';renderSearch(q);}
   });
 }
-
-function clearSearch() {
-  const inp = $('searchInput');
-  inp.value = '';
-  inp.dispatchEvent(new Event('input'));
-  inp.focus();
+function clearSearch(){
+  const i=$('searchInput');i.value='';i.dispatchEvent(new Event('input'));i.focus();
 }
-
-function renderSearchResults(q) {
-  const ql = q.toLowerCase();
-  const res = $('searchResults');
-
-  const craneMatches = cranes.filter(c => {
-    return [c.Crane_ID, c.Location, c.Crane_Type, c.Status, c.Remarks].some(f => (f||'').toLowerCase().includes(ql));
+function renderSearch(q){
+  const ql=q.toLowerCase(),res=$('searchResults');
+  const am=assets.filter(a=>{
+    const aid=a.Asset_ID||a.Crane_ID||'';
+    const atype=a.Asset_Type||a.Crane_Type||'';
+    return[aid,a.Location,atype,a.Status,a.Remarks].some(f=>(f||'').toLowerCase().includes(ql));
   });
-  const contactMatches = contacts.filter(p => {
-    if (p.Active === 'FALSE') return false;
-    return [p.Name, p.Phone, p.Company, p.Role].some(f => (f||'').toLowerCase().includes(ql));
-  });
-
-  // Merge: if a contact's crane also matches, de-dup crane
-  const craneMatchIds = new Set(craneMatches.map(c => c.Crane_ID));
-
-  $('searchResultLabel').textContent = `Results for "${q}" (${craneMatches.length + contactMatches.length})`;
-
-  if (craneMatches.length === 0 && contactMatches.length === 0) {
-    res.innerHTML = `<div class="empty-state"><div class="es-ico">🔍</div><h3>No results</h3><p>No cranes or contacts match "<strong>${H(q)}</strong>"</p></div>`;
-    return;
+  const pm=contacts.filter(p=>p.Active!=='FALSE'&&[p.Name,p.Phone,p.Company,p.Role].some(f=>(f||'').toLowerCase().includes(ql)));
+  $('searchResultLabel').textContent=`Results for "${q}" (${am.length+pm.length})`;
+  if(!am.length&&!pm.length){
+    res.innerHTML=`<div class="empty-state"><div class="ei">🔍</div><h3>No results</h3><p>Nothing matches "<strong>${H(q)}</strong>"</p></div>`;return;
   }
-
-  let html = '';
-
-  if (craneMatches.length > 0) {
-    html += `<div class="sec-lbl" style="padding-top:4px">Cranes (${craneMatches.length})</div>`;
-    html += '<div class="crane-list" style="padding:0;margin-bottom:12px;">';
-    craneMatches.forEach(c => {
-      const sc = statusClass(c.Status);
-      html += `<div class="crane-card" onclick="openCrane('${H(c.Crane_ID)}')">
-        <div class="crane-id-badge"><span class="cid">${hl(c.Crane_ID,q)}</span><span class="ctype">${H(shortType(c.Crane_Type))}</span></div>
-        <div class="crane-info">
-          <div class="crane-loc">${hl(c.Location||'—',q)}</div>
-          <div class="crane-sub">${hl(c.Crane_Type||'',q)}</div>
+  let html='';
+  if(am.length){
+    html+=`<div class="sec-hdr" style="padding-top:4px;"><div class="sec-title">Assets</div><div class="sec-count">${am.length}</div></div>`;
+    html+='<div class="crane-list" style="padding:0;margin-bottom:12px;">';
+    am.forEach(a=>{
+      const sc=SC(a.Status);
+      const aid=a.Asset_ID||a.Crane_ID||'';
+      const atype=a.Asset_Type||a.Crane_Type||'';
+      html+=`<div class="crane-card" onclick="openAsset('${H(aid)}')">
+        <div class="crane-card-stripe ${sc}"></div>
+        <div class="crane-card-body">
+          <div class="crane-id-tag"><span class="cid">${hl(aid,q)}</span><span class="ctype">${H(shortType(atype))}</span></div>
+          <div class="crane-meta"><div class="crane-loc">${hl(a.Location||'—',q)}</div><div class="crane-sub">${hl(atype||'',q)}</div></div>
+          <span class="sbadge ${sc}"><span class="sdot-sm"></span>${H(a.Status||'')}</span>
+          <span class="crane-chevron">›</span>
         </div>
-        <span class="status-badge ${sc}"><span class="status-dot"></span>${H(c.Status||'')}</span>
-        <span class="card-chevron">›</span>
       </div>`;
     });
-    html += '</div>';
+    html+='</div>';
   }
-
-  if (contactMatches.length > 0) {
-    html += `<div class="sec-lbl">People (${contactMatches.length})</div>`;
-    contactMatches.forEach(p => {
-      const crane = cranes.find(c => c.Crane_ID === p.Crane_ID) || {};
-      const phone = normalizePhone(p.Phone);
-      const roleClass = p.Role.toLowerCase();
-      html += `<div class="search-person-card" onclick="openCrane('${H(p.Crane_ID)}')">
-        <div style="font-size:28px;flex-shrink:0">${p.Role==='Operator'?'👷':p.Role==='Supervisor'?'🦺':'🏢'}</div>
-        <div class="spc-info">
-          <div class="spc-name">${hl(p.Name,q)}</div>
-          <div class="spc-role-lbl ${roleClass}">${p.Role}</div>
-          <div class="spc-crane">${H(p.Crane_ID)} · 📍 ${H(crane.Location||'—')}</div>
-          ${p.Phone ? `<div style="font-size:12px;color:var(--muted);margin-top:2px">${hl(p.Phone,q)}</div>` : ''}
+  if(pm.length){
+    html+=`<div class="sec-hdr"><div class="sec-title">People</div><div class="sec-count">${pm.length}</div></div>`;
+    pm.forEach(p=>{
+      const pAid=p.Asset_ID||p.Crane_ID||'';
+      const asset=assets.find(a=>(a.Asset_ID||a.Crane_ID)===pAid)||{};
+      const phone=fmtPhone(p.Phone);
+      const rc=p.Role.toLowerCase();
+      html+=`<div class="srp-card" onclick="openAsset('${H(pAid)}')">
+        <div style="font-size:28px;flex-shrink:0;">${p.Role==='Operator'?'👷':p.Role==='Supervisor'?'🦺':'🏢'}</div>
+        <div class="srp-info">
+          <div class="srp-name">${hl(p.Name,q)}</div>
+          <div class="srp-role ${rc}">${p.Role}</div>
+          <div class="srp-crane">${H(pAid)} · 📍 ${H(asset.Location||'—')}</div>
+          ${p.Phone?`<div style="font-size:12px;color:var(--muted);margin-top:1px;">${hl(p.Phone,q)}</div>`:''}
         </div>
-        ${phone ? `<a href="tel:${phone}" onclick="event.stopPropagation()" class="btn-call">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Call
-        </a>` : ''}
+        ${phone?`<a href="tel:${phone}" onclick="event.stopPropagation()" class="btn-call"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}
       </div>`;
     });
   }
-  res.innerHTML = html;
+  res.innerHTML=html;
 }
+function hl(t,q){if(!q||!t)return H(t||'');return H(t).replace(new RegExp('('+R(H(q))+')','gi'),'<mark>$1</mark>');}
 
-function hl(text, q) {
-  if (!q || !text) return H(text||'');
-  return H(text).replace(new RegExp('(' + R(H(q)) + ')', 'gi'), '<mark>$1</mark>');
-}
-
-// ── SETTINGS ──────────────────────────────────────────────────
-function renderSettings() {
-  const cachedTs = parseInt(localStorage.getItem(CACHE_TS)||'0');
-  const cached = loadCache();
-
-  const syncInfo = cachedTs
-    ? new Date(cachedTs).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})
-    : 'Never';
-
-  $('settingsContent').innerHTML = `
+// ── SETTINGS ───────────────────────────────────────────────────
+function renderSettings(){
+  const cachedTs=parseInt(localStorage.getItem('cc3_ts')||'0');
+  const syncInfo=cachedTs?new Date(cachedTs).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'Never';
+  $('settingsContent').innerHTML=`
     <div class="settings-hero">
-      <div class="logo">Crane<b>Call</b></div>
-      <p>Construction Crane Contact Management</p>
+      <div class="settings-logo">Asset<span>Call</span></div>
+      <div class="settings-tagline">Equipment & Asset Contact Management</div>
     </div>
-
-    <div style="padding:16px;">
-
-      <!-- Data card -->
+    <div class="settings-body">
       <div class="settings-card">
         <div class="settings-card-title">Data</div>
         <div class="settings-row" onclick="doRefresh()">
-          <div class="sr-lft">
-            <div class="sr-lbl">↻ Sync Now</div>
-            <div class="sr-sub">Fetch latest data from server</div>
-          </div>
-          <div class="sr-val"><span class="sr-chevron">›</span></div>
+          <div><div class="sr-lbl">↻ Sync Now</div><div class="sr-sub">Fetch latest from server</div></div>
+          <div class="sr-val"><span class="sr-chev">›</span></div>
         </div>
-        <div class="settings-row" style="cursor:default">
-          <div class="sr-lft">
-            <div class="sr-lbl">Last Synced</div>
-          </div>
-          <div class="sr-val">${syncInfo}</div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Last Synced</div><div class="sr-val">${syncInfo}</div>
         </div>
-        <div class="settings-row" style="cursor:default">
-          <div class="sr-lft">
-            <div class="sr-lbl">Cranes</div>
-          </div>
-          <div class="sr-val">${cranes.length}</div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Assets</div><div class="sr-val">${assets.length}</div>
         </div>
-        <div class="settings-row" style="cursor:default">
-          <div class="sr-lft">
-            <div class="sr-lbl">Contacts</div>
-          </div>
-          <div class="sr-val">${contacts.length}</div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Contacts</div><div class="sr-val">${contacts.length}</div>
         </div>
       </div>
-
-      <!-- Install card -->
-      <div class="settings-card" id="installSettingsCard">
+      <div class="settings-card" id="installCard">
         <div class="settings-card-title">App</div>
-        <div class="settings-row" id="installSettingsRow" onclick="triggerInstall()">
-          <div class="sr-lft">
-            <div class="sr-lbl">Install CraneCall</div>
-            <div class="sr-sub">Add to your home screen for offline use</div>
-          </div>
-          <div class="sr-val"><span class="sr-chevron">›</span></div>
+        <div class="settings-row" id="installRow" onclick="triggerInstall()" style="${window.matchMedia('(display-mode: standalone)').matches?'display:none':''}">
+          <div><div class="sr-lbl">📱 Install AssetCall</div><div class="sr-sub">Add to home screen for faster access</div></div>
+          <div class="sr-val"><span class="sr-chev">›</span></div>
         </div>
-        <div class="settings-row" style="cursor:default">
-          <div class="sr-lft">
-            <div class="sr-lbl">Version</div>
-          </div>
-          <div class="sr-val">2.0</div>
+        <div class="settings-row" style="cursor:default;">
+          <div class="sr-lbl">Version</div><div class="sr-val">3.0</div>
         </div>
       </div>
-
-      <!-- Admin card -->
       <div class="settings-card">
-        <div class="settings-card-title">Admin</div>
-        ${isAdmin ? `
-          <div class="settings-row" style="cursor:default">
-            <div class="sr-lft">
-              <div class="sr-lbl">
-                <span class="admin-badge">🔓 Admin Mode Active</span>
-              </div>
-            </div>
+        <div class="settings-card-title">Admin Access</div>
+        ${isAdmin?`
+          <div class="settings-row" style="cursor:default;">
+            <div><div class="sr-lbl"><span class="admin-active-badge">🔓 Admin Mode Active</span></div></div>
           </div>
-          <div class="settings-row" onclick="exitAdminMode()">
-            <div class="sr-lft">
-              <div class="sr-lbl" style="color:var(--red)">Exit Admin Mode</div>
-            </div>
-            <div class="sr-val"><span class="sr-chevron">›</span></div>
+          <div class="settings-row" onclick="exitAdmin()">
+            <div><div class="sr-lbl" style="color:var(--red);">Exit Admin Mode</div></div>
+            <div class="sr-val"><span class="sr-chev">›</span></div>
           </div>
-        ` : `
-          <div class="admin-enter">
+        `:`
+          <div class="admin-pin-wrap">
             <label>Enter Admin PIN to manage cranes and contacts</label>
             <div class="pin-row">
-              <input type="password" id="adminPinInput" maxlength="8" placeholder="••••" autocomplete="off">
-              <button class="btn btn-primary" style="height:48px;padding:0 20px;width:auto;flex-shrink:0" onclick="tryAdminLogin()">Enter</button>
+              <input type="password" id="pinInput" class="pin-input" maxlength="8" placeholder="••••" autocomplete="off">
+              <button class="btn-pin-enter" onclick="tryLogin()">Enter</button>
             </div>
-            <div class="form-err" id="pinErr" style="margin-top:8px">Incorrect PIN</div>
+            <div class="pin-err" id="pinErr">Incorrect PIN. Try again.</div>
           </div>
         `}
       </div>
-
     </div>`;
-
-  // Update install row visibility
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    $('installSettingsRow')?.remove();
-  }
-
-  // PIN enter on key
-  const pinInput = $('adminPinInput');
-  if (pinInput) {
-    pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryAdminLogin(); });
-  }
+  const pin=$('pinInput');
+  if(pin)pin.addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin();});
 }
-
-function tryAdminLogin() {
-  const pin = $('adminPinInput')?.value || '';
-  if (pin === ADMIN_PIN) {
-    isAdmin = true;
-    document.body.classList.add('admin-mode');
-    renderSettings();
-    toast('🔓 Admin mode enabled', 'success');
-  } else {
-    $('pinErr')?.classList.add('vis');
-  }
+function tryLogin(){
+  const p=$('pinInput')?.value||'';
+  if(p===ADMIN_PIN){
+    isAdmin=true;document.body.classList.add('admin-mode');
+    renderSettings();toast('🔓 Admin mode enabled','success');
+  }else{$('pinErr')?.classList.add('vis');}
 }
-
-function exitAdminMode() {
-  isAdmin = false;
-  document.body.classList.remove('admin-mode');
-  renderSettings();
-  toast('Admin mode disabled');
+function exitAdmin(){
+  isAdmin=false;document.body.classList.remove('admin-mode');
+  renderSettings();toast('Admin mode disabled');
 }
 
 // ── PWA INSTALL ────────────────────────────────────────────────
-function setupInstallPrompt() {
-  // Don't show if already standalone
-  if (window.matchMedia('(display-mode: standalone)').matches) return;
-  if (navigator.standalone === true) return; // iOS PWA
-  if (localStorage.getItem('cc2_install_dismissed')) return;
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredInstall = e;
+function setupInstall(){
+  if(window.matchMedia('(display-mode: standalone)').matches)return;
+  if(navigator.standalone===true)return;
+  if(localStorage.getItem('cc3_dismissed'))return;
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();deferredInstall=e;
     $('installBanner').classList.add('vis');
   });
-
-  window.addEventListener('appinstalled', () => {
+  window.addEventListener('appinstalled',()=>{
     $('installBanner').classList.remove('vis');
-    deferredInstall = null;
-    toast('✓ CraneCall installed', 'success');
+    deferredInstall=null;toast('✓ AssetCall installed','success');
   });
 }
-
-async function triggerInstall() {
-  if (deferredInstall) {
+async function triggerInstall(){
+  if(deferredInstall){
     deferredInstall.prompt();
-    const { outcome } = await deferredInstall.userChoice;
-    if (outcome === 'accepted') {
-      $('installBanner').classList.remove('vis');
-      deferredInstall = null;
-    }
-  } else if (window.matchMedia('(display-mode: standalone)').matches) {
-    toast('CraneCall is already installed');
-  } else {
-    toast('To install: tap Share → Add to Home Screen (iOS) or browser menu → Install (Android)');
+    const{outcome}=await deferredInstall.userChoice;
+    if(outcome==='accepted'){$('installBanner').classList.remove('vis');deferredInstall=null;}
+  }else{
+    toast('Tap browser menu → Add to Home Screen to install');
   }
 }
-
-function dismissInstall() {
+function dismissInstall(){
   $('installBanner').classList.remove('vis');
-  localStorage.setItem('cc2_install_dismissed', '1');
+  localStorage.setItem('cc3_dismissed','1');
 }
 
 // ── QR DEEP LINK ───────────────────────────────────────────────
-function handleDeepLink() {
-  const p = new URLSearchParams(window.location.search);
-  const cid = p.get('crane');
-  if (!cid) return;
-  if (cranes.length > 0) { openCrane(cid); return; }
-  // Wait for data
-  const t = setInterval(() => {
-    if (cranes.length > 0 || contacts.length > 0) { clearInterval(t); openCrane(cid); }
-  }, 200);
-  setTimeout(() => clearInterval(t), 8000);
+function handleDeepLink(){
+  const p=new URLSearchParams(window.location.search);
+  // Support ?asset=X (new) and ?crane=X (backwards compat)
+  const id=p.get('asset')||p.get('crane');
+  if(!id)return;
+  if(assets.length>0){openAsset(id);return;}
+  const t=setInterval(()=>{if(assets.length>0){clearInterval(t);openAsset(id);}},200);
+  setTimeout(()=>clearInterval(t),8000);
 }
 
 // ── ONLINE / OFFLINE ───────────────────────────────────────────
-window.addEventListener('online',  () => { isOnline = true;  loadData(true); });
-window.addEventListener('offline', () => {
-  isOnline = false;
-  const cachedTs = parseInt(localStorage.getItem(CACHE_TS)||'0');
-  setSyncStatus('offline', cachedTs);
-  $('offlineBanner').classList.add('vis');
+window.addEventListener('online',()=>{isOnline=true;loadData(true);});
+window.addEventListener('offline',()=>{
+  isOnline=false;
+  const t=parseInt(localStorage.getItem(CK_TS)||'0');
+  setSyncUI('offline',t);$('offlineBar').classList.add('vis');
 });
 
 // ── SERVICE WORKER ─────────────────────────────────────────────
-if ('serviceWorker' in navigator) {
+if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js')
-    .then(reg => {
-      reg.addEventListener('updatefound', () => {
-        const nw = reg.installing;
-        nw.addEventListener('statechange', () => {
-          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-            toast('App updated — refresh for new version');
-          }
+    .then(reg=>{
+      reg.addEventListener('updatefound',()=>{
+        reg.installing?.addEventListener('statechange',e=>{
+          if(e.target.state==='installed'&&navigator.serviceWorker.controller)
+            toast('Update available — reload for new version');
         });
       });
-    })
-    .catch(() => {});
-}
-
-// ── LOADING SKELETONS ──────────────────────────────────────────
-function showSkeletons() {
-  $('craneList').innerHTML = [1,2,3].map(() => '<div class="skeleton"></div>').join('');
+    }).catch(()=>{});
 }
 
 // ── INIT ───────────────────────────────────────────────────────
-function init() {
-  setupSearch();
-  setupInstallPrompt();
-  showSkeletons();
+function init(){
+  setupSearch(); setupInstall();
+  // Seed the browser history so the first popstate has something to work with
+  window.history.replaceState({screen:'home', depth:1}, '', '#home');
+  $('assetList').innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
   loadData();
   setTimeout(handleDeepLink, 400);
 }
-
 document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
