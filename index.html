@@ -691,7 +691,49 @@ a{color:inherit;text-decoration:none;}
 .cc-admin-row{display:flex;gap:6px;}
 .cc-admin-row.admin-only{display:none;}
 body.admin-mode .cc-admin-row.admin-only{display:flex;}
-.btn-edit2{
+
+/* ── Contact action buttons row (Call / WA / SMS) ── */
+.cc-actions{display:flex;flex-direction:column;gap:6px;flex-shrink:0;align-items:flex-end;}
+.cc-action-row{display:flex;gap:6px;align-items:center;}
+.btn-call{
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  height:38px;padding:0 13px;
+  background:var(--green);
+  color:#fff;
+  border-radius:var(--r-sm);
+  font-size:13px;font-weight:800;
+  text-decoration:none;white-space:nowrap;
+  box-shadow:0 3px 10px rgba(13,155,74,0.3);
+  transition:background var(--dur),transform var(--dur);
+  flex-shrink:0;
+}
+.btn-call:active{background:#0A7A3A;transform:scale(0.97);}
+.btn-wa{
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;
+  background:#25D366;
+  color:#fff;
+  border-radius:var(--r-sm);
+  text-decoration:none;
+  font-size:20px;
+  box-shadow:0 3px 10px rgba(37,211,102,0.3);
+  transition:background var(--dur),transform var(--dur);
+  flex-shrink:0;
+}
+.btn-wa:active{background:#1EB357;transform:scale(0.97);}
+.btn-sms{
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;
+  background:var(--navy);
+  color:#fff;
+  border-radius:var(--r-sm);
+  text-decoration:none;
+  font-size:18px;
+  box-shadow:var(--sh1);
+  transition:background var(--dur),transform var(--dur);
+  flex-shrink:0;
+}
+.btn-sms:active{background:var(--navy2);transform:scale(0.97);}
   height:30px;padding:0 12px;
   border-radius:var(--r-sm);
   font-size:12px;font-weight:700;
@@ -1708,23 +1750,53 @@ function openAsset(id){
 }
 
 function renderContactCard(p){
-  const phone=fmtPhone(p.Phone);
-  const hasPhone=!!phone;
-  const icon=p.Role==='Operator'?'👷':p.Role==='Supervisor'?'🦺':'🏢';
+  const phone    = fmtPhone(p.Phone);   // normalized 10-digit
+  const hasPhone = !!phone;
+  const waPhone  = '91' + phone;        // WhatsApp needs country code
+  const icon     = p.Role==='Operator'?'👷':p.Role==='Supervisor'?'🦺':'🏢';
+
   return`<div class="contact-card" id="cc-${H(p.Contact_ID)}">
     <div class="cc-avatar">${icon}</div>
     <div class="cc-info">
       <div class="cc-name">${H(p.Name)}</div>
       ${p.Company?`<div class="cc-company">${H(p.Company)}</div>`:''}
       ${hasPhone
-        ?`<div class="cc-phone"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> ${H(p.Phone)}</div>`
+        ?`<div class="cc-phone">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            ${H(p.Phone)}
+          </div>`
         :`<div class="cc-nophone">No phone number</div>`}
     </div>
     <div class="cc-actions">
-      ${hasPhone?`<a href="tel:${phone}" class="btn-call" onclick="event.stopPropagation()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}
+      ${hasPhone?`
+        <div class="cc-action-row">
+          <a href="tel:${phone}"
+             class="btn-call"
+             onclick="event.stopPropagation()"
+             title="Call ${H(p.Name)}">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call
+          </a>
+          <a href="https://wa.me/${waPhone}"
+             class="btn-wa"
+             onclick="event.stopPropagation()"
+             target="_blank"
+             rel="noopener"
+             title="WhatsApp ${H(p.Name)}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+            </svg>
+          </a>
+          <a href="sms:${phone}"
+             class="btn-sms"
+             onclick="event.stopPropagation()"
+             title="SMS ${H(p.Name)}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </a>
+        </div>`:''}
       <div class="cc-admin-row admin-only">
         <button class="btn-edit2" onclick="openEditContact('${H(p.Contact_ID)}')">Edit</button>
-        <button class="btn-del2" onclick="confirmDeleteContact('${H(p.Contact_ID)}')">Del</button>
+        <button class="btn-del2"  onclick="confirmDeleteContact('${H(p.Contact_ID)}')">Del</button>
       </div>
     </div>
   </div>`;
@@ -2065,7 +2137,13 @@ function renderSearch(q){
           <div class="srp-crane">${H(pAid)} · 📍 ${H(asset.Location||'—')}</div>
           ${p.Phone?`<div style="font-size:12px;color:var(--muted);margin-top:1px;">${hl(p.Phone,q)}</div>`:''}
         </div>
-        ${phone?`<a href="tel:${phone}" onclick="event.stopPropagation()" class="btn-call"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}
+        ${phone?`<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
+          <div class="cc-action-row">
+            <a href="tel:${phone}" onclick="event.stopPropagation()" class="btn-call" title="Call">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.29-1.29a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+            <a href="https://wa.me/91${phone}" onclick="event.stopPropagation()" class="btn-wa" target="_blank" rel="noopener" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+          </div>
+        </div>`:''}
       </div>`;
     });
   }
@@ -2209,12 +2287,58 @@ if('serviceWorker' in navigator){
 // ── INIT ───────────────────────────────────────────────────────
 function init(){
   setupSearch(); setupInstall();
-  // Seed the browser history so the first popstate has something to work with
   window.history.replaceState({screen:'home', depth:1}, '', '#home');
-  $('assetList').innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
-  loadData();
-  setTimeout(handleDeepLink, 400);
+
+  // ── INSTANT CACHE RENDER ────────────────────────────────────
+  // Load cache synchronously right now. If we have cached data,
+  // render it immediately (<50ms). Then silently refresh in bg.
+  // Users see contacts instantly instead of waiting for network.
+  const cachedTs = loadCache();  // populates assets[] and contacts[]
+
+  if(assets.length > 0){
+    // Paint cached data right away — no skeleton needed
+    renderAll();
+    setSyncUI('ok', cachedTs);
+
+    // Silently refresh in background if cache is stale (>5 min)
+    const stale = Date.now() - cachedTs > CACHE_TTL;
+    if(stale && isOnline){
+      // Small delay so the screen paints first, then fetch quietly
+      setTimeout(() => silentRefresh(), 300);
+    }
+  } else {
+    // No cache at all — show skeletons and do a full fetch
+    $('assetList').innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+    loadData();
+  }
+
+  setTimeout(handleDeepLink, 200);
 }
+
+// Silent background refresh — updates data without blocking the UI
+async function silentRefresh(){
+  try{
+    const r = await apiCall('getData');
+    const newAssets   = r.cranes || r.assets || [];
+    const newContacts = r.contacts || [];
+    // Only re-render if data actually changed
+    if(JSON.stringify(newAssets)!==JSON.stringify(assets) ||
+       JSON.stringify(newContacts)!==JSON.stringify(contacts)){
+      assets   = newAssets;
+      contacts = newContacts;
+      saveCache();
+      renderAll();
+    } else {
+      // Data unchanged — just update the sync timestamp
+      localStorage.setItem(CK_TS, String(Date.now()));
+    }
+    setSyncUI('synced');
+  }catch(e){
+    // Silent fail — user already sees cached data, no toast needed
+    setSyncUI('offline', parseInt(localStorage.getItem(CK_TS)||'0'));
+  }
+}
+
 document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
